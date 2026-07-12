@@ -1,0 +1,441 @@
+{% comment %}
+  EBELS SHOP BY CATEGORY
+  Filter pills switch between collections without a page reload.
+  Product cards: image, wishlist-style link, title, price,
+  berry "Add to bag" with AJAX add + feedback.
+{% endcomment %}
+
+<div class="ebels-catgrid page-width" id="EbelsCatgrid-{{ section.id }}">
+  <div class="ebels-catgrid__header">
+    {% if section.settings.heading != blank %}
+      <h2 class="ebels-catgrid__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <p class="ebels-catgrid__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+  </div>
+
+  {% if section.blocks.size > 0 %}
+    <div class="ebels-catgrid__pills" role="tablist" aria-label="{{ section.settings.heading | escape }}">
+      {% for block in section.blocks %}
+        {% liquid
+          assign tab_label = block.settings.label
+          if tab_label == blank and block.settings.collection != blank
+            assign tab_label = block.settings.collection.title
+          endif
+        %}
+        <button
+          class="ebels-catgrid__pill{% if forloop.first %} is-active{% endif %}"
+          data-tab-target="panel-{{ section.id }}-{{ forloop.index0 }}"
+          role="tab"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          {{ tab_label | default: 'Category' }}
+        </button>
+      {% endfor %}
+    </div>
+
+    {% for block in section.blocks %}
+      <div
+        class="ebels-catgrid__panel{% if forloop.first %} is-active{% endif %}"
+        id="panel-{{ section.id }}-{{ forloop.index0 }}"
+        role="tabpanel"
+      >
+        <div class="ebels-catgrid__grid">
+          {% if block.settings.collection != blank %}
+            {% for product in block.settings.collection.products limit: section.settings.products_limit %}
+              <div class="ebels-catgrid__card">
+                <div class="ebels-catgrid__media">
+                  <a href="{{ product.url }}" class="ebels-catgrid__media-link" aria-label="{{ product.title | escape }}">
+                    {% if product.featured_image %}
+                      {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'ebels-catgrid__img', widths: '300, 450, 600' }}
+                    {% else %}
+                      {{ 'product-2' | placeholder_svg_tag: 'ebels-catgrid__img' }}
+                    {% endif %}
+                  </a>
+                </div>
+                <div class="ebels-catgrid__info">
+                  <a href="{{ product.url }}" class="ebels-catgrid__title-link">
+                    <h3 class="ebels-catgrid__title">{{ product.title }}</h3>
+                  </a>
+                  {% if product.metafields.custom.card_details != blank %}
+  <p class="ebels-catgrid__meta">{{ product.metafields.custom.card_details }}</p>
+{% endif %}
+{% if product.variants.size > 1 %}
+  {% assign first_option = product.options_with_values | first %}
+  <p class="ebels-catgrid__variants">{{ first_option.values.size }} {{ first_option.name | downcase }}s</p>
+{% endif %}
+                  <p class="ebels-catgrid__price">
+                    {% if product.compare_at_price > product.price %}
+                      <s class="ebels-catgrid__price-was">{{ product.compare_at_price | money }}</s>
+                    {% endif %}
+                    {{ product.price | money }}
+                  </p>
+                  {% if product.available %}
+                    <button
+                      class="ebels-catgrid__atb"
+                      data-variant-id="{{ product.first_available_variant.id }}"
+                    >
+                      Add to bag
+                    </button>
+                  {% else %}
+                    <button class="ebels-catgrid__atb is-soldout" disabled>Sold out</button>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            {% for i in (1..4) %}
+              <div class="ebels-catgrid__card">
+                <div class="ebels-catgrid__media">
+                  {{ 'product-3' | placeholder_svg_tag: 'ebels-catgrid__img' }}
+                </div>
+                <div class="ebels-catgrid__info">
+                  <h3 class="ebels-catgrid__title">Choose a collection</h3>
+                  <p class="ebels-catgrid__price">$0.00</p>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% style %}
+  .ebels-catgrid {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .ebels-catgrid__header {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto var(--space-8);
+  }
+
+  .ebels-catgrid__heading {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-line);
+    letter-spacing: var(--text-h2-tracking);
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .ebels-catgrid__subheading {
+    font-family: var(--font-body);
+    font-size: var(--text-body-size);
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .ebels-catgrid__pills {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .ebels-catgrid__pill {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm-size);
+    font-weight: 500;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    border: 1px solid #E8E0D8;
+    border-radius: var(--radius-full);
+    padding: var(--space-2) var(--space-5);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .ebels-catgrid__pill:hover {
+    border-color: var(--border-strong);
+  }
+
+  .ebels-catgrid__pill.is-active {
+    background: var(--ebels-ink);
+    border-color: var(--ebels-ink);
+    color: var(--text-inverse);
+  }
+
+  .ebels-catgrid__panel {
+    display: none;
+  }
+
+  .ebels-catgrid__panel.is-active {
+    display: block;
+    animation: ebels-panel-in 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  @keyframes ebels-panel-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ebels-catgrid__panel.is-active { animation: none; }
+  }
+
+  .ebels-catgrid__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+
+  .ebels-catgrid__card {
+    background: var(--surface-primary);
+    border: 1px solid #F0E9E2;
+    border-radius: var(--radius-xl);
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .ebels-catgrid__card:hover {
+    box-shadow: 0 12px 32px rgba(34, 27, 22, 0.08);
+    transform: translateY(-3px);
+  }
+
+  .ebels-catgrid__media {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-secondary);
+  }
+
+  .ebels-catgrid__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ebels-catgrid__card:hover .ebels-catgrid__img {
+    transform: scale(1.05);
+  }
+
+  .ebels-catgrid__info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--space-4) var(--space-2) var(--space-2);
+  }
+
+  .ebels-catgrid__title-link {
+    text-decoration: none;
+  }
+
+  .ebels-catgrid__title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-body-sm-size);
+    line-height: var(--text-body-sm-line);
+    color: var(--text-primary);
+    margin: 0 0 var(--space-1);
+  }
+.ebels-catgrid__meta {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  line-height: var(--text-caption-line);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-1);
+}
+
+.ebels-catgrid__variants {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-1);
+}
+  .ebels-catgrid__price {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm-size);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-4);
+  }
+
+  .ebels-catgrid__price-was {
+    color: var(--text-secondary);
+    margin-right: var(--space-2);
+  }
+
+  .ebels-catgrid__atb {
+    margin-top: auto;
+    font-family: var(--font-body);
+    font-size: var(--text-caption-size);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-inverse);
+    background: var(--brand-secondary);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: var(--space-3) var(--space-4);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+
+  .ebels-catgrid__atb:hover { background: #691A33; }
+  .ebels-catgrid__atb:active { transform: scale(0.97); }
+
+  .ebels-catgrid__atb.is-added {
+    background: var(--status-success);
+  }
+
+  .ebels-catgrid__atb.is-soldout {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ebels-catgrid__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media screen and (max-width: 599px) {
+    .ebels-catgrid__grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+    .ebels-catgrid__pills { gap: var(--space-1); }
+  }
+{% endstyle %}
+
+<script>
+  (function () {
+    function initCatgrid(root) {
+      // ----- Tabs -----
+      var pills = root.querySelectorAll('.ebels-catgrid__pill');
+      var panels = root.querySelectorAll('.ebels-catgrid__panel');
+
+      pills.forEach(function (pill) {
+        pill.addEventListener('click', function () {
+          pills.forEach(function (p) {
+            p.classList.remove('is-active');
+            p.setAttribute('aria-selected', 'false');
+          });
+          panels.forEach(function (panel) { panel.classList.remove('is-active'); });
+
+          pill.classList.add('is-active');
+          pill.setAttribute('aria-selected', 'true');
+          var target = document.getElementById(pill.dataset.tabTarget);
+          if (target) target.classList.add('is-active');
+        });
+      });
+
+      // ----- AJAX add to bag -----
+      root.querySelectorAll('.ebels-catgrid__atb[data-variant-id]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (btn.classList.contains('is-added')) return;
+          var original = btn.textContent;
+          btn.textContent = 'Adding...';
+
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: parseInt(btn.dataset.variantId, 10), quantity: 1 })
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error('Add failed');
+              return res.json();
+            })
+            .then(function () {
+              btn.textContent = 'Added ✓';
+              btn.classList.add('is-added');
+
+              // Best effort: refresh the header cart count bubble
+              fetch('/cart.js')
+                .then(function (r) { return r.json(); })
+                .then(function (cart) {
+                  var bubble = document.querySelector('.cart-count-bubble span[aria-hidden]');
+                  if (bubble) bubble.textContent = cart.item_count;
+                })
+                .catch(function () {});
+
+              setTimeout(function () {
+                btn.textContent = original;
+                btn.classList.remove('is-added');
+              }, 2000);
+            })
+            .catch(function () {
+              btn.textContent = 'Try again';
+              setTimeout(function () { btn.textContent = original; }, 2000);
+            });
+        });
+      });
+    }
+
+    document.querySelectorAll('.ebels-catgrid').forEach(initCatgrid);
+
+    document.addEventListener('shopify:section:load', function (event) {
+      var grid = event.target.querySelector('.ebels-catgrid');
+      if (grid) initCatgrid(grid);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Ebels Shop by Category",
+  "tag": "section",
+  "class": "section-ebels-catgrid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Explore our curated collections"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Products per category",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Category tab",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tab label (optional)",
+          "info": "Defaults to the collection's name"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Ebels Shop by Category",
+      "blocks": [
+        { "type": "tab" },
+        { "type": "tab" },
+        { "type": "tab" }
+      ]
+    }
+  ]
+}
+{% endschema %}
