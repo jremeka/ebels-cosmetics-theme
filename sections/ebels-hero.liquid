@@ -9,7 +9,15 @@
   <div class="ebels-hero__track">
     {% for block in section.blocks %}
       <div class="ebels-hero__slide{% if forloop.first %} is-active{% endif %}" data-slide-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
-        
+        {% if block.settings.image %}
+          {% if forloop.first %}
+            {% assign img_loading = 'eager' %}
+          {% else %}
+            {% assign img_loading = 'lazy' %}
+          {% endif %}
+          <div class="ebels-hero__media">
+            {{ block.settings.image | image_url: width: 2000 | image_tag: loading: img_loading, class: 'ebels-hero__img', widths: '750, 1100, 1500, 2000' }}
+          </div>
         {% else %}
           <div class="ebels-hero__media ebels-hero__media--placeholder">
             {{ 'lifestyle-1' | placeholder_svg_tag: 'ebels-hero__img' }}

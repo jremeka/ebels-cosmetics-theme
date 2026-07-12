@@ -1,0 +1,159 @@
+/* ==========================================================================
+   EBELS HEADER RESTYLE
+   Rearranges Dawn's header into the Ebels layout:
+   Row 1: logo left · search bar center · icons right
+   Row 2: centered category navigation
+   Loaded from sections/header.liquid.
+   ========================================================================== */
+
+/* Header surface */
+.header-wrapper {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--ebels-off-white);
+}
+
+/* ----- Desktop layout (990px and up) ----- */
+@media screen and (min-width: 990px) {
+  .header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'heading search icons'
+      'nav     nav    nav';
+    align-items: center;
+    row-gap: var(--space-4);
+    column-gap: var(--space-8);
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-3);
+  }
+
+  .header__heading,
+  h1.header__heading {
+    grid-area: heading;
+    margin: 0;
+    justify-self: start;
+  }
+
+  .ebels-header-search {
+    grid-area: search;
+    justify-self: center;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .header__icons {
+    grid-area: icons;
+    justify-self: end;
+  }
+
+  .header__inline-menu {
+    grid-area: nav;
+    justify-self: center;
+  }
+
+  /* Hide Dawn's magnifier icon on desktop — the inline bar replaces it */
+  .header details-modal.header__search {
+    display: none;
+  }
+}
+
+/* ----- Mobile: hide the inline bar, Dawn's search icon stays ----- */
+@media screen and (max-width: 989px) {
+  .ebels-header-search {
+    display: none;
+  }
+}
+
+/* ----- Search bar styling ----- */
+.ebels-header-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ebels-header-search__icon {
+  position: absolute;
+  left: var(--space-4);
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.ebels-header-search__input {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid #e8e0d8;
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-10);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ebels-header-search__input::placeholder {
+  color: var(--text-secondary);
+}
+
+.ebels-header-search__input:focus {
+  border-color: var(--border-brand);
+  box-shadow: 0 0 0 3px rgba(234, 91, 29, 0.12);
+}
+
+/* Remove the default clear "x" styling inconsistency across browsers */
+.ebels-header-search__input::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* ----- Navigation row styling ----- */
+.header__inline-menu .header__menu-item {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  letter-spacing: 0.2px;
+}
+
+.header__inline-menu .header__menu-item:hover {
+  color: var(--text-brand);
+  text-decoration: none;
+}
+
+.header__inline-menu .header__menu-item span {
+  text-decoration: none;
+}
+
+/* Dropdown panels — soften into the Ebels look */
+.header__submenu {
+  background: var(--bg-primary);
+  border: 1px solid var(--ebels-off-white);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(34, 27, 22, 0.08);
+}
+
+.header__submenu .header__menu-item {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+}
+
+.header__submenu .header__menu-item:hover {
+  color: var(--text-brand);
+}
+
+/* Header icons — nudge toward Ebels ink */
+.header__icon {
+  color: var(--text-primary);
+}
+
+.header__icon:hover {
+  color: var(--text-brand);
+}
+@media screen and (min-width: 990px) {
+  .header__icons .header__search,
+  .header__icons details-modal,
+  .header details-modal.header__search {
+    display: none;
+  }
+}
