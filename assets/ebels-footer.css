@@ -1,0 +1,235 @@
+/* ==========================================================================
+   EBELS NEWSLETTER + FOOTER RESTYLE
+   Restyles Dawn's built-in newsletter and footer sections into the
+   dark espresso closing block from the Ebels design.
+   Loaded in layout/theme.liquid after ebels-tokens.css.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   NEWSLETTER — "Be the First to Know"
+   -------------------------------------------------------------------------- */
+
+.newsletter {
+  background: var(--ebels-ink) !important;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  padding: var(--space-16) var(--space-6) !important;
+}
+.newsletter .newsletter__wrapper,
+.newsletter .content-container,
+.newsletter [class*='color-scheme'],
+.newsletter [class*='color-background'] {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Amber eyebrow above the heading */
+.newsletter .newsletter__wrapper > h2::before,
+.newsletter h2.inline-richtext::before {
+  content: '\2726  Join the Inner Circle  \2726';
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ebels-amber);
+  margin-bottom: var(--space-4);
+}
+
+.newsletter h2 {
+  font-family: var(--font-heading) !important;
+  font-weight: 500 !important;
+  font-size: var(--text-h2-size) !important;
+  line-height: var(--text-h2-line) !important;
+  letter-spacing: var(--text-h2-tracking) !important;
+  color: #ffffff !important;
+}
+
+.newsletter .newsletter__subheading,
+.newsletter .rte {
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  color: rgba(255, 251, 247, 0.75) !important;
+}
+
+.newsletter .newsletter__subheading p,
+.newsletter .rte p {
+  color: rgba(255, 251, 247, 0.75) !important;
+}
+
+/* The email field becomes a white pill */
+.newsletter .newsletter-form__field-wrapper .field {
+  background: #ffffff;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.newsletter .newsletter-form__field-wrapper .field__input {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  box-shadow: none !important;
+  padding-left: var(--space-6);
+}
+
+.newsletter .newsletter-form__field-wrapper .field__input:focus {
+  box-shadow: none !important;
+  outline: none;
+}
+
+.newsletter .newsletter-form__field-wrapper .field__label {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  padding-left: var(--space-3);
+}
+
+/* Submit button: gradient circle with the arrow */
+.newsletter .newsletter-form__button {
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+  background: var(--brand-gradient);
+  border-radius: var(--radius-full);
+  color: #ffffff;
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease;
+}
+
+.newsletter .newsletter-form__button:hover {
+  opacity: 0.9;
+}
+
+.newsletter .newsletter-form__button:active {
+  transform: scale(0.95);
+}
+
+.newsletter .newsletter-form__button svg {
+  color: #ffffff;
+}
+
+/* Success / error messages readable on dark */
+.newsletter .newsletter-form__message,
+.newsletter .form__message {
+  color: #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER
+   -------------------------------------------------------------------------- */
+
+.footer {
+  background: var(--ebels-ink) !important;
+  border-top: 1px solid rgba(255, 251, 247, 0.08) !important;
+}
+
+.footer,
+.footer * {
+  --color-foreground: 255, 251, 247;
+}
+
+.footer .footer__content-top {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-8);
+}
+
+/* Menu column headings */
+.footer .footer-block__heading {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-caption-size) !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 251, 247, 0.55) !important;
+}
+
+/* Menu links */
+.footer .footer-block__details-content .link,
+.footer .footer-block__details-content .list-menu__item--link {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: rgba(255, 251, 247, 0.85) !important;
+  transition: color 0.2s ease;
+}
+
+.footer .footer-block__details-content .link:hover,
+.footer .footer-block__details-content .list-menu__item--link:hover {
+  color: var(--ebels-amber) !important;
+  text-decoration: none;
+}
+
+/* Footer body text (brand block, contact info) */
+.footer .footer-block__details-content,
+.footer .footer-block__details-content p,
+.footer .rte p {
+  color: rgba(255, 251, 247, 0.7);
+}
+
+/* Social icons */
+.footer .list-social__link {
+  color: rgba(255, 251, 247, 0.8) !important;
+}
+
+.footer .list-social__link:hover {
+  color: var(--ebels-amber) !important;
+}
+
+/* Bottom bar: payment icons, copyright, policies */
+.footer .footer__content-bottom {
+  border-top: 1px solid rgba(255, 251, 247, 0.1) !important;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.footer .copyright__content,
+.footer .copyright__content a {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  color: rgba(255, 251, 247, 0.5) !important;
+}
+
+.footer .copyright__content a:hover {
+  color: var(--ebels-amber) !important;
+}
+
+.footer .payment-icon {
+  opacity: 0.85;
+}
+
+/* Footer newsletter block (if enabled inside footer) inherits pill style */
+.footer .newsletter-form__field-wrapper .field {
+  background: #ffffff;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.footer .newsletter-form__field-wrapper .field__input {
+  background: transparent;
+  border: none;
+  box-shadow: none !important;
+  color: var(--text-primary);
+  padding-left: var(--space-6);
+}
+
+.footer .newsletter-form__button {
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+  background: var(--brand-gradient);
+  border-radius: var(--radius-full);
+  color: #ffffff;
+}
+
+@media screen and (max-width: 749px) {
+  .newsletter {
+    margin: 0;
+    padding: var(--space-12) var(--space-4) !important;
+  }
+}
