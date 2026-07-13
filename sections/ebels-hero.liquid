@@ -59,18 +59,17 @@
 
 {% style %}
   .ebels-hero {
-    position: relative;
-    margin: var(--space-4) auto 0;
-    max-width: 1440px;
-    padding: 0 var(--space-4);
-  }
+  position: relative;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+}
 
   .ebels-hero__track {
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    min-height: 420px;
-  }
+  position: relative;
+  overflow: hidden;
+  min-height: 100svh;
+}
 
   .ebels-hero__slide {
     position: absolute;
@@ -105,16 +104,17 @@
   }
 
   .ebels-hero__content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    min-height: 420px;
-    max-width: 480px;
-    padding: var(--space-12) var(--space-12);
-  }
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100svh;
+  max-width: 560px;
+  padding: 140px var(--space-12) var(--space-12);
+  margin-left: max(calc((100vw - 1440px) / 2), 0px);
+}
 
   .ebels-hero__badge {
     font-family: var(--font-body);
@@ -148,18 +148,22 @@
   }
 
   .ebels-hero__dots {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-2);
-    padding: var(--space-4) 0 0;
-  }
+  position: absolute;
+  bottom: var(--space-6);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  z-index: 2;
+}
 
   .ebels-hero__dot {
     width: 8px;
     height: 8px;
     border-radius: var(--radius-full);
     border: none;
-    background: var(--ebels-blush);
+    background: rgba(255,255,255,0.5); 
     cursor: pointer;
     padding: 0;
     transition: background 0.2s ease, width 0.2s ease;
@@ -171,11 +175,11 @@
   }
 
   @media screen and (max-width: 749px) {
-    .ebels-hero__track { min-height: 480px; }
+    .ebels-hero__track { min-height: 100svh; }
     .ebels-hero__content {
-      min-height: 480px;
+      min-height: 100svh;
       max-width: 100%;
-      padding: var(--space-8) var(--space-6);
+      padding: 120px var(--space-6) var(--space-16);
       justify-content: flex-end;
     }
     .ebels-hero__overlay {

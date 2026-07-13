@@ -1,0 +1,194 @@
+{{ 'ebels-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign has_real_variants = false
+  if product.variants.size > 1
+    assign has_real_variants = true
+  endif
+  assign shade_option_index = -1
+  for option in product.options_with_values
+    if option.name == 'Shade' or option.name == 'Color' or option.name == 'Colour'
+      assign shade_option_index = forloop.index0
+    endif
+  endfor
+-%}
+
+<div class="ebels-product page-width" data-product-section data-product-id="{{ product.id }}">
+
+  {%- comment -%} Breadcrumb {%- endcomment -%}
+  <nav class="ebels-breadcrumb ebels-body-sm" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="ebels-breadcrumb__sep">/</span>
+    {%- if product.collections.first != blank -%}
+      <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+      <span class="ebels-breadcrumb__sep">/</span>
+    {%- endif -%}
+    <span class="ebels-breadcrumb__current">{{ product.title }}</span>
+  </nav>
+
+  <div class="ebels-product__grid">
+
+    {%- comment -%} Gallery {%- endcomment -%}
+    <div class="ebels-product__gallery">
+      <div class="ebels-product__main-image">
+        {%- for image in product.images -%}
+          <img
+            src="{{ image | image_url: width: 1200 }}"
+            alt="{{ image.alt | default: product.title }}"
+            class="ebels-product__main-image-el{% if forloop.first %} is-active{% endif %}"
+            data-gallery-image
+            data-index="{{ forloop.index0 }}"
+            {% unless forloop.first %}hidden{% endunless %}
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+            width="1200"
+            height="1200"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'ebels-product__main-image-el is-active' }}
+        {%- endfor -%}
+      </div>
+
+      {%- if product.images.size > 1 -%}
+        <div class="ebels-product__thumbs" role="list">
+          {%- for image in product.images -%}
+            <button
+              type="button"
+              class="ebels-product__thumb{% if forloop.first %} is-active{% endif %}"
+              data-gallery-thumb
+              data-index="{{ forloop.index0 }}"
+              aria-label="Show image {{ forloop.index }} of {{ product.images.size }}"
+            >
+              <img src="{{ image | image_url: width: 200 }}" alt="" width="200" height="200" loading="lazy">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Buy box {%- endcomment -%}
+    <div class="ebels-product__info">
+      <p class="ebels-label">{{ product.vendor }}</p>
+      <h1 class="ebels-h1">{{ product.title }}</h1>
+
+      <div class="ebels-product__rating" data-review-placeholder>
+        {%- comment -%} Placeholder markup — wire to review app in the reviews phase {%- endcomment -%}
+        <span class="ebels-product__stars" aria-hidden="true">★★★★★</span>
+        <span class="ebels-body-sm">4.8 (312 reviews)</span>
+      </div>
+
+      <p class="ebels-product__price ebels-h4" data-product-price>
+        {{ current_variant.price | money }}
+      </p>
+
+      {%- if section.settings.short_description != blank -%}
+        <div class="ebels-body ebels-product__description">
+          {{ section.settings.short_description }}
+        </div>
+      {%- else -%}
+        <div class="ebels-body ebels-product__description">
+          {{ product.description | strip_html | truncatewords: 40 }}
+        </div>
+      {%- endif -%}
+
+      {%- if has_real_variants and shade_option_index > -1 -%}
+        {%- assign shade_option = product.options_with_values[shade_option_index] -%}
+        <fieldset class="ebels-product__swatches" data-swatch-group>
+          <legend class="ebels-label">Shade: <span data-swatch-selected-label>{{ current_variant.option_selections[shade_option.name] | default: shade_option.values.first }}</span></legend>
+          <div class="ebels-product__swatch-row">
+            {%- for value in shade_option.values -%}
+              {%- assign swatch_color = value.swatch.color -%}
+              <button
+                type="button"
+                class="ebels-product__swatch{% if value == shade_option.selected_value %} is-selected{% endif %}"
+                data-swatch-value="{{ value | escape }}"
+                data-swatch-option-name="{{ shade_option.name | escape }}"
+                style="--swatch-color: {{ swatch_color | default: '#8C8279' }};"
+                aria-label="{{ value }}"
+                title="{{ value }}"
+              ></button>
+            {%- endfor -%}
+          </div>
+        </fieldset>
+      {%- endif -%}
+
+      {%- comment -%} Hidden native variant picker keeps Shopify's variant logic wired even though we render custom swatches {%- endcomment -%}
+      <select name="id" class="ebels-product__native-variants" data-native-variant-select hidden>
+        {%- for variant in product.variants -%}
+          <option value="{{ variant.id }}" {% if variant == current_variant %}selected{% endif %}>
+            {{ variant.title }}
+          </option>
+        {%- endfor -%}
+      </select>
+
+      <div class="ebels-product__qty-row">
+        <div class="ebels-product__qty-stepper" data-qty-stepper>
+          <button type="button" class="ebels-product__qty-btn" data-qty-decrease aria-label="Decrease quantity">–</button>
+          <input type="number" class="ebels-product__qty-input" data-qty-input value="1" min="1" inputmode="numeric" aria-label="Quantity">
+          <button type="button" class="ebels-product__qty-btn" data-qty-increase aria-label="Increase quantity">+</button>
+        </div>
+
+        <button
+          type="button"
+          class="ebels-btn ebels-btn--primary ebels-product__add-to-bag"
+          data-add-to-bag
+          {% unless current_variant.available %}disabled{% endunless %}
+        >
+          {%- if current_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+        </button>
+      </div>
+
+      <button type="button" class="ebels-btn ebels-btn--outline ebels-product__wishlist" data-wishlist-toggle aria-pressed="false">
+        <svg class="ebels-product__wishlist-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+        </svg>
+        Add to Wishlist
+      </button>
+
+      <ul class="ebels-product__delivery-notes ebels-body-sm">
+        {%- if section.settings.delivery_line_1 != blank -%}
+          <li>{{ section.settings.delivery_line_1 }}</li>
+        {%- endif -%}
+        {%- if section.settings.delivery_line_2 != blank -%}
+          <li>{{ section.settings.delivery_line_2 }}</li>
+        {%- endif -%}
+      </ul>
+    </div>
+  </div>
+
+  <script type="application/json" data-product-json>
+    {{ product | json }}
+  </script>
+</div>
+
+<script src="{{ 'ebels-product.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Product Main",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "short_description",
+      "label": "Short description (overrides product description if set)"
+    },
+    {
+      "type": "text",
+      "id": "delivery_line_1",
+      "label": "Delivery note 1",
+      "default": "Free delivery on orders over £50"
+    },
+    {
+      "type": "text",
+      "id": "delivery_line_2",
+      "label": "Delivery note 2",
+      "default": "Order within 2h for next-day delivery"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ebels Product Main"
+    }
+  ]
+}
+{% endschema %}

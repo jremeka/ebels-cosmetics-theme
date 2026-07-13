@@ -1,0 +1,259 @@
+/* ==========================================================================
+   EBELS PRODUCT — Hero (breadcrumb, gallery, buy box)
+   Loaded by sections/ebels-product-main.liquid
+   ========================================================================== */
+
+.ebels-product {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-16);
+}
+
+/* ----- Breadcrumb ----- */
+.ebels-breadcrumb {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+.ebels-breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.ebels-breadcrumb a:hover {
+  color: var(--text-brand);
+}
+
+.ebels-breadcrumb__sep {
+  margin: 0 var(--space-2);
+  color: var(--border-strong);
+}
+
+.ebels-breadcrumb__current {
+  color: var(--text-primary);
+}
+
+/* ----- Grid ----- */
+.ebels-product__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
+}
+
+@media screen and (min-width: 990px) {
+  .ebels-product__grid {
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+}
+
+/* ----- Gallery ----- */
+.ebels-product__main-image {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-secondary);
+}
+
+.ebels-product__main-image-el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ebels-product__thumbs {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.ebels-product__thumb {
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1.5px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  background: var(--bg-secondary);
+  transition: border-color 0.2s ease;
+}
+
+.ebels-product__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ebels-product__thumb:hover {
+  border-color: var(--border-strong);
+}
+
+.ebels-product__thumb.is-selected,
+.ebels-product__thumb.is-active {
+  border-color: var(--border-brand);
+}
+
+/* ----- Buy box ----- */
+.ebels-product__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ebels-product__info > * {
+  margin-top: var(--space-3);
+}
+
+.ebels-product__info > *:first-child {
+  margin-top: 0;
+}
+
+.ebels-product__rating {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ebels-product__stars {
+  color: var(--ebels-amber);
+  letter-spacing: 1px;
+  font-size: var(--text-body-sm-size);
+}
+
+.ebels-product__price {
+  color: var(--text-primary);
+}
+
+.ebels-product__description {
+  color: var(--text-secondary);
+  max-width: 46ch;
+}
+
+/* ----- Swatches ----- */
+.ebels-product__swatches {
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.ebels-product__swatches legend {
+  padding: 0;
+  margin-bottom: var(--space-2);
+}
+
+.ebels-product__swatch-row {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.ebels-product__swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--swatch-color, var(--ebels-warm-gray));
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(34, 27, 22, 0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ebels-product__swatch:hover {
+  transform: scale(1.08);
+}
+
+.ebels-product__swatch.is-selected {
+  box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--ebels-ink);
+}
+
+/* ----- Quantity + Add to Bag ----- */
+.ebels-product__qty-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.ebels-product__qty-stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ebels-product__qty-btn {
+  width: 36px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  font-size: var(--text-body-lg-size);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.ebels-product__qty-btn:hover {
+  color: var(--text-brand);
+}
+
+.ebels-product__qty-input {
+  width: 36px;
+  height: 40px;
+  border: none;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  -moz-appearance: textfield;
+}
+
+.ebels-product__qty-input::-webkit-outer-spin-button,
+.ebels-product__qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.ebels-product__add-to-bag {
+  flex: 1;
+}
+
+.ebels-product__add-to-bag[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ebels-product__add-to-bag.is-added {
+  background: var(--status-success);
+}
+
+/* ----- Wishlist ----- */
+.ebels-product__wishlist {
+  width: 100%;
+  gap: var(--space-2);
+}
+
+.ebels-product__wishlist-icon {
+  transition: fill 0.15s ease, stroke 0.15s ease;
+}
+
+.ebels-product__wishlist[aria-pressed="true"] .ebels-product__wishlist-icon {
+  fill: var(--text-brand);
+  stroke: var(--text-brand);
+}
+
+/* ----- Delivery notes ----- */
+.ebels-product__delivery-notes {
+  list-style: none;
+  padding: 0;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
