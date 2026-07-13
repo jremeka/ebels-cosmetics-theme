@@ -20,6 +20,8 @@
     '.ebels-catgrid__card',
     '.ebels-ugc__header',
     '.ebels-ugc__card',
+    '.ebels-promo__content',
+    '.ebels-tiles__tile',
     '[data-reveal]'
   ].join(',');
 

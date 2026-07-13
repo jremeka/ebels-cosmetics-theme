@@ -1,0 +1,292 @@
+{% comment %}
+  EBELS PROMO TILES
+  2×2 editorial promo grid. Each tile: artwork (or brand color),
+  optional badge/heading/text/button, light or dark text, hover lift.
+  Stacks to a single column on mobile.
+{% endcomment %}
+
+<div class="ebels-tiles">
+  {% for block in section.blocks %}
+    <a
+      href="{{ block.settings.link | default: '#' }}"
+      class="ebels-tiles__tile ebels-tiles__tile--{{ block.settings.text_theme }}"
+      {{ block.shopify_attributes }}
+    >
+      <div class="ebels-tiles__media">
+        {% if block.settings.image != blank %}
+          {{ block.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'ebels-tiles__img', widths: '700, 1000, 1400' }}
+        {% else %}
+          <div class="ebels-tiles__fallback" style="background: {{ block.settings.fallback_color }};"></div>
+        {% endif %}
+      </div>
+
+      {% if block.settings.overlay > 0 %}
+        <div class="ebels-tiles__overlay" style="opacity: {{ block.settings.overlay | divided_by: 100.0 }};"></div>
+      {% endif %}
+
+      <div class="ebels-tiles__content">
+        {% if block.settings.badge != blank %}
+          <span class="ebels-tiles__badge">{{ block.settings.badge }}</span>
+        {% endif %}
+        {% if block.settings.heading != blank %}
+          <h3 class="ebels-tiles__heading">{{ block.settings.heading }}</h3>
+        {% endif %}
+        {% if block.settings.text != blank %}
+          <p class="ebels-tiles__text">{{ block.settings.text }}</p>
+        {% endif %}
+        {% if block.settings.button_label != blank %}
+          <span class="ebels-tiles__btn ebels-tiles__btn--{{ block.settings.button_style }}">
+            {{ block.settings.button_label }}
+          </span>
+        {% endif %}
+      </div>
+    </a>
+  {% endfor %}
+</div>
+
+{% style %}
+  .ebels-tiles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+    max-width: 1440px;
+    margin: var(--space-8) auto;
+    padding: 0 var(--space-4);
+  }
+
+  .ebels-tiles__tile {
+    position: relative;
+    display: block;
+    min-height: 300px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ebels-tiles__tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(34, 27, 22, 0.14);
+  }
+
+  .ebels-tiles__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .ebels-tiles__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .ebels-tiles__tile:hover .ebels-tiles__img {
+    transform: scale(1.04);
+  }
+
+  .ebels-tiles__fallback {
+    position: absolute;
+    inset: 0;
+  }
+
+  .ebels-tiles__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--ebels-ink);
+  }
+
+  .ebels-tiles__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 300px;
+    max-width: 340px;
+    padding: var(--space-8);
+  }
+
+  .ebels-tiles__badge {
+    font-family: var(--font-body);
+    font-size: var(--text-caption-size);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-3);
+  }
+
+  .ebels-tiles__heading {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-line);
+    margin: 0 0 var(--space-2);
+  }
+
+  .ebels-tiles__text {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm-size);
+    line-height: var(--text-body-sm-line);
+    margin: 0 0 var(--space-5);
+  }
+
+  /* Text themes */
+  .ebels-tiles__tile--light .ebels-tiles__heading { color: #FFFFFF; }
+  .ebels-tiles__tile--light .ebels-tiles__text { color: rgba(255, 255, 255, 0.85); }
+  .ebels-tiles__tile--light .ebels-tiles__badge {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .ebels-tiles__tile--dark .ebels-tiles__heading { color: var(--text-primary); }
+  .ebels-tiles__tile--dark .ebels-tiles__text { color: var(--text-primary); opacity: 0.75; }
+  .ebels-tiles__tile--dark .ebels-tiles__badge {
+    color: var(--text-primary);
+    background: rgba(34, 27, 22, 0.08);
+  }
+
+  /* Buttons */
+  .ebels-tiles__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-size: var(--text-caption-size);
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: var(--space-2) var(--space-5);
+    border-radius: var(--radius-full);
+    transition: opacity 0.2s ease;
+  }
+
+  .ebels-tiles__tile:hover .ebels-tiles__btn { opacity: 0.9; }
+
+  .ebels-tiles__btn--gradient { background: var(--brand-gradient); color: #FFFFFF; }
+  .ebels-tiles__btn--white { background: #FFFFFF; color: var(--text-primary); }
+  .ebels-tiles__btn--ink { background: var(--ebels-ink); color: #FFFFFF; }
+  .ebels-tiles__btn--berry { background: var(--brand-secondary); color: #FFFFFF; }
+
+  @media screen and (max-width: 749px) {
+    .ebels-tiles {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    .ebels-tiles__tile,
+    .ebels-tiles__content {
+      min-height: 240px;
+    }
+
+    .ebels-tiles__content {
+      padding: var(--space-6);
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Ebels Promo Tiles",
+  "tag": "section",
+  "class": "section-ebels-tiles",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Artwork",
+          "info": "1400 × 600px export"
+        },
+        {
+          "type": "color",
+          "id": "fallback_color",
+          "label": "Background color (if no artwork)",
+          "default": "#F1B8B0"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "info": "Example: Exclusive"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Sets & Bundles"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Tile link"
+        },
+        {
+          "type": "select",
+          "id": "text_theme",
+          "label": "Text color",
+          "options": [
+            { "value": "light", "label": "Light (for dark artwork)" },
+            { "value": "dark", "label": "Dark (for light artwork)" }
+          ],
+          "default": "dark"
+        },
+        {
+          "type": "range",
+          "id": "overlay",
+          "label": "Darkening overlay",
+          "min": 0,
+          "max": 60,
+          "step": 5,
+          "default": 0
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            { "value": "gradient", "label": "Brand gradient" },
+            { "value": "white", "label": "White" },
+            { "value": "ink", "label": "Ink (dark)" },
+            { "value": "berry", "label": "Berry" }
+          ],
+          "default": "ink"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Ebels Promo Tiles",
+      "blocks": [
+        { "type": "tile" },
+        { "type": "tile" },
+        { "type": "tile" },
+        { "type": "tile" }
+      ]
+    }
+  ]
+}
+{% endschema %}
