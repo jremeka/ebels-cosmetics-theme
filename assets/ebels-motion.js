@@ -22,6 +22,8 @@
     '.ebels-ugc__card',
     '.ebels-promo__content',
     '.ebels-tiles__tile',
+    '.ebels-bundles__top',
+    '.ebels-bundles__card',
     '[data-reveal]'
   ].join(',');
 

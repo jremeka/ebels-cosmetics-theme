@@ -1,0 +1,431 @@
+{% comment %}
+  EBELS BUNDLES CAROUSEL
+  Horizontal scroll-snap carousel of bundle products (max 8).
+  ~4.3 cards visible on desktop so the last clips as a swipe cue.
+  Arrows scroll one card at a time and disable at the ends. No loop.
+  Bundles are real products: price = bundle price, compare-at = combined value,
+  "what's inside" comes from the custom.card_details metafield.
+{% endcomment %}
+
+<div class="ebels-bundles" id="EbelsBundles-{{ section.id }}">
+  <div class="ebels-bundles__top">
+    <div class="ebels-bundles__header">
+      {% if section.settings.heading != blank %}
+        <h2 class="ebels-bundles__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="ebels-bundles__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+    <div class="ebels-bundles__arrows">
+      <button class="ebels-bundles__arrow ebels-bundles__arrow--prev" aria-label="Previous bundles" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="ebels-bundles__arrow ebels-bundles__arrow--next" aria-label="Next bundles">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="ebels-bundles__track">
+    {% for block in section.blocks %}
+      {% liquid
+        assign bundle = block.settings.product
+        if bundle == blank
+          continue
+        endif
+
+        assign contents_line = block.settings.contents
+        if contents_line == blank
+          assign contents_line = bundle.metafields.custom.card_details
+        endif
+
+        assign card_image = block.settings.image
+        if card_image == blank
+          assign card_image = bundle.featured_image
+        endif
+      %}
+
+      <div class="ebels-bundles__card" {{ block.shopify_attributes }}>
+        <a href="{{ bundle.url }}" class="ebels-bundles__media-link" aria-label="{{ bundle.title | escape }}">
+          <div class="ebels-bundles__media">
+            {% if card_image != blank %}
+              {{ card_image | image_url: width: 700 | image_tag: loading: 'lazy', class: 'ebels-bundles__img', widths: '350, 500, 700' }}
+            {% else %}
+              {{ 'product-4' | placeholder_svg_tag: 'ebels-bundles__img' }}
+            {% endif %}
+            {% if bundle.compare_at_price > bundle.price %}
+              {% assign savings = bundle.compare_at_price | minus: bundle.price | times: 100 | divided_by: bundle.compare_at_price %}
+              <span class="ebels-bundles__save">Save {{ savings }}%</span>
+            {% endif %}
+          </div>
+        </a>
+        <div class="ebels-bundles__info">
+          <a href="{{ bundle.url }}" class="ebels-bundles__title-link">
+            <h3 class="ebels-bundles__title">{{ bundle.title }}</h3>
+          </a>
+          {% if contents_line != blank %}
+            <p class="ebels-bundles__contents">{{ contents_line }}</p>
+          {% endif %}
+          <p class="ebels-bundles__price">
+            {% if bundle.compare_at_price > bundle.price %}
+              <s class="ebels-bundles__price-was">{{ bundle.compare_at_price | money }}</s>
+            {% endif %}
+            {{ bundle.price | money }}
+          </p>
+          {% if bundle.available %}
+            <button class="ebels-bundles__atb" data-variant-id="{{ bundle.first_available_variant.id }}">
+              Add bundle
+            </button>
+          {% else %}
+            <button class="ebels-bundles__atb is-soldout" disabled>Sold out</button>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% style %}
+  .ebels-bundles {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: var(--space-16) var(--space-4);
+  }
+
+  .ebels-bundles__top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  .ebels-bundles__heading {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-line);
+    letter-spacing: var(--text-h2-tracking);
+    color: var(--text-primary);
+    margin: 0 0 var(--space-2);
+  }
+
+  .ebels-bundles__subheading {
+    font-family: var(--font-body);
+    font-size: var(--text-body-size);
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .ebels-bundles__arrows {
+    display: flex;
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+
+  .ebels-bundles__arrow {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    border: 1px solid #E8E0D8;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .ebels-bundles__arrow:hover:not(:disabled) {
+    border-color: var(--border-strong);
+  }
+
+  .ebels-bundles__arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .ebels-bundles__track {
+    display: flex;
+    gap: var(--space-6);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: var(--space-2);
+  }
+
+  .ebels-bundles__track::-webkit-scrollbar { display: none; }
+
+  .ebels-bundles__card {
+    flex: 0 0 calc((100% - var(--space-6) * 3) / 4.35);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-primary);
+    border: 1px solid #F0E9E2;
+    border-radius: var(--radius-xl);
+    padding: var(--space-3);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .ebels-bundles__card:hover {
+    box-shadow: 0 12px 32px rgba(34, 27, 22, 0.08);
+    transform: translateY(-3px);
+  }
+
+  .ebels-bundles__media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-secondary);
+  }
+
+  .ebels-bundles__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ebels-bundles__card:hover .ebels-bundles__img {
+    transform: scale(1.05);
+  }
+
+  .ebels-bundles__save {
+    position: absolute;
+    top: var(--space-2);
+    left: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: var(--brand-secondary);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+  }
+
+  .ebels-bundles__info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--space-4) var(--space-2) var(--space-2);
+  }
+
+  .ebels-bundles__title-link { text-decoration: none; }
+
+  .ebels-bundles__title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-body-sm-size);
+    line-height: var(--text-body-sm-line);
+    color: var(--text-primary);
+    margin: 0 0 var(--space-1);
+  }
+
+  .ebels-bundles__contents {
+    font-family: var(--font-body);
+    font-size: var(--text-caption-size);
+    line-height: var(--text-caption-line);
+    color: var(--text-secondary);
+    margin: 0 0 var(--space-2);
+  }
+
+  .ebels-bundles__price {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm-size);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-4);
+  }
+
+  .ebels-bundles__price-was {
+    color: var(--text-secondary);
+    margin-right: var(--space-2);
+  }
+
+  .ebels-bundles__atb {
+    margin-top: auto;
+    font-family: var(--font-body);
+    font-size: var(--text-caption-size);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-inverse);
+    background: var(--ebels-ink);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: var(--space-3) var(--space-4);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+
+  .ebels-bundles__atb:hover { background: var(--ebels-espresso); }
+  .ebels-bundles__atb:active { transform: scale(0.97); }
+  .ebels-bundles__atb.is-added { background: var(--status-success); }
+
+  .ebels-bundles__atb.is-soldout {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ebels-bundles__card {
+      flex: 0 0 calc((100% - var(--space-6)) / 2.3);
+    }
+  }
+
+  @media screen and (max-width: 599px) {
+    .ebels-bundles__card {
+      flex: 0 0 66%;
+    }
+  }
+{% endstyle %}
+
+<script>
+  (function () {
+    function initBundles(root) {
+      var track = root.querySelector('.ebels-bundles__track');
+      var prev = root.querySelector('.ebels-bundles__arrow--prev');
+      var next = root.querySelector('.ebels-bundles__arrow--next');
+      if (!track) return;
+
+      function cardStep() {
+        var card = track.querySelector('.ebels-bundles__card');
+        if (!card) return 300;
+        var gap = parseFloat(getComputedStyle(track).gap) || 24;
+        return card.getBoundingClientRect().width + gap;
+      }
+
+      function updateArrows() {
+        var maxScroll = track.scrollWidth - track.clientWidth - 2;
+        if (prev) prev.disabled = track.scrollLeft <= 2;
+        if (next) next.disabled = track.scrollLeft >= maxScroll;
+      }
+
+      if (prev) prev.addEventListener('click', function () {
+        track.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+      });
+
+      if (next) next.addEventListener('click', function () {
+        track.scrollBy({ left: cardStep(), behavior: 'smooth' });
+      });
+
+      track.addEventListener('scroll', updateArrows, { passive: true });
+      window.addEventListener('resize', updateArrows);
+      updateArrows();
+
+      // AJAX add to bag
+      root.querySelectorAll('.ebels-bundles__atb[data-variant-id]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (btn.classList.contains('is-added')) return;
+          var original = btn.textContent;
+          btn.textContent = 'Adding...';
+
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: parseInt(btn.dataset.variantId, 10), quantity: 1 })
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error('Add failed');
+              return res.json();
+            })
+            .then(function () {
+              btn.textContent = 'Added ✓';
+              btn.classList.add('is-added');
+
+              fetch('/cart.js')
+                .then(function (r) { return r.json(); })
+                .then(function (cart) {
+                  var bubble = document.querySelector('.cart-count-bubble span[aria-hidden]');
+                  if (bubble) bubble.textContent = cart.item_count;
+                })
+                .catch(function () {});
+
+              setTimeout(function () {
+                btn.textContent = original;
+                btn.classList.remove('is-added');
+              }, 2000);
+            })
+            .catch(function () {
+              btn.textContent = 'Try again';
+              setTimeout(function () { btn.textContent = original; }, 2000);
+            });
+        });
+      });
+    }
+
+    document.querySelectorAll('.ebels-bundles').forEach(initBundles);
+
+    document.addEventListener('shopify:section:load', function (event) {
+      var bundles = event.target.querySelector('.ebels-bundles');
+      if (bundles) initBundles(bundles);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Ebels Bundles Carousel",
+  "tag": "section",
+  "class": "section-ebels-bundles",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop Bundles"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Save more when you bundle your favourites together."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle",
+      "name": "Bundle",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Bundle product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom image (optional)"
+        },
+        {
+          "type": "text",
+          "id": "contents",
+          "label": "What's inside (optional)",
+          "info": "Falls back to the product's Card details metafield"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Ebels Bundles Carousel",
+      "blocks": [
+        { "type": "bundle" },
+        { "type": "bundle" },
+        { "type": "bundle" },
+        { "type": "bundle" },
+        { "type": "bundle" }
+      ]
+    }
+  ]
+}
+{% endschema %}
