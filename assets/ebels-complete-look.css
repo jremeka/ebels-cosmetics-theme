@@ -1,0 +1,121 @@
+/* ==========================================================================
+   EBELS COMPLETE THE LOOK — hand-picked cross-sell product grid
+   Loaded by sections/ebels-complete-look.liquid
+   ========================================================================== */
+
+.ebels-ctl {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+.ebels-ctl__header {
+  margin-bottom: var(--space-8);
+}
+
+.ebels-ctl__heading {
+  margin-bottom: var(--space-2);
+}
+
+.ebels-ctl__subheading {
+  color: var(--text-secondary);
+}
+
+.ebels-ctl__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-ctl__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.ebels-ctl__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.ebels-ctl__media-link {
+  display: block;
+  text-decoration: none;
+}
+
+.ebels-ctl__media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.ebels-ctl__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.ebels-ctl__card:hover .ebels-ctl__img {
+  transform: scale(1.05);
+}
+
+.ebels-ctl__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ebels-ctl__title-link {
+  text-decoration: none;
+}
+
+.ebels-ctl__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ebels-ctl__price {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ebels-ctl__rating {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.ebels-ctl__stars {
+  color: var(--ebels-amber);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.ebels-ctl__add-to-bag {
+  width: 100%;
+  font-size: var(--text-caption-size);
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.ebels-ctl__add-to-bag[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ebels-ctl__add-to-bag.is-added {
+  background: var(--status-success);
+  color: var(--text-inverse);
+  border-color: var(--status-success);
+}

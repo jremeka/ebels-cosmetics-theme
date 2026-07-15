@@ -62,7 +62,9 @@
   object-fit: cover;
   display: block;
 }
-
+.ebels-product__main-image-el[hidden] {
+  display: none;
+}
 .ebels-product__thumbs {
   display: flex;
   gap: var(--space-3);
@@ -161,7 +163,9 @@
   padding: 0;
   cursor: pointer;
   box-shadow: 0 0 0 1px rgba(34, 27, 22, 0.1);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .ebels-product__swatch:hover {
@@ -169,7 +173,9 @@
 }
 
 .ebels-product__swatch.is-selected {
-  box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--ebels-ink);
+  box-shadow:
+    0 0 0 2px var(--bg-primary),
+    0 0 0 4px var(--ebels-ink);
 }
 
 /* ----- Quantity + Add to Bag ----- */
@@ -240,10 +246,12 @@
 }
 
 .ebels-product__wishlist-icon {
-  transition: fill 0.15s ease, stroke 0.15s ease;
+  transition:
+    fill 0.15s ease,
+    stroke 0.15s ease;
 }
 
-.ebels-product__wishlist[aria-pressed="true"] .ebels-product__wishlist-icon {
+.ebels-product__wishlist[aria-pressed='true'] .ebels-product__wishlist-icon {
   fill: var(--text-brand);
   stroke: var(--text-brand);
 }

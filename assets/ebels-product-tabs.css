@@ -1,0 +1,119 @@
+/* ==========================================================================
+   EBELS PRODUCT TABS — Description / Ingredients / How to Use / Shipping
+   Loaded by sections/ebels-product-tabs.liquid
+   ========================================================================== */
+
+.ebels-tabs {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+}
+
+/* ----- Tab nav ----- */
+.ebels-tabs__nav {
+  display: flex;
+  gap: var(--space-8);
+  border-bottom: 1px solid var(--border-default);
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.ebels-tabs__nav::-webkit-scrollbar {
+  display: none;
+}
+
+.ebels-tabs__tab {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  padding: var(--space-3) 0;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.ebels-tabs__tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--brand-primary);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.ebels-tabs__tab:hover {
+  color: var(--text-primary);
+}
+
+.ebels-tabs__tab.is-active {
+  color: var(--text-primary);
+}
+
+.ebels-tabs__tab.is-active::after {
+  transform: scaleX(1);
+}
+
+/* ----- Panels ----- */
+.ebels-tabs__panel {
+  padding-top: var(--space-8);
+}
+
+.ebels-tabs__panel[hidden] {
+  display: none;
+}
+
+.ebels-tabs__panel-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-tabs__panel-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+  }
+}
+
+.ebels-tabs__panel-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ebels-tabs__body {
+  color: var(--text-secondary);
+}
+
+.ebels-tabs__body p {
+  margin: 0;
+}
+
+/* ----- Checklist ----- */
+.ebels-tabs__checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ebels-tabs__checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.ebels-tabs__check-icon {
+  flex-shrink: 0;
+  color: var(--status-success);
+  margin-top: 2px;
+}

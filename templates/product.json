@@ -4,6 +4,86 @@
   "type": "ebels-product-main",
   "settings": {}
 },
+"ebels_tabs": {
+  "type": "ebels-product-tabs",
+  "blocks": {
+    "description": {
+      "type": "tab",
+      "settings": {
+        "label": "Description",
+        "heading": "A Masterpiece in Matte",
+        "body": "<p>Velvet Rouge is the culmination of three years of laboratory testing...</p>",
+        "checklist_items": "12-hour long wear formula\nVelvet matte finish — no drying, no flaking\nEnriched with Vitamin E & Shea Butter\nDermatologist tested, cruelty-free\nNet weight: 3.5g"
+      }
+    },
+    "ingredients": {
+      "type": "tab",
+      "settings": { "label": "Ingredients" }
+    },
+    "how_to_use": {
+      "type": "tab",
+      "settings": { "label": "How to Use" }
+    },
+    "shipping": {
+      "type": "tab",
+      "settings": { "label": "Shipping & Returns" }
+    }
+  },
+  "block_order": ["description", "ingredients", "how_to_use", "shipping"]
+},
+"ebels_how_to_wear": {
+  "type": "ebels-how-to-wear",
+  "blocks": {
+    "step_1": {
+      "type": "step",
+      "settings": {
+        "title": "Prep & Prime",
+        "description": "Exfoliate gently with a sugar scrub and apply a light lip balm."
+      }
+    },
+    "step_2": {
+      "type": "step",
+      "settings": {
+        "title": "Line & Define",
+        "description": "Trace the natural contour of your lips with a matching liner."
+      }
+    },
+    "step_3": {
+      "type": "step",
+      "settings": {
+        "title": "Apply & Blot",
+        "description": "Glide Velvet Rouge across lips. Blot with a tissue for a soft focus effect."
+      }
+    }
+  },
+  "block_order": ["step_1", "step_2", "step_3"]
+},
+"ebels_complete_look": {
+  "type": "ebels-complete-look",
+  "settings": {
+    "heading": "Complete the Look",
+    "subheading": "Pair Velvet Rouge with these bestsellers"
+  },
+  "blocks": {
+    "product_1": {
+      "type": "product",
+      "settings": { "product": "precision-liner" }
+    },
+    "product_2": {
+      "type": "product",
+      "settings": { "product": "suede-no-5" }
+    },
+    "product_3": {
+      "type": "product",
+      "settings": { "product": "silk-clutch" }
+    },
+    "product_4": {
+      "type": "product",
+      "settings": { "product": "luminous-base" }
+    }
+  },
+  "block_order": ["product_1", "product_2", "product_3", "product_4"]
+},
     "disclosures": {
       "type": "disclosures",
       "settings": {
@@ -11,28 +91,13 @@
         "padding_bottom": 0
       }
     },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 28
-      }
-    }
+    
   },
   "order": [
     "main",
-    "disclosures",
-    "related-products"
+    "ebels_tabs",
+    "ebels_how_to_wear",
+    "ebels_complete_look",
+    "disclosures"
   ]
 }

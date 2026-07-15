@@ -1,0 +1,68 @@
+/* ==========================================================================
+   EBELS HOW TO WEAR — 3-step visual guide
+   Loaded by sections/ebels-how-to-wear.liquid
+   ========================================================================== */
+
+.ebels-htw {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+.ebels-htw__header {
+  text-align: center;
+  max-width: 44ch;
+  margin: 0 auto var(--space-10);
+}
+
+.ebels-htw__heading {
+  margin-bottom: var(--space-2);
+}
+
+.ebels-htw__subheading {
+  color: var(--text-secondary);
+}
+
+.ebels-htw__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-htw__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.ebels-htw__step {
+  display: flex;
+  flex-direction: column;
+}
+
+.ebels-htw__image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--bg-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.ebels-htw__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ebels-htw__step-label {
+  margin-bottom: var(--space-1);
+}
+
+.ebels-htw__step-title {
+  margin-bottom: var(--space-2);
+}
+
+.ebels-htw__step-description {
+  color: var(--text-secondary);
+}
