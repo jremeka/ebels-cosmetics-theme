@@ -84,6 +84,34 @@
   },
   "block_order": ["product_1", "product_2", "product_3", "product_4"]
 },
+"ebels_reviews": {
+  "type": "ebels-reviews",
+  "settings": {
+    "average_rating": 4.8,
+    "review_count": 312,
+    "percent_5": 72,
+    "percent_4": 18,
+    "percent_3": 6,
+    "percent_2": 3,
+    "percent_1": 1
+  }
+},
+"ebels_real_looks": {
+  "type": "ebels-real-looks",
+  "settings": {
+    "heading": "Real People, Real Looks",
+    "subheading": "See how our community wears this look. Tag us",
+    "hashtag": "#EBELSvelvetrouge"
+  }
+},
+"ebels_recently_viewed": {
+  "type": "ebels-recently-viewed",
+  "settings": {
+    "heading": "Recently Viewed",
+    "view_all_link": "/collections/all",
+    "products_to_show": 4
+  }
+},
     "disclosures": {
       "type": "disclosures",
       "settings": {
@@ -98,6 +126,9 @@
     "ebels_tabs",
     "ebels_how_to_wear",
     "ebels_complete_look",
+    "ebels_reviews",
+    "ebels_real_looks",
+    "ebels_recently_viewed",
     "disclosures"
   ]
 }

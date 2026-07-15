@@ -1,0 +1,155 @@
+/* ==========================================================================
+   EBELS RECENTLY VIEWED — localStorage-driven product grid
+   Loaded by sections/ebels-recently-viewed.liquid
+   ========================================================================== */
+
+.ebels-rv {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+/* Lesson learned from the gallery bug: always make [hidden] explicit */
+.ebels-rv[hidden] {
+  display: none;
+}
+
+.ebels-rv__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+}
+
+.ebels-rv__heading {
+  margin: 0;
+}
+
+.ebels-rv__view-all {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: var(--text-caption-size);
+}
+
+.ebels-rv__view-all:hover {
+  color: var(--text-brand);
+}
+
+.ebels-rv__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-rv__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+/* ----- Card (rendered by JS, so plain classes, no Liquid loop here) ----- */
+.ebels-rv__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.ebels-rv__media-link {
+  display: block;
+  text-decoration: none;
+}
+
+.ebels-rv__media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.ebels-rv__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.ebels-rv__card:hover .ebels-rv__img {
+  transform: scale(1.05);
+}
+
+.ebels-rv__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ebels-rv__title-link {
+  text-decoration: none;
+}
+
+.ebels-rv__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ebels-rv__price {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ebels-rv__rating {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.ebels-rv__stars {
+  color: var(--ebels-amber);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.ebels-rv__add-to-bag {
+  width: 100%;
+  font-size: var(--text-caption-size);
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.ebels-rv__add-to-bag[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ebels-rv__add-to-bag.is-added {
+  background: var(--status-success);
+  color: var(--text-inverse);
+  border-color: var(--status-success);
+}
+
+/* ----- Skeleton loading state while cards are being fetched ----- */
+.ebels-rv__skeleton {
+  border-radius: var(--radius-lg);
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--border-default) 50%, var(--bg-secondary) 75%);
+  background-size: 200% 100%;
+  animation: ebels-rv-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes ebels-rv-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

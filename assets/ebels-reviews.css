@@ -1,0 +1,177 @@
+/* ==========================================================================
+   EBELS REVIEWS — rating summary, star breakdown, review cards
+   Loaded by sections/ebels-reviews.liquid
+   ========================================================================== */
+
+.ebels-reviews {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+/* ----- Star rendering (partial-fill via gradient text clip) ----- */
+.ebels-reviews__stars {
+  display: inline-block;
+  font-size: 22px;
+  letter-spacing: 2px;
+  line-height: 1;
+  background-image: linear-gradient(90deg, var(--ebels-amber) var(--star-fill, 0%), var(--border-default) var(--star-fill, 0%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ebels-reviews__stars--sm {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* ----- Summary block ----- */
+.ebels-reviews__summary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: start;
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--border-default);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-reviews__summary {
+    grid-template-columns: auto 1fr auto;
+    gap: var(--space-10);
+  }
+}
+
+.ebels-reviews__score-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ebels-reviews__score {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  line-height: 1;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ebels-reviews__score-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ebels-reviews__bars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 320px;
+}
+
+.ebels-reviews__bar-row {
+  display: grid;
+  grid-template-columns: 44px 1fr 32px;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ebels-reviews__bar-label {
+  white-space: nowrap;
+}
+
+.ebels-reviews__bar-track {
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--border-default);
+  overflow: hidden;
+}
+
+.ebels-reviews__bar-fill {
+  height: 100%;
+  background: var(--ebels-amber);
+  border-radius: var(--radius-full);
+}
+
+.ebels-reviews__bar-percent {
+  text-align: right;
+}
+
+.ebels-reviews__write-btn {
+  align-self: start;
+  white-space: nowrap;
+}
+
+/* ----- Review cards ----- */
+.ebels-reviews__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-reviews__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ebels-reviews__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+
+.ebels-reviews__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ebels-reviews__author {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ebels-reviews__card-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin: var(--space-1) 0 0;
+}
+
+.ebels-reviews__card-body {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.ebels-reviews__helpful {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  color: var(--text-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ebels-reviews__helpful:hover {
+  color: var(--text-brand);
+}
+
+.ebels-reviews__helpful.is-voted {
+  color: var(--text-brand);
+  cursor: default;
+  text-decoration: none;
+}

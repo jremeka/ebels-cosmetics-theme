@@ -23,6 +23,35 @@
     initQtyStepper(root);
     initAddToBag(root);
     initWishlist(root);
+    trackRecentlyViewed(product);
+  }
+
+  /* ----- Recently viewed tracking -----
+     Records this product in localStorage so ebels-recently-viewed.js can
+     read it back later. Runs on every product page automatically. */
+  function trackRecentlyViewed(product) {
+    if (!product || !product.handle) return;
+
+    var STORAGE_KEY = 'ebels:recently-viewed';
+    var MAX_ITEMS = 12;
+    var stored = [];
+
+    try {
+      stored = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch (e) {
+      stored = [];
+    }
+
+    // Remove any existing entry for this product, then add it fresh to the front
+    stored = stored.filter(function (item) { return item.handle !== product.handle; });
+    stored.unshift({ handle: product.handle, viewedAt: Date.now() });
+    stored = stored.slice(0, MAX_ITEMS);
+
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+    } catch (e) {
+      // Storage unavailable (private browsing, storage full, etc.) — fail silently
+    }
   }
 
   /* ----- Gallery ----- */
@@ -109,7 +138,17 @@
     }
 
     function formatMoney(cents) {
-      return '£' + (cents / 100).toFixed(2);
+      var formatEl = root.querySelector('[data-money-format]') || document.querySelector('[data-money-format]');
+      var format = '${{amount}}';
+      if (formatEl) {
+        try {
+          format = JSON.parse(formatEl.textContent) || format;
+        } catch (e) {
+          // Keep the fallback format if parsing fails
+        }
+      }
+      var value = (cents / 100).toFixed(2);
+      return format.replace(/\{\{\s*amount\s*\}\}/, value);
     }
   }
 
