@@ -1,0 +1,89 @@
+{{ 'ebels-collection-header.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-ch page-width" data-collection-header>
+  <div class="ebels-ch__intro">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="ebels-ch__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    <h1 class="ebels-ch__title">{{ collection.title }}</h1>
+
+    {%- if collection.description != blank -%}
+      <button type="button" class="ebels-ch__read-more" data-read-more-toggle aria-expanded="false">
+        Read more
+      </button>
+      <div class="ebels-ch__description" data-read-more-content hidden>
+        {{ collection.description }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="ebels-ch__filters">
+      {%- for block in section.blocks -%}
+        {%- assign filter_url = collection.url -%}
+        {%- if block.settings.tag != blank -%}
+          {%- assign filter_url = collection.url | append: '/' | append: block.settings.tag | handleize -%}
+        {%- endif -%}
+        <a href="{{ filter_url }}" class="ebels-ch__filter-item" {{ block.shopify_attributes }}>
+          <span class="ebels-ch__filter-icon">
+            {%- if block.settings.icon != blank -%}
+              {{ block.settings.icon | image_url: width: 80 | image_tag: loading: 'lazy', class: 'ebels-ch__filter-img' }}
+            {%- else -%}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/></svg>
+            {%- endif -%}
+          </span>
+          <span class="ebels-ch__filter-label">{{ block.settings.label }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+<script src="{{ 'ebels-collection-header.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Collection Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Ebels Collection"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "filter_icon",
+      "name": "Filter icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon",
+          "info": "80 × 80px, simple line icon recommended"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Floral"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Product tag to filter by",
+          "info": "Must exactly match a tag used on products in this collection (e.g. \"Floral\"). Links to Shopify's native tag-filtered collection page — no app required."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Ebels Collection Header"
+    }
+  ]
+}
+{% endschema %}

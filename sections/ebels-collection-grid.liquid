@@ -1,0 +1,234 @@
+{{ 'ebels-collection-grid.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  EBELS COLLECTION GRID
+  - Price sorting is fully functional (native Shopify sort_by).
+  - Rating sorting is built and ready, but sorts on a data-rating attribute
+    that's currently a placeholder (see reviews section note). Once a real
+    review app populates a per-product rating, feed that value into the
+    data-rating attribute below instead of the hardcoded placeholder and
+    rating sort becomes fully functional with no other changes needed.
+  - Badges are driven by exact product tags: "New Shades", "Bestseller",
+    "Luxury", "Limited". Add the matching tag to a product in Shopify admin
+    to make its badge appear automatically.
+{%- endcomment -%}
+
+<div class="ebels-cg page-width" data-collection-grid data-current-path="{{ collection.url }}">
+
+  <script type="application/json" data-money-format>{{ shop.money_format | json }}</script>
+
+  <div class="ebels-cg__meta">
+    <div class="ebels-cg__breadcrumb-wrap">
+      <nav class="ebels-cg__breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">Ebels</a>
+        <span class="ebels-cg__breadcrumb-sep">/</span>
+        <span class="ebels-cg__breadcrumb-current">{{ collection.title }}</span>
+      </nav>
+      <p class="ebels-cg__count">{{ collection.all_products_count }} products</p>
+    </div>
+
+    <div class="ebels-cg__controls">
+      <a
+        href="{{ collection.url }}?sort_by=created-descending"
+        class="ebels-cg__pill{% if collection.sort_by == 'created-descending' %} is-active{% endif %}"
+      >
+        New Arrivals
+      </a>
+
+      <div class="ebels-cg__sort" data-sort-dropdown>
+        <button type="button" class="ebels-cg__sort-btn" data-sort-trigger aria-haspopup="listbox" aria-expanded="false">
+          <span data-sort-label>Sort by</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="ebels-cg__sort-menu" data-sort-menu role="listbox" hidden>
+          <li><a href="{{ collection.url }}?sort_by=manual" data-sort-option>Featured</a></li>
+          <li><a href="{{ collection.url }}?sort_by=best-selling" data-sort-option>Best Selling</a></li>
+          <li><a href="{{ collection.url }}?sort_by=price-ascending" data-sort-option>Price: Low to High</a></li>
+          <li><a href="{{ collection.url }}?sort_by=price-descending" data-sort-option>Price: High to Low</a></li>
+          <li><a href="#" data-sort-option data-rating-sort="desc">Rating: High to Low</a></li>
+          <li><a href="#" data-sort-option data-rating-sort="asc">Rating: Low to High</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {%- paginate collection.products by section.settings.products_per_page -%}
+    {%- if collection.products.size > 0 -%}
+      <div
+        class="ebels-cg__grid"
+        data-cg-product-list
+        style="--ebels-cg-columns: {{ section.settings.columns_desktop }};"
+      >
+        {%- for product in collection.products -%}
+          {%- assign badge_text = '' -%}
+          {%- if product.tags contains 'New Shades' -%}
+            {%- assign badge_text = 'New Shades' -%}
+          {%- elsif product.tags contains 'Bestseller' -%}
+            {%- assign badge_text = 'Bestseller' -%}
+          {%- elsif product.tags contains 'Luxury' -%}
+            {%- assign badge_text = 'Luxury' -%}
+          {%- elsif product.tags contains 'Limited' -%}
+            {%- assign badge_text = 'Limited' -%}
+          {%- endif -%}
+
+          {%- assign hover_index = section.settings.hover_image_index | minus: 1 -%}
+          {%- assign hover_image = product.images[hover_index] -%}
+          {%- assign primary_variant = product.selected_or_first_available_variant -%}
+
+          {%- assign shade_option_index = -1 -%}
+          {%- for option in product.options_with_values -%}
+            {%- if option.name == 'Shade' or option.name == 'Color' or option.name == 'Colour' -%}
+              {%- assign shade_option_index = forloop.index0 -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          <div class="ebels-cg__card" data-cg-card data-rating="4.8">
+            <div class="ebels-cg__media">
+              {%- if badge_text != '' -%}
+                <span class="ebels-cg__badge ebels-cg__badge--{{ badge_text | handleize }}">{{ badge_text }}</span>
+              {%- endif -%}
+
+              <a href="{{ product.url }}" class="ebels-cg__media-link" aria-label="{{ product.title | escape }}">
+                {%- if product.featured_image != blank -%}
+                  {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', class: 'ebels-cg__img ebels-cg__img--primary', widths: '350, 525, 700' }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'ebels-cg__img ebels-cg__img--primary' }}
+                {%- endif -%}
+
+                {%- if hover_image != blank -%}
+                  {{ hover_image | image_url: width: 700 | image_tag: loading: 'lazy', class: 'ebels-cg__img ebels-cg__img--hover', widths: '350, 525, 700' }}
+                {%- endif -%}
+
+                {%- if shade_option_index > -1 -%}
+                  {%- for variant in product.variants -%}
+                    {%- if variant.featured_image != blank -%}
+                      <img
+                        src="{{ variant.featured_image | image_url: width: 700 }}"
+                        alt="{{ variant.title | escape }}"
+                        class="ebels-cg__img ebels-cg__img--variant"
+                        data-cg-variant-image="{{ variant.id }}"
+                        loading="lazy"
+                        width="700"
+                        height="875"
+                        hidden
+                      >
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              </a>
+
+              {%- if shade_option_index > -1 -%}
+                {%- assign shade_option = product.options_with_values[shade_option_index] -%}
+                <div class="ebels-cg__swatches ebels-cg__swatches--overlay" data-cg-swatches data-option-name="{{ shade_option.name | escape }}">
+                  {%- for value in shade_option.values limit: 4 -%}
+                    {%- assign swatch_variant = product.variants | where: 'title', value | first -%}
+                    <button
+                      type="button"
+                      class="ebels-cg__swatch{% if forloop.first %} is-selected{% endif %}"
+                      style="--swatch-color: {{ value.swatch.color | default: '#8C8279' }};"
+                      data-cg-swatch-value="{{ value | escape }}"
+                      data-cg-variant-id="{{ swatch_variant.id }}"
+                      data-cg-variant-price="{{ swatch_variant.price }}"
+                      data-cg-variant-available="{{ swatch_variant.available }}"
+                      aria-label="{{ value }}"
+                      title="{{ value }}"
+                    ></button>
+                  {%- endfor -%}
+                  {%- if shade_option.values.size > 4 -%}
+                    <span class="ebels-cg__swatch-more">+{{ shade_option.values.size | minus: 4 }}</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+
+            <div class="ebels-cg__info">
+              <div class="ebels-cg__rating" data-review-placeholder>
+                <span class="ebels-cg__stars" aria-hidden="true">★★★★★</span>
+                <span class="ebels-caption">(120)</span>
+              </div>
+
+              <a href="{{ product.url }}" class="ebels-cg__title-link">
+                <h3 class="ebels-cg__title">{{ product.title }}</h3>
+              </a>
+              <p class="ebels-cg__price" data-cg-price>{{ primary_variant.price | money }}</p>
+
+              <button
+                type="button"
+                class="ebels-btn ebels-cg__add-to-bag"
+                data-add-to-bag-cg
+                data-variant-id="{{ primary_variant.id }}"
+                {% unless primary_variant.available %}disabled{% endunless %}
+              >
+                {%- if primary_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+              </button>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="ebels-cg__pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="ebels-cg__page-link">← Previous</a>
+          {%- endif -%}
+
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}" class="ebels-cg__page-number">{{ part.title }}</a>
+            {%- else -%}
+              <span class="ebels-cg__page-number{% if part.title == paginate.current_page %} is-current{% endif %}">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="ebels-cg__page-link">Next →</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- else -%}
+      <div class="ebels-cg__empty">
+        <p class="ebels-body">No products found in this collection yet.</p>
+      </div>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+<script src="{{ 'ebels-collection-grid.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Collection Grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Products per row (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 6,
+      "max": 48,
+      "step": 6,
+      "default": 24
+    },
+    {
+      "type": "number",
+      "id": "hover_image_index",
+      "label": "Hover-swap image position",
+      "default": 2,
+      "info": "Which uploaded product image (1st, 2nd, etc.) shows on hover. Default 2 = the second image."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ebels Collection Grid"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,192 @@
+/* ==========================================================================
+   EBELS COLLECTION LIST — horizontal scroller, circular collection cutouts
+   No heading. Nav arrows + edge fade mask on desktop, swipe on mobile.
+   Loaded by sections/ebels-collection-list.liquid
+   ========================================================================== */
+
+.ebels-cl {
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-10);
+}
+
+.ebels-cl__wrap {
+  position: relative;
+}
+
+/* ----- Track ----- */
+.ebels-cl__track {
+  display: flex;
+  gap: var(--space-8);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: var(--space-2) var(--space-1) var(--space-3);
+  outline: none;
+}
+
+.ebels-cl__track::-webkit-scrollbar {
+  display: none;
+}
+
+.ebels-cl__track {
+  cursor: grab;
+}
+
+.ebels-cl__track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.ebels-cl__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  flex: 0 0 auto;
+  width: 152px;
+  scroll-snap-align: start;
+}
+
+.ebels-cl__circle {
+  position: relative;
+  width: 152px;
+  height: 152px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle at 50% 45%, var(--ebels-blush) 0%, var(--bg-secondary) 72%);
+  box-shadow: 0 8px 24px rgba(34, 27, 22, 0.08);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ebels-cl__item:hover .ebels-cl__circle {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 14px 32px rgba(34, 27, 22, 0.14);
+}
+
+.ebels-cl__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.ebels-cl__label {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.ebels-cl__item:hover .ebels-cl__label {
+  color: var(--text-brand);
+}
+
+/* ----- Nav arrows (desktop, appear on section hover) ----- */
+.ebels-cl__nav {
+  position: absolute;
+  top: 68px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-default);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 6px 16px rgba(34, 27, 22, 0.1);
+}
+
+.ebels-cl__wrap:hover .ebels-cl__nav {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ebels-cl__nav:hover {
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+  border-color: var(--ebels-ink);
+}
+
+.ebels-cl__nav--prev {
+  left: -8px;
+}
+
+.ebels-cl__nav--next {
+  right: -8px;
+}
+
+.ebels-cl__nav[disabled] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ----- Edge fade mask ----- */
+.ebels-cl__fade {
+  position: absolute;
+  top: 0;
+  bottom: var(--space-6);
+  width: 64px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.ebels-cl__fade--left {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-primary) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.ebels-cl__fade--right {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg-primary) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.ebels-cl__fade.is-hidden {
+  opacity: 0;
+}
+
+/* ----- Responsive ----- */
+@media screen and (max-width: 749px) {
+  .ebels-cl__nav {
+    display: none;
+  }
+
+  .ebels-cl__track {
+    gap: var(--space-5);
+  }
+
+  .ebels-cl__item {
+    width: 112px;
+  }
+
+  .ebels-cl__circle {
+    width: 112px;
+    height: 112px;
+  }
+
+  .ebels-cl__nav {
+    top: 48px;
+  }
+
+  .ebels-cl__fade {
+    width: 32px;
+  }
+}

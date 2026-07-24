@@ -1,0 +1,142 @@
+/* ==========================================================================
+   EBELS COLLECTION HEADER — title, read-more description, tag filter row
+   Loaded by sections/ebels-collection-header.liquid
+   ========================================================================== */
+
+.ebels-ch {
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-8);
+  text-align: center;
+}
+
+.ebels-ch__intro {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.ebels-ch__eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-3);
+}
+
+.ebels-ch__title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--text-h1-size);
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ebels-ch__read-more {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ebels-ch__read-more:hover {
+  color: var(--text-brand);
+}
+
+.ebels-ch__description {
+  max-width: 900px;
+  margin: var(--space-4) auto 0;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.ebels-ch__description[hidden] {
+  display: none;
+}
+
+.ebels-ch__description p {
+  margin: 0;
+}
+
+/* ----- Filter row (clickable, links to Shopify's native tag-filtered collection URL) ----- */
+.ebels-ch__filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-top: var(--space-10);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.ebels-ch__filter-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  width: 84px;
+}
+
+.ebels-ch__filter-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.ebels-ch__filter-item:hover .ebels-ch__filter-icon {
+  border-color: var(--border-brand);
+  transform: translateY(-2px);
+}
+
+.ebels-ch__filter-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.ebels-ch__filter-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+@media screen and (max-width: 749px) {
+  .ebels-ch__filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    gap: var(--space-6);
+  }
+
+  .ebels-ch__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ebels-ch__filter-item {
+    flex: 0 0 auto;
+  }
+}

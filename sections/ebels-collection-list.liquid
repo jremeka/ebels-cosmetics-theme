@@ -1,0 +1,90 @@
+{{ 'ebels-collection-list.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  EBELS COLLECTION LIST
+  No heading — pure horizontal scroller of circular collection cutouts,
+  up to 8, each linking to its real Shopify collection page.
+{%- endcomment -%}
+
+<div class="ebels-cl" data-collection-list-section>
+  {%- if section.blocks.size > 0 -%}
+    <div class="ebels-cl__wrap page-width">
+      <button type="button" class="ebels-cl__nav ebels-cl__nav--prev" data-cl-prev aria-label="Scroll left">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div class="ebels-cl__track" data-cl-track tabindex="0" aria-label="Shop by collection">
+        {%- for block in section.blocks -%}
+          {%- assign cl_collection = block.settings.collection -%}
+          {%- if cl_collection != blank -%}
+            {%- assign cl_image = block.settings.custom_image | default: cl_collection.image -%}
+            {%- assign cl_title = block.settings.custom_title | default: cl_collection.title -%}
+            <a href="{{ cl_collection.url }}" class="ebels-cl__item" data-reveal {{ block.shopify_attributes }}>
+              <div class="ebels-cl__circle">
+                {%- if cl_image != blank -%}
+                  {{ cl_image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'ebels-cl__img', widths: '250, 375, 500' }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'ebels-cl__img' }}
+                {%- endif -%}
+              </div>
+              <span class="ebels-cl__label">{{ cl_title }}</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <button type="button" class="ebels-cl__nav ebels-cl__nav--next" data-cl-next aria-label="Scroll right">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <div class="ebels-cl__fade ebels-cl__fade--left" data-cl-fade-left></div>
+      <div class="ebels-cl__fade ebels-cl__fade--right" data-cl-fade-right></div>
+    </div>
+  {%- endif -%}
+</div>
+
+<script src="{{ 'ebels-collection-list.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Collection List",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "collection_item",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom image (optional)",
+          "info": "800 × 800px square photo recommended. Overrides the collection's own image. Fills and crops to the full circle — no transparent background needed, regular photos work great. Center the main subject, since edges get cropped into a circle."
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom title (optional)",
+          "info": "Overrides the collection's own title if set"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Ebels Collection List",
+      "blocks": [
+        { "type": "collection_item" },
+        { "type": "collection_item" },
+        { "type": "collection_item" },
+        { "type": "collection_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
