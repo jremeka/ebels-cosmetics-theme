@@ -1,0 +1,143 @@
+/* ==========================================================================
+   EBELS CART RECOMMENDATIONS — "Recommended For You" below the shopping bag
+   Loaded by sections/ebels-cart-recommendations.liquid
+   ========================================================================== */
+
+.ebels-crec {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+.ebels-crec__header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.ebels-crec__eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-2);
+}
+
+.ebels-crec__heading {
+  margin: 0;
+}
+
+.ebels-crec__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-crec__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+.ebels-crec__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.ebels-crec__badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background: var(--ebels-ink);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm, 6px);
+}
+
+.ebels-crec__media-link {
+  display: block;
+  text-decoration: none;
+}
+
+.ebels-crec__media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.ebels-crec__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.ebels-crec__card:hover .ebels-crec__img {
+  transform: scale(1.05);
+}
+
+.ebels-crec__rating {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-1);
+}
+
+.ebels-crec__stars {
+  color: var(--ebels-amber);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.ebels-crec__title-link {
+  text-decoration: none;
+}
+
+.ebels-crec__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ebels-crec__price {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin: var(--space-1) 0 var(--space-3);
+}
+
+.ebels-crec__add-to-bag {
+  width: 100%;
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+  border: none;
+  font-size: var(--text-caption-size);
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.ebels-crec__add-to-bag:hover {
+  opacity: 0.85;
+}
+
+.ebels-crec__add-to-bag[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ebels-crec__add-to-bag.is-added {
+  background: var(--status-success);
+}

@@ -1,0 +1,61 @@
+{{ 'ebels-cart-drawer.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  EBELS CART DRAWER (snippet)
+  Rendered once, globally, via sections/cart-drawer.liquid.
+  Content is populated entirely by JS from /cart.js — see ebels-cart-drawer.js.
+  This markup is just the shell: overlay, panel, header, and static structure.
+
+  Global JS API this file defines (already called by other add-to-bag scripts
+  across the site — see CLAUDE.md):
+    window.EbelsCartDrawer.open()     — refreshes contents, then opens
+    window.EbelsCartDrawer.close()
+    window.EbelsCartDrawer.refresh()  — re-fetches /cart.js and re-renders, no open/close
+{%- endcomment -%}
+
+<div
+  class="ebels-cd"
+  data-cart-drawer
+  data-free-shipping-threshold="{{ free_shipping_threshold | default: 50 }}"
+  data-empty-message="{{ empty_message | default: 'Your bag is empty.' | escape }}"
+  hidden
+>
+  <script type="application/json" data-money-format>{{ shop.money_format | json }}</script>
+
+  <div class="ebels-cd__overlay" data-cart-drawer-overlay tabindex="-1"></div>
+
+  <div class="ebels-cd__panel" role="dialog" aria-modal="true" aria-label="Shopping bag">
+    <div class="ebels-cd__header">
+      <h2 class="ebels-cd__title">My Bag (<span data-cart-drawer-count>0</span>)</h2>
+      <button type="button" class="ebels-cd__close" data-cart-drawer-close aria-label="Close bag">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="ebels-cd__shipping-msg" data-cart-drawer-shipping-msg></div>
+
+    <div class="ebels-cd__body" data-cart-drawer-body>
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="ebels-cd__footer" data-cart-drawer-footer hidden>
+      <div class="ebels-cd__subtotal-row">
+        <span class="ebels-cd__subtotal-label">Subtotal</span>
+        <span class="ebels-cd__subtotal-value" data-cart-drawer-subtotal>$0.00</span>
+      </div>
+
+      <div class="ebels-cd__actions">
+        <button type="button" class="ebels-btn ebels-btn--outline ebels-cd__continue" data-cart-drawer-close>
+          Continue Shopping
+        </button>
+        <a href="{{ routes.cart_url }}" class="ebels-btn ebels-cd__view-bag">
+          View Shopping Bag
+        </a>
+      </div>
+
+      <p class="ebels-caption ebels-cd__tax-note">Taxes and shipping calculated at checkout</p>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'ebels-cart-drawer.js' | asset_url }}" defer></script>

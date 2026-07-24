@@ -1,0 +1,149 @@
+{{ 'ebels-account-orders.css' | asset_url | stylesheet_tag }}
+
+{%- if customer -%}
+<div class="ebels-acc-ord page-width" data-account-tab-panel="orders" hidden>
+  <script type="application/json" data-money-format>{{ shop.money_format | json }}</script>
+
+  {%- if customer.orders.size > 0 -%}
+    <div class="ebels-acc-ord__meta">
+      <p class="ebels-acc-ord__count">{{ customer.orders_count }} order{% if customer.orders_count != 1 %}s{% endif %}</p>
+    </div>
+
+    <div class="ebels-acc-ord__list">
+      {%- for order in customer.orders -%}
+        <div class="ebels-acc-ord__card">
+          <div class="ebels-acc-ord__card-head">
+            <div>
+              <p class="ebels-acc-ord__number">Order #{{ order.name }}</p>
+              <p class="ebels-caption">{{ order.created_at | date: '%d %b %Y' }}</p>
+            </div>
+
+            {%- if order.fulfillment_status == 'fulfilled' -%}
+              <span class="ebels-acc-ord__status ebels-acc-ord__status--delivered">● Delivered</span>
+            {%- elsif order.fulfillment_status == 'partial' -%}
+              <span class="ebels-acc-ord__status ebels-acc-ord__status--transit">● In Transit</span>
+            {%- else -%}
+              <span class="ebels-acc-ord__status ebels-acc-ord__status--processing">● Processing</span>
+            {%- endif -%}
+          </div>
+
+          <div class="ebels-acc-ord__items">
+            {%- for line_item in order.line_items -%}
+              <div class="ebels-acc-ord__item">
+                <div class="ebels-acc-ord__item-media">
+                  {%- if line_item.image -%}
+                    <img src="{{ line_item.image | image_url: width: 150 }}" alt="{{ line_item.title | escape }}" loading="lazy" width="75" height="75">
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'ebels-acc-ord__item-placeholder' }}
+                  {%- endif -%}
+                </div>
+                <div>
+                  <p class="ebels-acc-ord__item-title">{{ line_item.title }}</p>
+                  <p class="ebels-caption">Qty: {{ line_item.quantity }}</p>
+                </div>
+              </div>
+            {%- endfor -%}
+
+            <div class="ebels-acc-ord__total">
+              <p class="ebels-caption">Order Total</p>
+              <p class="ebels-acc-ord__total-value">{{ order.total_price | money }}</p>
+            </div>
+          </div>
+
+          <div class="ebels-acc-ord__actions">
+            <a href="{{ order.order_status_url }}" class="ebels-acc-ord__link">View Details</a>
+            {%- assign tracking_url = '' -%}
+            {%- for fulfillment in order.fulfillments -%}
+              {%- if fulfillment.tracking_url != blank -%}
+                {%- assign tracking_url = fulfillment.tracking_url -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if tracking_url != '' -%}
+              <a href="{{ tracking_url }}" class="ebels-acc-ord__link ebels-acc-ord__link--brand" target="_blank" rel="noopener">Track Package</a>
+            {%- endif -%}
+
+            <div class="ebels-acc-ord__actions-right">
+              <button type="button" class="ebels-btn ebels-btn--outline ebels-acc-ord__reorder" data-account-reorder data-order-id="{{ order.id }}">
+                Reorder
+              </button>
+              <button type="button" class="ebels-btn ebels-btn--outline ebels-acc-ord__review" data-account-write-review data-order-id="{{ order.id }}">
+                Write a Review
+              </button>
+            </div>
+          </div>
+
+          {%- comment -%} Hidden data for the Reorder button's JS to read variant IDs/quantities {%- endcomment -%}
+          <script type="application/json" data-order-lines="{{ order.id }}">
+            [
+              {%- for line_item in order.line_items -%}
+                { "variant_id": {{ line_item.variant_id | json }}, "quantity": {{ line_item.quantity | json }} }{% unless forloop.last %},{% endunless %}
+              {%- endfor -%}
+            ]
+          </script>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%}
+      RE-ORDER YOUR FAVOURITES — genuinely pulled from real past-purchased
+      products (unique, most recent first), not hand-picked or algorithmic.
+    {%- endcomment -%}
+    {%- assign seen_handles = '' -%}
+    <div class="ebels-acc-ord__favourites">
+      <h2 class="ebels-acc-ord__favourites-title">Re-order your favourites</h2>
+      <div class="ebels-acc-ord__favourites-grid">
+        {%- assign seen_handles_array = seen_handles | split: ',' -%}
+        {%- for order in customer.orders -%}
+          {%- for line_item in order.line_items -%}
+            {%- assign handle = line_item.product.handle -%}
+            {%- unless seen_handles_array contains handle -%}
+              {%- assign seen_handles = seen_handles | append: handle | append: ',' -%}
+              {%- assign seen_handles_array = seen_handles | split: ',' -%}
+              {%- assign fav_variant = line_item.product.selected_or_first_available_variant -%}
+              <div class="ebels-acc-ord__fav-card">
+                <a href="{{ line_item.product.url }}" class="ebels-acc-ord__fav-media-link">
+                  <div class="ebels-acc-ord__fav-media">
+                    {%- if line_item.image -%}
+                      <img src="{{ line_item.image | image_url: width: 400 }}" alt="{{ line_item.title | escape }}" loading="lazy">
+                    {%- else -%}
+                      {{ 'product-1' | placeholder_svg_tag: 'ebels-acc-ord__fav-img' }}
+                    {%- endif -%}
+                  </div>
+                </a>
+                <p class="ebels-acc-ord__fav-title">{{ line_item.title }}</p>
+                <p class="ebels-acc-ord__fav-price">{{ fav_variant.price | money }}</p>
+                <button
+                  type="button"
+                  class="ebels-btn ebels-acc-ord__fav-add"
+                  data-add-to-bag-fav
+                  data-variant-id="{{ fav_variant.id }}"
+                  {% unless fav_variant.available %}disabled{% endunless %}
+                >
+                  {%- if fav_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+                </button>
+              </div>
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- else -%}
+    <div class="ebels-acc-ord__empty">
+      <p class="ebels-body">You haven't placed any orders yet.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="ebels-btn ebels-acc-ord__empty-cta">Start Shopping</a>
+    </div>
+  {%- endif -%}
+</div>
+{%- endif -%}
+
+<script src="{{ 'ebels-account-orders.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Account Orders",
+  "settings": [],
+  "presets": [
+    { "name": "Ebels Account Orders" }
+  ]
+}
+{% endschema %}

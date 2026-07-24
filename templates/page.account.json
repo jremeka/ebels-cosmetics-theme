@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "account_header": {
+      "type": "ebels-account-header"
+    },
+    "account_foryou": {
+      "type": "ebels-account-foryou"
+    },
+    "account_orders": {
+      "type": "ebels-account-orders"
+    },
+    "account_profile": {
+      "type": "ebels-account-profile"
+    },
+    "offers": {
+      "type": "ebels-offers-strip"
+    },
+    "newsletter": {
+      "type": "ebels-newsletter"
+    }
+  },
+  "order": ["account_header", "account_foryou", "account_orders", "account_profile", "offers", "newsletter"]
+}

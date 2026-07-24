@@ -1,0 +1,79 @@
+/* ==========================================================================
+   EBELS ACCOUNT HEADER — welcome message + tab navigation
+   Loaded by sections/ebels-account-header.liquid
+   ========================================================================== */
+
+.ebels-acc-header {
+  padding-top: var(--space-10);
+  text-align: center;
+}
+
+.ebels-acc-header__intro {
+  margin-bottom: var(--space-8);
+}
+
+.ebels-acc-header__title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--text-h1-size);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.ebels-acc-header__badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #FFFFFF;
+  background: var(--ebels-espresso, #3B241C);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+}
+
+/* ----- Tabs ----- */
+.ebels-acc-header__tabs {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-8);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.ebels-acc-header__tab {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  padding: var(--space-4) 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.ebels-acc-header__tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--ebels-ink);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.ebels-acc-header__tab:hover {
+  color: var(--text-primary);
+}
+
+.ebels-acc-header__tab.is-active {
+  color: var(--text-primary);
+}
+
+.ebels-acc-header__tab.is-active::after {
+  transform: scaleX(1);
+}

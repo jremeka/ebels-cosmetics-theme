@@ -1,0 +1,121 @@
+{{ 'ebels-account-profile.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  EBELS ACCOUNT PROFILE
+  Uses Shopify's classic {% form 'customer' %} tag to update name/email and
+  the beauty-profile metafields. This form mechanism predates New Customer
+  Accounts — it SHOULD still work since it's a standard authenticated form
+  submission, not a login mechanism, but this needs a live test (submit a
+  real change and confirm it saves) before fully trusting it. If it doesn't
+  work, editing would need to redirect to Shopify's hosted account pages
+  instead.
+
+  Two things from the original design were intentionally left out:
+  - "Payment Methods" — not possible in a custom theme at all (Shopify
+    blocks theme-level access to stored payment info for PCI compliance).
+  - Granular email category checkboxes (separate toggles per email type) —
+    Shopify only has ONE native marketing-consent flag. Replaced with a
+    single real toggle instead of several fake ones that wouldn't actually
+    control anything without a real email platform (Klaviyo, etc.).
+{%- endcomment -%}
+
+{%- if customer -%}
+<div class="ebels-acc-prof page-width" data-account-tab-panel="profile" hidden>
+
+  {%- form 'customer', class: 'ebels-acc-prof__form' -%}
+    {%- if form.errors -%}
+      <div class="ebels-acc-prof__errors">
+        {{ form.errors | default_errors }}
+      </div>
+    {%- endif -%}
+
+    <div class="ebels-acc-prof__block">
+      <h2 class="ebels-acc-prof__block-title">My Preferences</h2>
+
+      <div class="ebels-acc-prof__row">
+        <div class="ebels-acc-prof__field">
+          <label for="AccountFirstName">First Name</label>
+          <input type="text" id="AccountFirstName" name="customer[first_name]" value="{{ customer.first_name }}">
+        </div>
+        <div class="ebels-acc-prof__field">
+          <label for="AccountLastName">Last Name</label>
+          <input type="text" id="AccountLastName" name="customer[last_name]" value="{{ customer.last_name }}">
+        </div>
+      </div>
+
+      <div class="ebels-acc-prof__field">
+        <label for="AccountEmail">Email</label>
+        <input type="email" id="AccountEmail" name="customer[email]" value="{{ customer.email }}">
+      </div>
+
+      <div class="ebels-acc-prof__row">
+        <div class="ebels-acc-prof__field">
+          <label for="AccountSkinType">Skin Type</label>
+          <select id="AccountSkinType" name="customer[metafields][custom][skin_type]">
+            <option value="">Select…</option>
+            {%- assign skin_type_options = 'Oily,Dry,Combination,Normal,Sensitive' | split: ',' -%}
+            {%- for option in skin_type_options -%}
+              <option value="{{ option }}" {% if customer.metafields.custom.skin_type == option %}selected{% endif %}>{{ option }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+        <div class="ebels-acc-prof__field">
+          <label for="AccountSkinTone">Skin Tone</label>
+          <input type="text" id="AccountSkinTone" name="customer[metafields][custom][skin_tone]" value="{{ customer.metafields.custom.skin_tone }}" placeholder="e.g. Medium Warm">
+        </div>
+      </div>
+
+      <div class="ebels-acc-prof__field">
+        <label for="AccountScents">Preferred Scents</label>
+        <input type="text" id="AccountScents" name="customer[metafields][custom][preferred_scents]" value="{{ customer.metafields.custom.preferred_scents }}" placeholder="e.g. Floral & Woody">
+      </div>
+    </div>
+
+    <div class="ebels-acc-prof__block">
+      <h2 class="ebels-acc-prof__block-title">Communication Preferences</h2>
+      <label class="ebels-acc-prof__checkbox">
+        <input type="checkbox" name="customer[accepts_marketing]" value="1" {% if customer.accepts_marketing %}checked{% endif %}>
+        <span>Email me about new drops, offers, and beauty tips</span>
+      </label>
+    </div>
+
+    <button type="submit" class="ebels-btn ebels-acc-prof__save">Save Changes</button>
+  {%- endform -%}
+
+  {%- comment -%} Addresses — real data, read-only display here. Adding/editing addresses uses Shopify's native address form pattern (separate, larger feature — flagged for a follow-up build). {%- endcomment -%}
+  <div class="ebels-acc-prof__block">
+    <h2 class="ebels-acc-prof__block-title">My Addresses</h2>
+
+    {%- if customer.addresses.size > 0 -%}
+      <div class="ebels-acc-prof__addresses">
+        {%- for address in customer.addresses -%}
+          <div class="ebels-acc-prof__address-card">
+            <p>{{ address.first_name }} {{ address.last_name }}</p>
+            <p>{{ address.address1 }}{% if address.address2 != blank %}, {{ address.address2 }}{% endif %}</p>
+            <p>{{ address.city }}, {{ address.province_code }} {{ address.zip }}</p>
+            <p>{{ address.country }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p class="ebels-acc-prof__empty-note">You haven't added any shipping addresses yet</p>
+    {%- endif -%}
+
+    <a href="{{ routes.account_addresses_url }}" class="ebels-acc-prof__addresses-link">+ Manage Addresses</a>
+  </div>
+
+  <a href="{{ routes.account_logout_url }}" class="ebels-acc-prof__logout">Log Out</a>
+</div>
+{%- endif -%}
+
+<script src="{{ 'ebels-account-profile.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Account Profile",
+  "settings": [],
+  "presets": [
+    { "name": "Ebels Account Profile" }
+  ]
+}
+{% endschema %}

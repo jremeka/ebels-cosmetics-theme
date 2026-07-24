@@ -1,0 +1,171 @@
+/* ==========================================================================
+   EBELS ACCOUNT — Profile tab
+   Loaded by sections/ebels-account-profile.liquid
+   ========================================================================== */
+
+.ebels-acc-prof {
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-16);
+  max-width: 680px;
+}
+
+.ebels-acc-prof[hidden] {
+  display: none;
+}
+
+.ebels-acc-prof__errors {
+  background: color-mix(in srgb, #C0392B 10%, var(--bg-primary));
+  border: 1px solid #C0392B;
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-6);
+  color: #C0392B;
+  font-size: var(--text-body-sm-size);
+}
+
+.ebels-acc-prof__block {
+  margin-bottom: var(--space-10);
+}
+
+.ebels-acc-prof__block-title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-caption-size);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-5);
+}
+
+.ebels-acc-prof__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media screen and (min-width: 600px) {
+  .ebels-acc-prof__row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ebels-acc-prof__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.ebels-acc-prof__field label {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ebels-acc-prof__field input,
+.ebels-acc-prof__field select {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.ebels-acc-prof__field input:focus,
+.ebels-acc-prof__field select:focus {
+  outline: none;
+  border-color: var(--border-brand);
+}
+
+.ebels-acc-prof__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+}
+
+.ebels-acc-prof__checkbox input {
+  accent-color: var(--ebels-ink);
+  width: 18px;
+  height: 18px;
+}
+
+.ebels-acc-prof__save {
+  width: 100%;
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+  border: none;
+  padding: var(--space-4);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+
+.ebels-acc-prof__save:hover {
+  opacity: 0.9;
+}
+
+/* ----- Addresses ----- */
+.ebels-acc-prof__addresses {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.ebels-acc-prof__address-card {
+  padding: var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+}
+
+.ebels-acc-prof__address-card p {
+  margin: 0 0 2px;
+}
+
+.ebels-acc-prof__empty-note {
+  color: var(--text-secondary);
+  padding: var(--space-5);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  margin: 0 0 var(--space-4);
+}
+
+.ebels-acc-prof__addresses-link {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  text-decoration: none;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-6);
+}
+
+.ebels-acc-prof__addresses-link:hover {
+  border-color: var(--border-brand);
+  color: var(--text-brand);
+}
+
+/* ----- Logout ----- */
+.ebels-acc-prof__logout {
+  display: block;
+  text-align: center;
+  padding: var(--space-3);
+  color: var(--text-secondary);
+  text-decoration: underline;
+  font-size: var(--text-body-sm-size);
+}
+
+.ebels-acc-prof__logout:hover {
+  color: var(--text-brand);
+}

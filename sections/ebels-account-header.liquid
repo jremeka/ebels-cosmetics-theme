@@ -1,0 +1,50 @@
+{{ 'ebels-account-header.css' | asset_url | stylesheet_tag }}
+
+{%- unless customer -%}
+  <script>window.location.href = "{{ routes.account_login_url }}";</script>
+{%- endunless -%}
+
+{%- if customer -%}
+<div class="ebels-acc-header page-width" data-account-tabs>
+  <div class="ebels-acc-header__intro">
+    <h1 class="ebels-acc-header__title">Welcome back, {{ customer.first_name | default: 'there' }}</h1>
+    {%- if section.settings.show_member_badge -%}
+      <span class="ebels-acc-header__badge">
+        ✦ {{ section.settings.member_badge_text }}
+      </span>
+    {%- endif -%}
+  </div>
+
+  <nav class="ebels-acc-header__tabs" role="tablist" aria-label="Account sections">
+    <button type="button" class="ebels-acc-header__tab is-active" data-account-tab-trigger data-tab-target="foryou" role="tab" aria-selected="true">For You</button>
+    <button type="button" class="ebels-acc-header__tab" data-account-tab-trigger data-tab-target="orders" role="tab" aria-selected="false">Orders</button>
+    <button type="button" class="ebels-acc-header__tab" data-account-tab-trigger data-tab-target="profile" role="tab" aria-selected="false">Profile</button>
+  </nav>
+</div>
+{%- endif -%}
+
+<script src="{{ 'ebels-account-header.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Account Header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_member_badge",
+      "label": "Show member badge",
+      "default": true,
+      "info": "Static text badge. Shopify has no native loyalty/membership system — this is decorative only unless a loyalty app is connected later."
+    },
+    {
+      "type": "text",
+      "id": "member_badge_text",
+      "label": "Member badge text",
+      "default": "EBELS Member"
+    }
+  ],
+  "presets": [
+    { "name": "Ebels Account Header" }
+  ]
+}
+{% endschema %}

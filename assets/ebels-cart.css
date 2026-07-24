@@ -1,0 +1,437 @@
+/* ==========================================================================
+   EBELS SHOPPING BAG — full cart page
+   Loaded by sections/ebels-cart.liquid
+   ========================================================================== */
+
+.ebels-cart {
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-16);
+}
+
+.ebels-cart__header {
+  margin-bottom: var(--space-8);
+}
+
+.ebels-cart__title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--text-h1-size);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-1);
+}
+
+.ebels-cart__count {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ----- Layout ----- */
+.ebels-cart__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
+  align-items: start;
+}
+
+@media screen and (min-width: 990px) {
+  .ebels-cart__layout {
+    grid-template-columns: 1.6fr 1fr;
+    gap: var(--space-12);
+  }
+}
+
+/* ----- Toolbar ----- */
+.ebels-cart__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-default);
+  margin-bottom: var(--space-2);
+}
+
+.ebels-cart__select-all {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.ebels-cart__select-all input {
+  accent-color: var(--ebels-ink);
+}
+
+.ebels-cart__remove-selected {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  font-weight: 600;
+  color: var(--text-brand);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ----- Line items ----- */
+.ebels-cart__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.ebels-cart__item-check {
+  margin-top: var(--space-6);
+  accent-color: var(--ebels-ink);
+  flex-shrink: 0;
+}
+
+.ebels-cart__item-media {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.ebels-cart__item-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ebels-cart__item-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ebels-cart__item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.ebels-cart__item-title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.ebels-cart__item-variant {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  color: var(--text-secondary);
+  margin: 2px 0 0;
+}
+
+.ebels-cart__item-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.ebels-cart__price-sale {
+  color: var(--text-brand);
+}
+
+.ebels-cart__price-compare {
+  font-weight: 400;
+  font-size: var(--text-caption-size);
+  color: var(--text-secondary);
+  text-decoration: line-through;
+}
+
+.ebels-cart__item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ebels-cart__qty-stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.ebels-cart__qty-btn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.ebels-cart__qty-btn:hover {
+  color: var(--text-brand);
+}
+
+.ebels-cart__qty-value {
+  width: 32px;
+  text-align: center;
+  font-size: var(--text-body-sm-size);
+  font-weight: 600;
+}
+
+.ebels-cart__remove {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  color: var(--text-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ebels-cart__remove:hover {
+  color: var(--text-brand);
+}
+
+/* ----- Order summary ----- */
+.ebels-cart__summary {
+  background: color-mix(in srgb, var(--ebels-blush) 8%, var(--bg-primary));
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  position: sticky;
+  top: var(--space-6);
+  box-shadow: 0 4px 20px rgba(34, 27, 22, 0.05);
+}
+
+.ebels-cart__summary-title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-caption-size);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-5);
+}
+
+.ebels-cart__summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.ebels-cart__free-tag {
+  color: var(--status-success);
+  font-weight: 700;
+}
+
+.ebels-cart__summary-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-4);
+  margin-top: var(--space-2);
+  border-top: 1px solid rgba(34, 27, 22, 0.12);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: var(--text-h5-size);
+  color: var(--text-primary);
+}
+
+.ebels-cart__vat-note {
+  text-align: right;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-5);
+}
+
+/* ----- Installments (stub) ----- */
+.ebels-cart__installments {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.ebels-cart__badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm, 6px);
+  color: #FFFFFF;
+}
+
+.ebels-cart__badge--klarna {
+  background: #FFB3C7;
+  color: #17120F;
+}
+
+.ebels-cart__installment-text {
+  font-size: var(--text-caption-size);
+  color: var(--text-secondary);
+}
+
+/* ----- Promo code ----- */
+.ebels-cart__promo {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.ebels-cart__promo-input {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  background: var(--bg-primary);
+}
+
+.ebels-cart__promo-btn {
+  padding: var(--space-3) var(--space-5);
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-caption-size);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ebels-cart__promo-btn:hover {
+  opacity: 0.85;
+}
+
+/* ----- Checkout ----- */
+.ebels-cart__checkout-form {
+  margin-bottom: var(--space-3);
+}
+
+.ebels-cart__checkout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-body-sm-size);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.ebels-cart__checkout-btn:hover {
+  opacity: 0.9;
+}
+
+/* ----- Dynamic checkout buttons (Shop Pay / PayPal / Google Pay etc.) -----
+   Shopify injects this markup itself, so styling here is somewhat fragile —
+   these class names come from Shopify's own scripts, not ours, and could
+   change in a future Shopify update. Which specific buttons appear (e.g.
+   removing Shop Pay) is controlled in Admin → Settings → Payments, not here. */
+.ebels-cart__dynamic-checkout {
+  margin-bottom: var(--space-3);
+}
+
+.ebels-cart__dynamic-checkout:empty {
+  display: none;
+  margin-bottom: 0;
+}
+
+.ebels-cart__dynamic-checkout .shopify-payment-button__button {
+  border-radius: var(--radius-full) !important;
+  max-height: 44px !important;
+}
+
+.ebels-cart__dynamic-checkout iframe {
+  border-radius: var(--radius-full) !important;
+}
+
+/* ----- Payment method icons (real Shopify-provided SVGs, not text) ----- */
+.ebels-cart__payment-icons-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  flex-wrap: wrap;
+}
+
+.ebels-cart__payment-icon {
+  height: 22px;
+  width: auto;
+}
+
+/* ----- Guarantee + help ----- */
+.ebels-cart__guarantee {
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(34, 27, 22, 0.12);
+  margin-bottom: var(--space-4);
+}
+
+.ebels-cart__guarantee-title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-1);
+}
+
+.ebels-cart__help {
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.ebels-cart__help a {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+/* ----- Empty state ----- */
+.ebels-cart__empty {
+  text-align: center;
+  padding: var(--space-16) 0;
+}
+
+.ebels-cart__empty .ebels-body {
+  color: var(--text-secondary);
+  margin: var(--space-3) 0 var(--space-8);
+}
+
+.ebels-cart__empty-cta {
+  display: inline-block;
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: 700;
+}

@@ -1,0 +1,105 @@
+{{ 'ebels-account-foryou.css' | asset_url | stylesheet_tag }}
+
+{%- if customer -%}
+<div class="ebels-acc-fy page-width" data-account-tab-panel="foryou">
+
+  {%- comment -%}
+    BEAUTY PROFILE — stored as customer metafields (namespace: custom).
+    Set up once in Shopify admin: Settings → Custom data → Customers → Add
+    definition for each: skin_type, skin_tone, preferred_scents (all
+    single-line text works fine). Editing these lives in the Profile tab —
+    this is display-only here.
+  {%- endcomment -%}
+  <div class="ebels-acc-fy__section">
+    <div class="ebels-acc-fy__section-head">
+      <h2 class="ebels-acc-fy__section-title">Your Beauty Profile</h2>
+      <a href="#profile" class="ebels-acc-fy__edit-link" data-account-goto-profile>Edit Profile</a>
+    </div>
+
+    <div class="ebels-acc-fy__profile-grid">
+      <div class="ebels-acc-fy__profile-card">
+        <span class="ebels-acc-fy__profile-label">Skin Type</span>
+        <p class="ebels-acc-fy__profile-value">{{ customer.metafields.custom.skin_type | default: 'Not set' }}</p>
+      </div>
+      <div class="ebels-acc-fy__profile-card">
+        <span class="ebels-acc-fy__profile-label">Skin Tone</span>
+        <p class="ebels-acc-fy__profile-value">{{ customer.metafields.custom.skin_tone | default: 'Not set' }}</p>
+      </div>
+      <div class="ebels-acc-fy__profile-card">
+        <span class="ebels-acc-fy__profile-label">Preferred Scents</span>
+        <p class="ebels-acc-fy__profile-value">{{ customer.metafields.custom.preferred_scents | default: 'Not set' }}</p>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}
+    PICKED FOR YOU — hand-picked, not real personalization. Shopify has no
+    native purchase-history-based recommendation engine for theme use;
+    building genuine per-customer personalization needs a dedicated app.
+    This mirrors the same product-picker pattern as Complete the Look.
+  {%- endcomment -%}
+  {%- if section.blocks.size > 0 -%}
+    <div class="ebels-acc-fy__section">
+      <h2 class="ebels-acc-fy__section-title">Picked For You</h2>
+      <p class="ebels-caption ebels-acc-fy__section-sub">Hand-picked favorites we think you'll love</p>
+
+      <div class="ebels-acc-fy__grid">
+        {%- for block in section.blocks -%}
+          {%- assign fy_product = block.settings.product -%}
+          {%- if fy_product != blank -%}
+            {%- assign fy_variant = fy_product.selected_or_first_available_variant -%}
+            <div class="ebels-acc-fy__card" {{ block.shopify_attributes }}>
+              <a href="{{ fy_product.url }}" class="ebels-acc-fy__media-link">
+                <div class="ebels-acc-fy__media">
+                  {%- if fy_product.featured_image != blank -%}
+                    {{ fy_product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'ebels-acc-fy__img', widths: '250, 375, 500' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'ebels-acc-fy__img' }}
+                  {%- endif -%}
+                </div>
+              </a>
+              <div class="ebels-acc-fy__info">
+                <a href="{{ fy_product.url }}" class="ebels-acc-fy__title-link">
+                  <h3 class="ebels-acc-fy__title">{{ fy_product.title }}</h3>
+                </a>
+                <p class="ebels-acc-fy__price">{{ fy_variant.price | money }}</p>
+                <button
+                  type="button"
+                  class="ebels-btn ebels-acc-fy__add-to-bag"
+                  data-add-to-bag-fy
+                  data-variant-id="{{ fy_variant.id }}"
+                  {% unless fy_variant.available %}disabled{% endunless %}
+                >
+                  {%- if fy_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+                </button>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+{%- endif -%}
+
+<script src="{{ 'ebels-account-foryou.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Account For You",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Picked product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    { "name": "Ebels Account For You" }
+  ]
+}
+{% endschema %}

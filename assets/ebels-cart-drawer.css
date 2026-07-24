@@ -1,0 +1,295 @@
+/* ==========================================================================
+   EBELS CART DRAWER
+   Loaded by snippets/ebels-cart-drawer.liquid, rendered globally site-wide.
+   ========================================================================== */
+
+.ebels-cd {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.ebels-cd[hidden] {
+  display: none;
+}
+
+.ebels-cd__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(34, 27, 22, 0.45);
+  animation: ebels-cd-fade-in 0.25s ease;
+}
+
+@keyframes ebels-cd-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ebels-cd__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(480px, 100vw);
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -12px 0 40px rgba(34, 27, 22, 0.18);
+  animation: ebels-cd-slide-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ebels-cd-slide-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* ----- Header ----- */
+.ebels-cd__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-6) var(--space-6) var(--space-4);
+}
+
+.ebels-cd__title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: var(--text-h5-size);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ebels-cd__close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-default);
+  background: none;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.ebels-cd__close:hover {
+  border-color: var(--border-brand);
+  color: var(--text-brand);
+}
+
+/* ----- Free shipping message ----- */
+.ebels-cd__shipping-msg {
+  margin: 0 var(--space-6) var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+  color: var(--text-brand);
+  text-align: center;
+}
+
+.ebels-cd__shipping-msg:empty {
+  display: none;
+}
+
+/* ----- Body / line items ----- */
+.ebels-cd__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--space-6);
+}
+
+.ebels-cd__item {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.ebels-cd__item-media {
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.ebels-cd__item-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ebels-cd__item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ebels-cd__item-title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.ebels-cd__item-variant {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.ebels-cd__item-price {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.ebels-cd__item-price-compare {
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: line-through;
+  font-size: var(--text-caption-size);
+}
+
+.ebels-cd__item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ebels-cd__qty-stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.ebels-cd__qty-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: var(--text-body-sm-size);
+}
+
+.ebels-cd__qty-btn:hover {
+  color: var(--text-brand);
+}
+
+.ebels-cd__qty-value {
+  width: 28px;
+  text-align: center;
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+}
+
+.ebels-cd__remove {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  color: var(--text-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ebels-cd__remove:hover {
+  color: var(--text-brand);
+}
+
+/* ----- Empty state ----- */
+.ebels-cd__empty {
+  text-align: center;
+  padding: var(--space-16) var(--space-4);
+  color: var(--text-secondary);
+}
+
+/* ----- Footer ----- */
+.ebels-cd__footer {
+  padding: var(--space-5) var(--space-6) var(--space-6);
+  border-top: 1px solid var(--border-default);
+}
+
+.ebels-cd__footer[hidden] {
+  display: none;
+}
+
+.ebels-cd__subtotal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.ebels-cd__subtotal-label {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+}
+
+.ebels-cd__subtotal-value {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: var(--text-h5-size);
+  color: var(--text-primary);
+}
+
+.ebels-cd__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ebels-cd__continue,
+.ebels-cd__view-bag {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+}
+
+.ebels-cd__view-bag {
+  display: block;
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-caption-size);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.ebels-cd__view-bag:hover {
+  opacity: 0.85;
+}
+
+.ebels-cd__tax-note {
+  text-align: center;
+  color: var(--text-secondary);
+  margin: var(--space-3) 0 0;
+}
+
+/* ----- Body scroll lock while open ----- */
+body.ebels-cd-open {
+  overflow: hidden;
+}

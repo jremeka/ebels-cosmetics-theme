@@ -1,1 +1,31 @@
-{%- render 'cart-drawer' -%}
+{%- comment -%}
+  This is Dawn's global cart-drawer hook — it's already included once, site-wide,
+  by layout/theme.liquid, which is why we don't need to edit that file directly.
+  This section just carries our schema settings and renders our own drawer snippet.
+{%- endcomment -%}
+
+{% render 'ebels-cart-drawer',
+  free_shipping_threshold: section.settings.free_shipping_threshold,
+  empty_message: section.settings.empty_message
+%}
+
+{% schema %}
+{
+  "name": "Ebels Cart Drawer",
+  "settings": [
+    {
+      "type": "number",
+      "id": "free_shipping_threshold",
+      "label": "Free shipping threshold ($)",
+      "default": 10,
+      "info": "Shown as a progress message in the drawer, e.g. \"You're $12 away from free shipping.\""
+    },
+    {
+      "type": "text",
+      "id": "empty_message",
+      "label": "Empty bag message",
+      "default": "Your bag is empty."
+    }
+  ]
+}
+{% endschema %}

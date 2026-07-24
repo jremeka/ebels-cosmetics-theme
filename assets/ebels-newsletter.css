@@ -1,0 +1,83 @@
+/* ==========================================================================
+   EBELS NEWSLETTER
+   ========================================================================== */
+
+.ebels-nl {
+  padding: var(--space-16) var(--space-4);
+}
+
+.ebels-nl__inner {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ebels-nl__eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ebels-amber);
+  margin: 0 0 var(--space-4);
+}
+
+.ebels-nl__heading {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: var(--text-h2-size);
+  line-height: var(--text-h2-line);
+  color: #FFFFFF;
+  margin: 0 0 var(--space-3);
+}
+
+.ebels-nl__text {
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 var(--space-8);
+}
+
+.ebels-nl__field-row {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.ebels-nl__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  border: none;
+  background: #FFFFFF;
+  color: var(--ebels-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+}
+
+.ebels-nl__submit {
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ebels-nl__message {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+}
+
+.ebels-nl__message--error {
+  color: #FF9C8A;
+}
+
+.ebels-nl__message--success {
+  color: var(--ebels-amber);
+}
+
+@media screen and (max-width: 749px) {
+  .ebels-nl__field-row {
+    flex-direction: column;
+  }
+}

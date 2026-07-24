@@ -15,9 +15,5 @@
       "settings": { "columns_desktop": 3, "products_per_page": 24, "hover_image_index": 2 }
     }
   },
-  "order": ["collection_header", 
-  "collection_grid",
-  "ebels_promo_banner",
-  "ebels_email_signup",
-]
+  "order": ["collection_header", "collection_grid"]
 }

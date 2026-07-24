@@ -205,6 +205,7 @@
           btn.textContent = 'Added ✓';
           btn.classList.add('is-added');
           updateCartCount();
+          if (window.EbelsCartDrawer) window.EbelsCartDrawer.open();
           setTimeout(function () {
             btn.textContent = originalText;
             btn.classList.remove('is-added');

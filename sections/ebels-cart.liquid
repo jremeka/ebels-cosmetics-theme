@@ -1,0 +1,184 @@
+{{ 'ebels-cart.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-cart page-width" data-cart-page>
+  <script type="application/json" data-money-format>{{ shop.money_format | json }}</script>
+
+  {%- if cart.item_count > 0 -%}
+    <div class="ebels-cart__header">
+      <h1 class="ebels-cart__title">Shopping Bag</h1>
+      <p class="ebels-cart__count">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}</p>
+    </div>
+
+    <div class="ebels-cart__layout">
+      <div class="ebels-cart__items-col">
+        <div class="ebels-cart__toolbar">
+          <label class="ebels-cart__select-all">
+            <input type="checkbox" data-cart-select-all checked>
+            <span>Select All ({{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %})</span>
+          </label>
+          <button type="button" class="ebels-cart__remove-selected" data-cart-remove-selected>Remove Selected</button>
+        </div>
+
+        <div class="ebels-cart__list" data-cart-list>
+          {%- for item in cart.items -%}
+            <div class="ebels-cart__item" data-cart-item data-line-index="{{ forloop.index }}" data-line-key="{{ item.key }}">
+              <input type="checkbox" class="ebels-cart__item-check" data-cart-item-check checked>
+
+              <div class="ebels-cart__item-media">
+                {%- if item.image -%}
+                  <img src="{{ item.image | image_url: width: 300 }}" alt="{{ item.product.title | escape }}" loading="lazy" width="150" height="150">
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'ebels-cart__item-img-placeholder' }}
+                {%- endif -%}
+              </div>
+
+              <div class="ebels-cart__item-body">
+                <div class="ebels-cart__item-top">
+                  <div>
+                    <a href="{{ item.url }}" class="ebels-cart__item-title">{{ item.product.title }}</a>
+                    {%- if item.variant.title != 'Default Title' -%}
+                      <p class="ebels-cart__item-variant">{{ item.variant.title }}</p>
+                    {%- endif -%}
+                  </div>
+
+                  <div class="ebels-cart__item-price">
+                    {%- if item.original_line_price != item.final_line_price -%}
+                      <span class="ebels-cart__price-sale" data-cart-item-line-price>{{ item.final_line_price | money }}</span>
+                      <span class="ebels-cart__price-compare">{{ item.original_line_price | money }}</span>
+                    {%- else -%}
+                      <span data-cart-item-line-price>{{ item.final_line_price | money }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+
+                <div class="ebels-cart__item-bottom">
+                  <div class="ebels-cart__qty-stepper">
+                    <button type="button" class="ebels-cart__qty-btn" data-cart-qty-decrease aria-label="Decrease quantity">–</button>
+                    <span class="ebels-cart__qty-value" data-cart-qty-value data-unit-price="{{ item.final_price }}">{{ item.quantity }}</span>
+                    <button type="button" class="ebels-cart__qty-btn" data-cart-qty-increase aria-label="Increase quantity">+</button>
+                  </div>
+                  <button type="button" class="ebels-cart__remove" data-cart-remove>Remove</button>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="ebels-cart__summary-col">
+        <div class="ebels-cart__summary">
+          <h2 class="ebels-cart__summary-title">Order Summary</h2>
+
+          <div class="ebels-cart__summary-row">
+            <span>Subtotal</span>
+            <span data-cart-subtotal>{{ cart.total_price | money }}</span>
+          </div>
+          <div class="ebels-cart__summary-row">
+            <span>Delivery: Standard Shipping</span>
+            <span class="ebels-cart__free-tag">FREE</span>
+          </div>
+
+          <div class="ebels-cart__summary-total">
+            <span>Estimated Total</span>
+            <span data-cart-total>{{ cart.total_price | money }}</span>
+          </div>
+          <p class="ebels-caption ebels-cart__vat-note">Inc. VAT</p>
+
+          {%- if section.settings.show_installment_badges -%}
+            <div class="ebels-cart__installments">
+              <span class="ebels-cart__badge ebels-cart__badge--klarna">Klarna</span>
+              <span class="ebels-cart__installment-text">or 3 interest-free payments</span>
+            </div>
+          {%- endif -%}
+
+          <div class="ebels-cart__promo">
+            <input type="text" class="ebels-cart__promo-input" placeholder="Enter promo code" data-cart-promo-input>
+            <button type="button" class="ebels-cart__promo-btn" data-cart-promo-apply>Apply</button>
+          </div>
+
+          <form action="{{ routes.cart_url }}" method="post" class="ebels-cart__checkout-form">
+            <div class="ebels-cart__dynamic-checkout">
+              {{ content_for_additional_checkout_buttons }}
+            </div>
+
+            <button type="submit" name="checkout" class="ebels-cart__checkout-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Checkout
+            </button>
+          </form>
+
+          <div class="ebels-cart__payment-icons-row">
+            {{ shop.enabled_payment_types | payment_type_svg_tag: class: 'ebels-cart__payment-icon' }}
+          </div>
+
+          <div class="ebels-cart__guarantee">
+            <p class="ebels-cart__guarantee-title">Our Guarantee</p>
+            <p class="ebels-caption">{{ section.settings.guarantee_text }}</p>
+          </div>
+
+          <p class="ebels-caption ebels-cart__help">
+            Need help?
+            <a href="{{ section.settings.contact_url | default: '/pages/contact' }}">Contact Us</a>
+            ·
+            <a href="{{ section.settings.returns_url | default: '/pages/returns' }}">Returns & Refunds</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  {%- else -%}
+    <div class="ebels-cart__empty">
+      <h1 class="ebels-cart__title">Shopping Bag</h1>
+      <p class="ebels-body">{{ section.settings.empty_message }}</p>
+      <a href="{{ section.settings.empty_cta_url | default: routes.all_products_collection_url }}" class="ebels-btn ebels-cart__empty-cta">
+        Continue Shopping
+      </a>
+    </div>
+  {%- endif -%}
+</div>
+
+<script src="{{ 'ebels-cart.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Shopping Bag",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_installment_badges",
+      "label": "Show installment payment badges (Klarna/Clearpay)",
+      "default": false,
+      "info": "Visual only until a real BNPL app is connected."
+    },
+    {
+      "type": "textarea",
+      "id": "guarantee_text",
+      "label": "Guarantee text",
+      "default": "If you're not completely satisfied, return any unused product within 30 days for a full refund. Free returns on all orders."
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "Contact Us link"
+    },
+    {
+      "type": "url",
+      "id": "returns_url",
+      "label": "Returns & Refunds link"
+    },
+    {
+      "type": "text",
+      "id": "empty_message",
+      "label": "Empty bag message",
+      "default": "Your bag is empty. Let's find something you'll love."
+    },
+    {
+      "type": "url",
+      "id": "empty_cta_url",
+      "label": "Empty bag button link"
+    }
+  ],
+  "presets": [
+    { "name": "Ebels Shopping Bag" }
+  ]
+}
+{% endschema %}
