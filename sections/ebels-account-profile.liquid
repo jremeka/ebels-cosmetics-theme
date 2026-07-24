@@ -20,7 +20,7 @@
 {%- endcomment -%}
 
 {%- if customer -%}
-<div class="ebels-acc-prof page-width" data-account-tab-panel="profile" hidden>
+<div class="ebels-acc-prof page-width" data-account-tab-panel="profile">
 
   {%- form 'customer', class: 'ebels-acc-prof__form' -%}
     {%- if form.errors -%}
@@ -30,23 +30,7 @@
     {%- endif -%}
 
     <div class="ebels-acc-prof__block">
-      <h2 class="ebels-acc-prof__block-title">My Preferences</h2>
-
-      <div class="ebels-acc-prof__row">
-        <div class="ebels-acc-prof__field">
-          <label for="AccountFirstName">First Name</label>
-          <input type="text" id="AccountFirstName" name="customer[first_name]" value="{{ customer.first_name }}">
-        </div>
-        <div class="ebels-acc-prof__field">
-          <label for="AccountLastName">Last Name</label>
-          <input type="text" id="AccountLastName" name="customer[last_name]" value="{{ customer.last_name }}">
-        </div>
-      </div>
-
-      <div class="ebels-acc-prof__field">
-        <label for="AccountEmail">Email</label>
-        <input type="email" id="AccountEmail" name="customer[email]" value="{{ customer.email }}">
-      </div>
+      <h2 class="ebels-acc-prof__block-title">Beauty Profile</h2>
 
       <div class="ebels-acc-prof__row">
         <div class="ebels-acc-prof__field">
@@ -72,6 +56,26 @@
     </div>
 
     <div class="ebels-acc-prof__block">
+      <h2 class="ebels-acc-prof__block-title">My Profile</h2>
+
+      <div class="ebels-acc-prof__row">
+        <div class="ebels-acc-prof__field">
+          <label for="AccountFirstName">First Name</label>
+          <input type="text" id="AccountFirstName" name="customer[first_name]" value="{{ customer.first_name }}">
+        </div>
+        <div class="ebels-acc-prof__field">
+          <label for="AccountLastName">Last Name</label>
+          <input type="text" id="AccountLastName" name="customer[last_name]" value="{{ customer.last_name }}">
+        </div>
+      </div>
+
+      <div class="ebels-acc-prof__field">
+        <label for="AccountEmail">Email</label>
+        <input type="email" id="AccountEmail" name="customer[email]" value="{{ customer.email }}">
+      </div>
+    </div>
+
+    <div class="ebels-acc-prof__block">
       <h2 class="ebels-acc-prof__block-title">Communication Preferences</h2>
       <label class="ebels-acc-prof__checkbox">
         <input type="checkbox" name="customer[accepts_marketing]" value="1" {% if customer.accepts_marketing %}checked{% endif %}>
@@ -90,10 +94,79 @@
       <div class="ebels-acc-prof__addresses">
         {%- for address in customer.addresses -%}
           <div class="ebels-acc-prof__address-card">
-            <p>{{ address.first_name }} {{ address.last_name }}</p>
-            <p>{{ address.address1 }}{% if address.address2 != blank %}, {{ address.address2 }}{% endif %}</p>
-            <p>{{ address.city }}, {{ address.province_code }} {{ address.zip }}</p>
-            <p>{{ address.country }}</p>
+            <div>
+              <p>{{ address.first_name }} {{ address.last_name }}</p>
+              <p>{{ address.address1 }}{% if address.address2 != blank %}, {{ address.address2 }}{% endif %}</p>
+              <p>{{ address.city }}, {{ address.province_code }} {{ address.zip }}</p>
+              {%- if address == customer.default_address -%}
+                <span class="ebels-acc-prof__default-tag">Default</span>
+              {%- endif -%}
+            </div>
+            <div class="ebels-acc-prof__address-actions">
+              <button type="button" class="ebels-acc-prof__address-edit" data-address-modal-open="address-{{ address.id }}">Edit</button>
+              {%- form 'customer_address', address, class: 'ebels-acc-prof__remove-form' -%}
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="ebels-acc-prof__address-remove">Remove</button>
+              {%- endform -%}
+            </div>
+          </div>
+
+          {%- comment -%} Edit modal for this specific address {%- endcomment -%}
+          <div class="ebels-acc-modal" data-address-modal="address-{{ address.id }}" hidden>
+            <div class="ebels-acc-modal__overlay" data-address-modal-close></div>
+            <div class="ebels-acc-modal__panel" role="dialog" aria-modal="true" aria-label="Edit address">
+              <div class="ebels-acc-modal__head">
+                <h3>Edit Address</h3>
+                <button type="button" data-address-modal-close aria-label="Close">×</button>
+              </div>
+              {%- form 'customer_address', address, class: 'ebels-acc-modal__form' -%}
+                <div class="ebels-acc-prof__row">
+                  <div class="ebels-acc-prof__field">
+                    <label for="AddressFirstName{{ address.id }}">First Name</label>
+                    <input type="text" id="AddressFirstName{{ address.id }}" name="address[first_name]" value="{{ address.first_name }}">
+                  </div>
+                  <div class="ebels-acc-prof__field">
+                    <label for="AddressLastName{{ address.id }}">Last Name</label>
+                    <input type="text" id="AddressLastName{{ address.id }}" name="address[last_name]" value="{{ address.last_name }}">
+                  </div>
+                </div>
+                <div class="ebels-acc-prof__field">
+                  <label for="Address1_{{ address.id }}">Address</label>
+                  <input type="text" id="Address1_{{ address.id }}" name="address[address1]" value="{{ address.address1 }}">
+                </div>
+                <div class="ebels-acc-prof__field">
+                  <label for="Address2_{{ address.id }}">Apartment, suite, etc (optional)</label>
+                  <input type="text" id="Address2_{{ address.id }}" name="address[address2]" value="{{ address.address2 }}">
+                </div>
+                <div class="ebels-acc-prof__row">
+                  <div class="ebels-acc-prof__field">
+                    <label for="City_{{ address.id }}">City</label>
+                    <input type="text" id="City_{{ address.id }}" name="address[city]" value="{{ address.city }}">
+                  </div>
+                  <div class="ebels-acc-prof__field">
+                    <label for="Province_{{ address.id }}">State</label>
+                    <input type="text" id="Province_{{ address.id }}" name="address[province]" value="{{ address.province }}">
+                  </div>
+                  <div class="ebels-acc-prof__field">
+                    <label for="Zip_{{ address.id }}">ZIP Code</label>
+                    <input type="text" id="Zip_{{ address.id }}" name="address[zip]" value="{{ address.zip }}">
+                  </div>
+                </div>
+                <input type="hidden" name="address[country]" value="United States">
+                <div class="ebels-acc-prof__field">
+                  <label for="Phone_{{ address.id }}">Phone</label>
+                  <input type="tel" id="Phone_{{ address.id }}" name="address[phone]" value="{{ address.phone }}">
+                </div>
+                <label class="ebels-acc-prof__checkbox">
+                  <input type="radio" name="address[default]" value="1" {% if address == customer.default_address %}checked{% endif %}>
+                  <span>This is my default address</span>
+                </label>
+                <div class="ebels-acc-modal__actions">
+                  <button type="button" class="ebels-btn ebels-btn--outline" data-address-modal-close>Cancel</button>
+                  <button type="submit" class="ebels-btn ebels-acc-modal__save">Save</button>
+                </div>
+              {%- endform -%}
+            </div>
           </div>
         {%- endfor -%}
       </div>
@@ -101,7 +174,65 @@
       <p class="ebels-acc-prof__empty-note">You haven't added any shipping addresses yet</p>
     {%- endif -%}
 
-    <a href="{{ routes.account_addresses_url }}" class="ebels-acc-prof__addresses-link">+ Manage Addresses</a>
+    <button type="button" class="ebels-acc-prof__addresses-link" data-address-modal-open="address-new">+ Add New Address</button>
+  </div>
+
+  {%- comment -%} New address modal {%- endcomment -%}
+  <div class="ebels-acc-modal" data-address-modal="address-new" hidden>
+    <div class="ebels-acc-modal__overlay" data-address-modal-close></div>
+    <div class="ebels-acc-modal__panel" role="dialog" aria-modal="true" aria-label="Add new address">
+      <div class="ebels-acc-modal__head">
+        <h3>Add Address</h3>
+        <button type="button" data-address-modal-close aria-label="Close">×</button>
+      </div>
+      {%- form 'customer_address', customer.new_address, class: 'ebels-acc-modal__form' -%}
+        <div class="ebels-acc-prof__row">
+          <div class="ebels-acc-prof__field">
+            <label for="AddressFirstNameNew">First Name</label>
+            <input type="text" id="AddressFirstNameNew" name="address[first_name]">
+          </div>
+          <div class="ebels-acc-prof__field">
+            <label for="AddressLastNameNew">Last Name</label>
+            <input type="text" id="AddressLastNameNew" name="address[last_name]">
+          </div>
+        </div>
+        <div class="ebels-acc-prof__field">
+          <label for="Address1New">Address</label>
+          <input type="text" id="Address1New" name="address[address1]">
+        </div>
+        <div class="ebels-acc-prof__field">
+          <label for="Address2New">Apartment, suite, etc (optional)</label>
+          <input type="text" id="Address2New" name="address[address2]">
+        </div>
+        <div class="ebels-acc-prof__row">
+          <div class="ebels-acc-prof__field">
+            <label for="CityNew">City</label>
+            <input type="text" id="CityNew" name="address[city]">
+          </div>
+          <div class="ebels-acc-prof__field">
+            <label for="ProvinceNew">State</label>
+            <input type="text" id="ProvinceNew" name="address[province]">
+          </div>
+          <div class="ebels-acc-prof__field">
+            <label for="ZipNew">ZIP Code</label>
+            <input type="text" id="ZipNew" name="address[zip]">
+          </div>
+        </div>
+        <input type="hidden" name="address[country]" value="United States">
+        <div class="ebels-acc-prof__field">
+          <label for="PhoneNew">Phone</label>
+          <input type="tel" id="PhoneNew" name="address[phone]">
+        </div>
+        <label class="ebels-acc-prof__checkbox">
+          <input type="radio" name="address[default]" value="1" {% if customer.addresses.size == 0 %}checked{% endif %}>
+          <span>This is my default address</span>
+        </label>
+        <div class="ebels-acc-modal__actions">
+          <button type="button" class="ebels-btn ebels-btn--outline" data-address-modal-close>Cancel</button>
+          <button type="submit" class="ebels-btn ebels-acc-modal__save">Save</button>
+        </div>
+      {%- endform -%}
+    </div>
   </div>
 
   <a href="{{ routes.account_logout_url }}" class="ebels-acc-prof__logout">Log Out</a>

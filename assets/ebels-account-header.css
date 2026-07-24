@@ -21,15 +21,19 @@
 }
 
 .ebels-acc-header__badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-body);
   font-size: var(--text-caption-size);
   font-weight: 600;
   letter-spacing: 0.5px;
-  color: #FFFFFF;
-  background: var(--ebels-espresso, #3B241C);
-  padding: 6px 16px;
-  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.ebels-acc-header__badge-sparkle {
+  color: var(--brand-primary);
 }
 
 /* ----- Tabs ----- */

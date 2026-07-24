@@ -40,13 +40,4 @@
         });
     });
   });
-
-  // "Edit Profile" link jumps to the Profile tab via the header's tab trigger
-  document.querySelectorAll('[data-account-goto-profile]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      var profileTrigger = document.querySelector('[data-account-tab-trigger][data-tab-target="profile"]');
-      if (profileTrigger) profileTrigger.click();
-    });
-  });
 })();

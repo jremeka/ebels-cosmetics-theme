@@ -10,15 +10,16 @@
     <h1 class="ebels-acc-header__title">Welcome back, {{ customer.first_name | default: 'there' }}</h1>
     {%- if section.settings.show_member_badge -%}
       <span class="ebels-acc-header__badge">
-        ✦ {{ section.settings.member_badge_text }}
+        <span class="ebels-acc-header__badge-sparkle" aria-hidden="true">✦</span>
+        {{ section.settings.member_badge_text }}
       </span>
     {%- endif -%}
   </div>
 
   <nav class="ebels-acc-header__tabs" role="tablist" aria-label="Account sections">
-    <button type="button" class="ebels-acc-header__tab is-active" data-account-tab-trigger data-tab-target="foryou" role="tab" aria-selected="true">For You</button>
+    <button type="button" class="ebels-acc-header__tab is-active" data-account-tab-trigger data-tab-target="profile" role="tab" aria-selected="true">Profile</button>
     <button type="button" class="ebels-acc-header__tab" data-account-tab-trigger data-tab-target="orders" role="tab" aria-selected="false">Orders</button>
-    <button type="button" class="ebels-acc-header__tab" data-account-tab-trigger data-tab-target="profile" role="tab" aria-selected="false">Profile</button>
+    <button type="button" class="ebels-acc-header__tab" data-account-tab-trigger data-tab-target="foryou" role="tab" aria-selected="false">For You</button>
   </nav>
 </div>
 {%- endif -%}

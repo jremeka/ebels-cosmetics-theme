@@ -13,7 +13,7 @@
   if (!triggers.length) return;
 
   // Restore last-viewed tab from the URL hash, if present (e.g. #orders)
-  var initialTab = window.location.hash.replace('#', '') || 'foryou';
+  var initialTab = window.location.hash.replace('#', '') || 'profile';
 
   function activate(tabName) {
     triggers.forEach(function (t) {

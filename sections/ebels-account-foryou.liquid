@@ -1,36 +1,7 @@
 {{ 'ebels-account-foryou.css' | asset_url | stylesheet_tag }}
 
 {%- if customer -%}
-<div class="ebels-acc-fy page-width" data-account-tab-panel="foryou">
-
-  {%- comment -%}
-    BEAUTY PROFILE — stored as customer metafields (namespace: custom).
-    Set up once in Shopify admin: Settings → Custom data → Customers → Add
-    definition for each: skin_type, skin_tone, preferred_scents (all
-    single-line text works fine). Editing these lives in the Profile tab —
-    this is display-only here.
-  {%- endcomment -%}
-  <div class="ebels-acc-fy__section">
-    <div class="ebels-acc-fy__section-head">
-      <h2 class="ebels-acc-fy__section-title">Your Beauty Profile</h2>
-      <a href="#profile" class="ebels-acc-fy__edit-link" data-account-goto-profile>Edit Profile</a>
-    </div>
-
-    <div class="ebels-acc-fy__profile-grid">
-      <div class="ebels-acc-fy__profile-card">
-        <span class="ebels-acc-fy__profile-label">Skin Type</span>
-        <p class="ebels-acc-fy__profile-value">{{ customer.metafields.custom.skin_type | default: 'Not set' }}</p>
-      </div>
-      <div class="ebels-acc-fy__profile-card">
-        <span class="ebels-acc-fy__profile-label">Skin Tone</span>
-        <p class="ebels-acc-fy__profile-value">{{ customer.metafields.custom.skin_tone | default: 'Not set' }}</p>
-      </div>
-      <div class="ebels-acc-fy__profile-card">
-        <span class="ebels-acc-fy__profile-label">Preferred Scents</span>
-        <p class="ebels-acc-fy__profile-value">{{ customer.metafields.custom.preferred_scents | default: 'Not set' }}</p>
-      </div>
-    </div>
-  </div>
+<div class="ebels-acc-fy page-width" data-account-tab-panel="foryou" hidden>
 
   {%- comment -%}
     PICKED FOR YOU — hand-picked, not real personalization. Shopify has no
