@@ -1,0 +1,117 @@
+{{ 'ebels-search-results.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-sr page-width" data-search-results>
+  <script type="application/json" data-money-format>{{ shop.money_format | json }}</script>
+
+  {%- if search.performed -%}
+    {%- if search.results_count > 0 -%}
+      {%- paginate search.results by section.settings.products_per_page -%}
+        <div class="ebels-sr__grid">
+          {%- for item in search.results -%}
+            {%- assign sr_variant = item.selected_or_first_available_variant -%}
+
+            {%- assign shade_option_index = -1 -%}
+            {%- for option in item.options_with_values -%}
+              {%- if option.name == 'Shade' or option.name == 'Color' or option.name == 'Colour' -%}
+                {%- assign shade_option_index = forloop.index0 -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            <div class="ebels-sr__card" data-reveal>
+              <a href="{{ item.url }}" class="ebels-sr__media-link" aria-label="{{ item.title | escape }}">
+                <div class="ebels-sr__media">
+                  {%- if item.featured_image != blank -%}
+                    {{ item.featured_image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'ebels-sr__img', widths: '250, 375, 500' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'ebels-sr__img' }}
+                  {%- endif -%}
+                </div>
+              </a>
+
+              <div class="ebels-sr__info">
+                <div class="ebels-sr__rating" data-review-placeholder>
+                  <span class="ebels-sr__stars" aria-hidden="true">★★★★★</span>
+                  <span class="ebels-caption">(120)</span>
+                </div>
+
+                <a href="{{ item.url }}" class="ebels-sr__title-link">
+                  <h3 class="ebels-sr__title">{{ item.title }}</h3>
+                </a>
+                <p class="ebels-sr__desc">{{ item.description | strip_html | truncatewords: 14 }}</p>
+                <p class="ebels-sr__price">{{ sr_variant.price | money }}</p>
+
+                <div class="ebels-sr__bottom-row">
+                  {%- if shade_option_index > -1 -%}
+                    {%- assign shade_option = item.options_with_values[shade_option_index] -%}
+                    <div class="ebels-sr__swatches">
+                      {%- for value in shade_option.values limit: 4 -%}
+                        <span class="ebels-sr__swatch" style="--swatch-color: {{ value.swatch.color | default: '#8C8279' }};" title="{{ value }}"></span>
+                      {%- endfor -%}
+                    </div>
+                  {%- else -%}
+                    <span></span>
+                  {%- endif -%}
+                  <a href="{{ item.url }}" class="ebels-sr__arrow" aria-label="View {{ item.title | escape }}">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </a>
+                </div>
+
+                <button
+                  type="button"
+                  class="ebels-btn ebels-sr__add-to-bag"
+                  data-add-to-bag-sr
+                  data-variant-id="{{ sr_variant.id }}"
+                  {% unless sr_variant.available %}disabled{% endunless %}
+                >
+                  {%- if sr_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+                </button>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="ebels-sr__pagination" aria-label="Pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="ebels-sr__page-link">‹</a>
+            {%- endif -%}
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}" class="ebels-sr__page-number">{{ part.title }}</a>
+              {%- else -%}
+                <span class="ebels-sr__page-number{% if part.title == paginate.current_page %} is-current{% endif %}">{{ part.title }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="ebels-sr__page-link">›</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- else -%}
+      {%- comment -%} No-results state is handled by the dedicated ebels-search-empty section instead {%- endcomment -%}
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+<script src="{{ 'ebels-search-results.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Search Results",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 48,
+      "step": 8,
+      "default": 8
+    }
+  ],
+  "presets": [
+    { "name": "Ebels Search Results" }
+  ]
+}
+{% endschema %}

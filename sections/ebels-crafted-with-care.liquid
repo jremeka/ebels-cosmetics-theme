@@ -1,0 +1,52 @@
+{{ 'ebels-crafted-with-care.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-cwc page-width" data-reveal>
+  {%- if section.settings.heading != blank -%}
+    <h2 class="ebels-h2 ebels-cwc__heading">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+  {%- if section.settings.text != blank -%}
+    <div class="ebels-body ebels-cwc__text">{{ section.settings.text }}</div>
+  {%- endif -%}
+  {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
+    <a href="{{ section.settings.link_url }}" class="ebels-cwc__link">
+      {{ section.settings.link_text }}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Ebels Crafted With Care",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Crafted with Care"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Every EBELS product is thoughtfully formulated and designed to celebrate your natural beauty. From our signature fragrances to our handcrafted bags, each piece tells a story of elegance and self-expression.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Learn Our Story"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    }
+  ],
+  "presets": [
+    { "name": "Ebels Crafted With Care" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,23 @@
+/* ==========================================================================
+   EBELS COLLECTIONS LIST — page header
+   Loaded by sections/ebels-collections-list-header.liquid
+   ========================================================================== */
+
+.ebels-clh {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-8);
+  text-align: center;
+}
+
+.ebels-clh__title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--text-h1-size);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.ebels-clh__subheading {
+  color: var(--text-secondary);
+  margin: 0;
+}

@@ -1,0 +1,114 @@
+/* ==========================================================================
+   EBELS COLLECTIONS LIST — main grid of real Shopify collections
+   Loaded by sections/ebels-collections-list-grid.liquid
+   ========================================================================== */
+
+.ebels-clg {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-16);
+}
+
+.ebels-clg__header {
+  text-align: center;
+  margin-bottom: var(--space-10);
+}
+
+.ebels-clg__heading {
+  margin-bottom: var(--space-2);
+}
+
+.ebels-clg__subheading {
+  color: var(--text-secondary);
+}
+
+.ebels-clg__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-clg__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ebels-clg__card {
+  display: block;
+  text-decoration: none;
+}
+
+.ebels-clg__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-secondary);
+  transition: transform 0.3s ease;
+}
+
+.ebels-clg__card:hover .ebels-clg__media {
+  transform: translateY(-3px);
+}
+
+.ebels-clg__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.ebels-clg__card:hover .ebels-clg__img {
+  transform: scale(1.05);
+}
+
+.ebels-clg__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(34, 27, 22, 0) 40%, rgba(34, 27, 22, 0.6) 100%);
+}
+
+.ebels-clg__label {
+  position: absolute;
+  left: var(--space-6);
+  bottom: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ebels-clg__title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-h5-size);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.ebels-clg__count {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ebels-clg__arrow {
+  position: absolute;
+  right: var(--space-6);
+  bottom: var(--space-6);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: var(--ebels-ink);
+  border-radius: var(--radius-full);
+  transition: transform 0.25s ease;
+}
+
+.ebels-clg__card:hover .ebels-clg__arrow {
+  transform: translateX(3px);
+}

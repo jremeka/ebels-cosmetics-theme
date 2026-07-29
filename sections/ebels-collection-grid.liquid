@@ -19,11 +19,7 @@
 
   <div class="ebels-cg__meta">
     <div class="ebels-cg__breadcrumb-wrap">
-      <nav class="ebels-cg__breadcrumb" aria-label="Breadcrumb">
-        <a href="{{ routes.root_url }}">Ebels</a>
-        <span class="ebels-cg__breadcrumb-sep">/</span>
-        <span class="ebels-cg__breadcrumb-current">{{ collection.title }}</span>
-      </nav>
+      {% render 'ebels-breadcrumb', dark: true %}
       <p class="ebels-cg__count">{{ collection.all_products_count }} products</p>
     </div>
 

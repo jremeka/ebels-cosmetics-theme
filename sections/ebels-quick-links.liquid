@@ -1,0 +1,65 @@
+{{ 'ebels-quick-links.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-ql page-width" data-reveal>
+  {%- if section.settings.heading != blank -%}
+    <h2 class="ebels-h2 ebels-ql__heading">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+  {%- if section.settings.subheading != blank -%}
+    <p class="ebels-body ebels-ql__subheading">{{ section.settings.subheading }}</p>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="ebels-ql__grid">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.url }}" class="ebels-ql__link" {{ block.shopify_attributes }}>
+          <span>{{ block.settings.label }}</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Ebels Quick Links",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Quick links"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Get back to shopping in one tap"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "New Arrivals" },
+        { "type": "url", "id": "url", "label": "URL" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Ebels Quick Links",
+      "blocks": [
+        { "type": "link", "settings": { "label": "New Arrivals" } },
+        { "type": "link", "settings": { "label": "Best Sellers" } },
+        { "type": "link", "settings": { "label": "Sale & Offers" } },
+        { "type": "link", "settings": { "label": "Help & Contact" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

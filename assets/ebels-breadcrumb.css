@@ -1,0 +1,47 @@
+/* ==========================================================================
+   EBELS BREADCRUMB — shared across every internal page
+   Loaded by snippets/ebels-breadcrumb.liquid — do not duplicate this
+   styling in individual section CSS files, just render the snippet.
+   ========================================================================== */
+
+.ebels-crumb {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-8);
+  text-align: left;
+}
+
+.ebels-crumb__link {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.ebels-crumb__link:hover {
+  color: var(--text-brand);
+}
+
+.ebels-crumb__sep {
+  margin: 0 var(--space-2);
+  color: var(--border-strong);
+}
+
+.ebels-crumb__current {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ----- Dark variant, for use on a dark background (e.g. collection grid's meta bar) ----- */
+.ebels-crumb--dark {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ebels-crumb--dark .ebels-crumb__link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ebels-crumb--dark .ebels-crumb__link:hover {
+  color: #FFFFFF;
+}
+
+.ebels-crumb--dark .ebels-crumb__current {
+  color: #FFFFFF;
+}

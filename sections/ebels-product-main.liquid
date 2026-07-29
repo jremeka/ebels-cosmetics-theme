@@ -16,16 +16,7 @@
 
 <div class="ebels-product page-width" data-product-section data-product-id="{{ product.id }}">
 
-  {%- comment -%} Breadcrumb {%- endcomment -%}
-  <nav class="ebels-breadcrumb ebels-body-sm" aria-label="Breadcrumb">
-    <a href="{{ routes.root_url }}">Home</a>
-    <span class="ebels-breadcrumb__sep">/</span>
-    {%- if product.collections.first != blank -%}
-      <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
-      <span class="ebels-breadcrumb__sep">/</span>
-    {%- endif -%}
-    <span class="ebels-breadcrumb__current">{{ product.title }}</span>
-  </nav>
+  {% render 'ebels-breadcrumb' %}
 
   <div class="ebels-product__grid">
 

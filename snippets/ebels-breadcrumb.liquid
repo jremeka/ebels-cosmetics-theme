@@ -1,0 +1,76 @@
+{{ 'ebels-breadcrumb.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  EBELS BREADCRUMB (shared snippet)
+  Drop this one line into any section: {% render 'ebels-breadcrumb' %}
+  It auto-detects the current page type and builds the trail itself — no
+  parameters needed for standard pages (product, collection, cart, search,
+  404, blog, article, our custom account page, list-collections).
+
+  Optional parameters:
+  - override_current: 'Custom Label'  → overrides the current-page label
+  - dark: true                        → white-text variant for use on a
+                                          dark background (e.g. the
+                                          collection grid's dark meta bar)
+
+  Always falls back gracefully to "Home / [page title]" for any template
+  not explicitly handled below, so it's safe to add to a brand-new page
+  even before this snippet is taught about that specific template.
+{%- endcomment -%}
+
+<nav class="ebels-crumb ebels-body-sm{% if dark %} ebels-crumb--dark{% endif %}" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}" class="ebels-crumb__link">Home</a>
+
+  {%- case template.name -%}
+
+    {%- when 'product' -%}
+      {%- assign crumb_collection = collection | default: product.collections.first -%}
+      {%- if crumb_collection != blank -%}
+        <span class="ebels-crumb__sep">/</span>
+        <a href="{{ crumb_collection.url }}" class="ebels-crumb__link">{{ crumb_collection.title }}</a>
+      {%- endif -%}
+      <span class="ebels-crumb__sep">/</span>
+      <span class="ebels-crumb__current">{{ override_current | default: product.title }}</span>
+
+    {%- when 'collection' -%}
+      <span class="ebels-crumb__sep">/</span>
+      <span class="ebels-crumb__current">{{ override_current | default: collection.title }}</span>
+
+    {%- when 'list-collections' -%}
+      <span class="ebels-crumb__sep">/</span>
+      <span class="ebels-crumb__current">{{ override_current | default: 'Collections' }}</span>
+
+    {%- when 'cart' -%}
+      <span class="ebels-crumb__sep">/</span>
+      <span class="ebels-crumb__current">{{ override_current | default: 'Shopping Bag' }}</span>
+
+    {%- when 'search' -%}
+      <span class="ebels-crumb__sep">/</span>
+      <span class="ebels-crumb__current">{{ override_current | default: 'Search Results' }}</span>
+
+    {%- when '404' -%}
+      <span class="ebels-crumb__sep">/</span>
+      <span class="ebels-crumb__current">{{ override_current | default: 'Page Not Found' }}</span>
+
+    {%- when 'blog' -%}
+      <span class="ebels-crumb__sep">/</span>
+      <span class="ebels-crumb__current">{{ override_current | default: blog.title }}</span>
+
+    {%- when 'article' -%}
+      <span class="ebels-crumb__sep">/</span>
+      <a href="{{ blog.url }}" class="ebels-crumb__link">{{ blog.title }}</a>
+      <span class="ebels-crumb__sep">/</span>
+      <span class="ebels-crumb__current">{{ override_current | default: article.title }}</span>
+
+    {%- when 'page' -%}
+      <span class="ebels-crumb__sep">/</span>
+      <span class="ebels-crumb__current">{{ override_current | default: page.title }}</span>
+
+    {%- else -%}
+      {%- if override_current != blank or page_title != blank -%}
+        <span class="ebels-crumb__sep">/</span>
+        <span class="ebels-crumb__current">{{ override_current | default: page_title }}</span>
+      {%- endif -%}
+
+  {%- endcase -%}
+</nav>

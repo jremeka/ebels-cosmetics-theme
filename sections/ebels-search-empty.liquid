@@ -1,0 +1,113 @@
+{{ 'ebels-search-empty.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Shows only when a search was performed and returned zero results.
+  "You Might Like" pulls a pool of real products from your whole catalog
+  (collections.all) and JS randomly picks 4 of them on every page load —
+  genuinely different each visit. Liquid itself has no true "random"
+  function (pages are cached, so server-side randomness per-visit isn't
+  reliable) — this JS-shuffle-a-real-pool approach is the honest way to
+  get that effect. "Popular Categories" links to real collections you pick
+  below, not hardcoded labels.
+{%- endcomment -%}
+
+{%- if search.performed and search.results_count == 0 -%}
+  <div class="ebels-se page-width" data-search-empty-section>
+    <script type="application/json" data-money-format>{{ shop.money_format | json }}</script>
+
+    <div class="ebels-se__message" data-reveal>
+      <h2 class="ebels-se__heading">No results found for "{{ search.terms }}"</h2>
+      <p class="ebels-se__subtext">{{ section.settings.subtext }}</p>
+
+      {%- if section.blocks.size > 0 -%}
+        <p class="ebels-se__categories-label">Popular Categories</p>
+        <div class="ebels-se__categories">
+          {%- for block in section.blocks -%}
+            {%- assign se_collection = block.settings.collection -%}
+            {%- if se_collection != blank -%}
+              <a href="{{ se_collection.url }}" class="ebels-se__category-pill" {{ block.shopify_attributes }}>
+                {{ block.settings.custom_label | default: se_collection.title }}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="ebels-se__likes" data-reveal>
+      <h2 class="ebels-h2 ebels-se__likes-heading">{{ section.settings.likes_heading }}</h2>
+      <p class="ebels-body ebels-se__likes-subheading">{{ section.settings.likes_subheading }}</p>
+
+      <div class="ebels-se__grid" data-search-empty-grid>
+        {%- comment -%} Populated by JS from the pool below, shuffled client-side {%- endcomment -%}
+      </div>
+
+      {%- comment -%} Real product pool, up to 24, for JS to randomly pick 4 from {%- endcomment -%}
+      <script type="application/json" data-search-empty-pool>
+        [
+          {%- assign se_pool = collections.all.products | slice: 0, 24 -%}
+          {%- for product in se_pool -%}
+            {%- assign se_variant = product.selected_or_first_available_variant -%}
+            {
+              "title": {{ product.title | json }},
+              "url": {{ product.url | json }},
+              "image": {{ product.featured_image | image_url: width: 500 | json }},
+              "price": {{ se_variant.price | json }},
+              "available": {{ se_variant.available | json }}
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      </script>
+    </div>
+  </div>
+{%- endif -%}
+
+<script src="{{ 'ebels-search-empty.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Search Empty",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "We couldn't find what you're looking for. Try checking your spelling or using more general terms."
+    },
+    {
+      "type": "text",
+      "id": "likes_heading",
+      "label": "\"You Might Like\" heading",
+      "default": "You Might Like"
+    },
+    {
+      "type": "text",
+      "id": "likes_subheading",
+      "label": "\"You Might Like\" subheading",
+      "default": "Our most-loved pieces, curated just for you"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "custom_label", "label": "Custom label (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Ebels Search Empty",
+      "blocks": [
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,10 +1,20 @@
 {
   "sections": {
-    "main": {
-      "type": "main-404"
+    "not_found": {
+      "type": "ebels-404"
+    },
+    "picks": {
+      "type": "ebels-404-picks"
+    },
+    "quick_links": {
+      "type": "ebels-quick-links"
+    },
+    "offers": {
+      "type": "ebels-offers-strip"
+    },
+    "newsletter": {
+      "type": "ebels-newsletter"
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["not_found", "picks", "quick_links", "offers", "newsletter"]
 }

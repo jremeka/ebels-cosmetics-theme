@@ -1,0 +1,54 @@
+{{ 'ebels-404.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-404 page-width">
+  {% render 'ebels-breadcrumb' %}
+
+  <div class="ebels-404__hero" data-reveal>
+    <p class="ebels-404__number">404</p>
+    <h1 class="ebels-404__heading">{{ section.settings.heading }}</h1>
+    {%- if section.settings.subheading != blank -%}
+      <p class="ebels-404__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <div class="ebels-404__actions">
+      <a href="{{ routes.root_url }}" class="ebels-btn ebels-404__home-btn">Back to Home</a>
+      <a href="{{ section.settings.collections_url | default: routes.collections_url }}" class="ebels-btn ebels-btn--outline">Browse Collections</a>
+    </div>
+
+    <p class="ebels-404__search-label">Or try searching for what you need</p>
+    <form action="{{ routes.search_url }}" method="get" class="ebels-404__search-form" role="search">
+      <input type="hidden" name="type" value="product">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" name="q" class="ebels-404__search-input" placeholder="Search products, categories, or brands..." required>
+    </form>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ebels 404",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Oops, this page took a beauty break"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "The page you're looking for might have been moved, renamed, or is temporarily unavailable."
+    },
+    {
+      "type": "url",
+      "id": "collections_url",
+      "label": "\"Browse Collections\" link",
+      "info": "Leave blank to use the default all-collections page"
+    }
+  ],
+  "presets": [
+    { "name": "Ebels 404" }
+  ]
+}
+{% endschema %}

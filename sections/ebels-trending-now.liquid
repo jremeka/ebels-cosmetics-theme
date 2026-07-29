@@ -1,0 +1,61 @@
+{{ 'ebels-trending-now.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Manual/hand-picked tag pills — Shopify has no native "trending searches"
+  data to pull from. Each pill links to a real search for that term.
+{%- endcomment -%}
+
+{%- if search.performed and search.results_count > 0 -%}
+  <div class="ebels-tn page-width" data-reveal>
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ebels-h3 ebels-tn__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="ebels-tn__pills">
+        {%- for block in section.blocks -%}
+          <a href="{{ routes.search_url }}?q={{ block.settings.term | url_encode }}&type=product" class="ebels-tn__pill" {{ block.shopify_attributes }}>
+            {{ block.settings.term }}
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Ebels Trending Now",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trending Now"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "term",
+      "name": "Search term",
+      "settings": [
+        { "type": "text", "id": "term", "label": "Term", "default": "new arrivals" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Ebels Trending Now",
+      "blocks": [
+        { "type": "term", "settings": { "term": "foundation" } },
+        { "type": "term", "settings": { "term": "new arrivals" } },
+        { "type": "term", "settings": { "term": "gift sets" } },
+        { "type": "term", "settings": { "term": "perfume" } },
+        { "type": "term", "settings": { "term": "hair oil" } },
+        { "type": "term", "settings": { "term": "lipstick sets" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

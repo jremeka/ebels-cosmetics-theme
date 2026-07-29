@@ -1,0 +1,38 @@
+/* ==========================================================================
+   EBELS TRENDING NOW — hand-picked search suggestion pills
+   Loaded by sections/ebels-trending-now.liquid
+   ========================================================================== */
+
+.ebels-tn {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-16);
+}
+
+.ebels-tn__heading {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  margin-bottom: var(--space-4);
+}
+
+.ebels-tn__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.ebels-tn__pill {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.ebels-tn__pill:hover {
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+}

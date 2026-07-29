@@ -27,30 +27,6 @@
   gap: var(--space-3);
 }
 
-.ebels-cg__breadcrumb {
-  font-family: var(--font-body);
-  font-size: var(--text-body-sm-size);
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.ebels-cg__breadcrumb a {
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-}
-
-.ebels-cg__breadcrumb a:hover {
-  color: #ffffff;
-}
-
-.ebels-cg__breadcrumb-sep {
-  margin: 0 var(--space-2);
-}
-
-.ebels-cg__breadcrumb-current {
-  color: #ffffff;
-  font-weight: 600;
-}
-
 .ebels-cg__count {
   font-family: var(--font-body);
   font-size: var(--text-caption-size);

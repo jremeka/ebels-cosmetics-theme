@@ -1,0 +1,84 @@
+/* ==========================================================================
+   EBELS 404 — hero/empty-state section
+   Loaded by sections/ebels-404.liquid
+   ========================================================================== */
+
+.ebels-404 {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-8);
+}
+
+.ebels-404__hero {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding-top: var(--space-8);
+}
+
+.ebels-404__number {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(80px, 14vw, 140px);
+  line-height: 1;
+  color: var(--ebels-blush);
+  margin: 0 0 var(--space-4);
+}
+
+.ebels-404__heading {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--text-h2-size);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.ebels-404__subheading {
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-8);
+}
+
+.ebels-404__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.ebels-404__home-btn {
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+  border: none;
+}
+
+.ebels-404__home-btn:hover {
+  opacity: 0.9;
+}
+
+.ebels-404__search-label {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-3);
+}
+
+.ebels-404__search-form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-5);
+  color: var(--text-secondary);
+}
+
+.ebels-404__search-input {
+  flex: 1;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  outline: none;
+}

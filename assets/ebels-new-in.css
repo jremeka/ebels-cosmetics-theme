@@ -1,0 +1,128 @@
+/* ==========================================================================
+   EBELS NEW IN — dynamic newest-products grid
+   Loaded by sections/ebels-new-in.liquid
+   ========================================================================== */
+
+.ebels-newin {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+.ebels-newin__header {
+  text-align: center;
+  margin-bottom: var(--space-10);
+}
+
+.ebels-newin__heading {
+  margin-bottom: var(--space-2);
+}
+
+.ebels-newin__subheading {
+  color: var(--text-secondary);
+}
+
+.ebels-newin__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-newin__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.ebels-newin__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.ebels-newin__wishlist {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-full);
+  color: var(--ebels-ink);
+  cursor: pointer;
+}
+
+.ebels-newin__wishlist[aria-pressed="true"] {
+  color: var(--text-brand);
+}
+
+.ebels-newin__media-link {
+  display: block;
+  text-decoration: none;
+}
+
+.ebels-newin__media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.ebels-newin__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.ebels-newin__card:hover .ebels-newin__img {
+  transform: scale(1.05);
+}
+
+.ebels-newin__title-link {
+  text-decoration: none;
+}
+
+.ebels-newin__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ebels-newin__price {
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin: var(--space-1) 0 var(--space-3);
+}
+
+.ebels-newin__add-to-bag {
+  width: 100%;
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+  border: none;
+  font-size: var(--text-caption-size);
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.ebels-newin__add-to-bag:hover {
+  opacity: 0.85;
+}
+
+.ebels-newin__add-to-bag[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ebels-newin__add-to-bag.is-added {
+  background: var(--status-success);
+}

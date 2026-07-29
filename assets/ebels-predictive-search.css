@@ -1,0 +1,163 @@
+/* ==========================================================================
+   EBELS PREDICTIVE SEARCH
+   Restyles Dawn's existing predictive search modal + dropdown (from
+   snippets/header-search.liquid and snippets/predictive-search-results.liquid)
+   to match the Ebels brand. Pure CSS override — the underlying JS/logic
+   (debounced fetch, keyboard nav) is untouched, since it already works.
+   Loaded once globally from layout/theme.liquid.
+   ========================================================================== */
+
+/* ----- Modal shell (the full search overlay triggered by the header icon) ----- */
+.search-modal .modal-overlay {
+  background: rgba(34, 27, 22, 0.5);
+}
+
+.search-modal__content {
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  border: none;
+  box-shadow: 0 20px 60px rgba(34, 27, 22, 0.2);
+  max-width: 640px;
+  padding: var(--space-6);
+}
+
+/* ----- The search input itself ----- */
+.search-modal__form .search__input {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg-size, 18px);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+}
+
+.search-modal__form .search__input:focus {
+  border-color: var(--border-brand);
+  box-shadow: none;
+}
+
+.search-modal__form .search__button,
+.search-modal__form .reset__button {
+  color: var(--text-secondary);
+}
+
+.search-modal__close-button {
+  color: var(--text-secondary);
+}
+
+.search-modal__close-button:hover {
+  color: var(--text-brand);
+}
+
+/* ----- Predictive dropdown container ----- */
+.predictive-search {
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 40px rgba(34, 27, 22, 0.14);
+  margin-top: var(--space-3);
+  background: var(--bg-primary);
+  font-family: var(--font-body);
+}
+
+.predictive-search__results-groups-wrapper {
+  border-bottom-color: var(--border-default);
+  padding: var(--space-2) 0 var(--space-4);
+}
+
+/* ----- Section labels (PRODUCTS / SUGGESTIONS) ----- */
+.predictive-search__heading {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-default);
+  margin: 0 var(--space-5);
+  padding: var(--space-4) 0 var(--space-2);
+}
+
+/* ----- Result rows ----- */
+.predictive-search__item {
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+}
+
+.predictive-search__list-item[aria-selected='true'] > *,
+.predictive-search__list-item:hover > *,
+.predictive-search__item[aria-selected='true'],
+.predictive-search__item:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.predictive-search__list-item[aria-selected='true'] .predictive-search__item-heading,
+.predictive-search__list-item:hover .predictive-search__item-heading {
+  text-decoration: none;
+  color: var(--text-brand);
+}
+
+/* ----- Product results (with thumbnail) ----- */
+.predictive-search__item--link-with-thumbnail {
+  grid-template-columns: 56px 1fr;
+  grid-column-gap: var(--space-4);
+  align-items: center;
+}
+
+.predictive-search__image {
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.predictive-search__item-heading {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+}
+
+.predictive-search__item-vendor {
+  font-size: var(--text-caption-size);
+  color: var(--text-secondary);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.predictive-search__item .price {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: var(--text-body-sm-size);
+}
+
+/* ----- "Search for '...'" row at the bottom ----- */
+.predictive-search__item--term {
+  border-top: 1px solid var(--border-default);
+  margin-top: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+}
+
+.predictive-search__item--term:hover {
+  color: var(--text-brand);
+}
+
+.predictive-search__item--term .icon-arrow {
+  color: var(--brand-primary);
+  transition: transform 0.2s ease;
+}
+
+.predictive-search__item--term:hover .icon-arrow {
+  transform: translateX(3px);
+}
+
+/* ----- Suggestion / query text ----- */
+.predictive-search__item-query-result mark {
+  color: var(--text-brand);
+  background: none;
+  font-weight: 700;
+}

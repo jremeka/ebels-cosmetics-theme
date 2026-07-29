@@ -77,7 +77,7 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
-
+      {%- assign scheme_classes = '' -%}
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
         {% if forloop.index == 1 -%}
@@ -282,6 +282,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
 {{ 'ebels-tokens.css' | asset_url | stylesheet_tag }}
 {{ 'ebels-footer.css' | asset_url | stylesheet_tag }}
+{{ 'ebels-predictive-search.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'ebels-motion.js' | asset_url }}" defer></script>
     {{ 'base.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">

@@ -1,0 +1,45 @@
+/* ==========================================================================
+   EBELS CRAFTED WITH CARE — centered brand story blurb
+   Loaded by sections/ebels-crafted-with-care.liquid
+   ========================================================================== */
+
+.ebels-cwc {
+  max-width: 720px;
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ebels-cwc__heading {
+  margin-bottom: var(--space-4);
+}
+
+.ebels-cwc__text {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.ebels-cwc__text p {
+  margin: 0;
+}
+
+.ebels-cwc__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-brand);
+  text-decoration: underline;
+}
+
+.ebels-cwc__link svg {
+  transition: transform 0.2s ease;
+}
+
+.ebels-cwc__link:hover svg {
+  transform: translateX(3px);
+}

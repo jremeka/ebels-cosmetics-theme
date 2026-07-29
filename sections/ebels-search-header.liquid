@@ -1,0 +1,63 @@
+{{ 'ebels-search-header.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Filter pills use Shopify's real native search.filters object (genuine
+  faceted search, no app needed) — whatever filter groups Shopify finds
+  relevant to the current query show automatically. Sort uses Shopify's
+  native search sort_by param, same mechanism as collection sorting.
+{%- endcomment -%}
+
+<div class="ebels-sh page-width">
+  {% render 'ebels-breadcrumb' %}
+
+  <div class="ebels-sh__search-wrap" data-reveal>
+    <form action="{{ routes.search_url }}" method="get" class="ebels-sh__search-form" role="search">
+      <input type="hidden" name="type" value="product">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" name="q" class="ebels-sh__search-input" value="{{ search.terms | escape }}" placeholder="Search our collection...">
+    </form>
+
+    {%- if search.performed -%}
+      <p class="ebels-sh__count">
+        Showing {{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for "{{ search.terms }}"
+      </p>
+    {%- endif -%}
+  </div>
+
+  {%- if search.performed and search.results_count > 0 -%}
+    <div class="ebels-sh__controls">
+      {%- if search.filters.size > 0 -%}
+        <div class="ebels-sh__filters">
+          <a href="{{ routes.search_url }}?q={{ search.terms | url_encode }}&type=product" class="ebels-sh__filter-pill{% if search.filters[0].active_values.size == 0 %} is-active{% endif %}">All</a>
+          {%- for value in search.filters[0].values -%}
+            <a href="{{ value.url_to_add }}" class="ebels-sh__filter-pill{% if value.active %} is-active{% endif %}">{{ value.label }}</a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="ebels-sh__sort" data-search-sort-dropdown>
+        <button type="button" class="ebels-sh__sort-btn" data-search-sort-trigger aria-haspopup="listbox" aria-expanded="false">
+          <span>Sort by: {{ search.sort_by | default: 'Relevance' | capitalize }}</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="ebels-sh__sort-menu" data-search-sort-menu role="listbox" hidden>
+          <li><a href="?q={{ search.terms | url_encode }}&type=product&sort_by=relevance">Relevance</a></li>
+          <li><a href="?q={{ search.terms | url_encode }}&type=product&sort_by=price-ascending">Price: Low to High</a></li>
+          <li><a href="?q={{ search.terms | url_encode }}&type=product&sort_by=price-descending">Price: High to Low</a></li>
+        </ul>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<script src="{{ 'ebels-search-header.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Search Header",
+  "settings": [],
+  "presets": [
+    { "name": "Ebels Search Header" }
+  ]
+}
+{% endschema %}

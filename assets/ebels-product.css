@@ -8,30 +8,6 @@
   padding-bottom: var(--space-16);
 }
 
-/* ----- Breadcrumb ----- */
-.ebels-breadcrumb {
-  color: var(--text-secondary);
-  margin-bottom: var(--space-8);
-}
-
-.ebels-breadcrumb a {
-  color: var(--text-secondary);
-  text-decoration: none;
-}
-
-.ebels-breadcrumb a:hover {
-  color: var(--text-brand);
-}
-
-.ebels-breadcrumb__sep {
-  margin: 0 var(--space-2);
-  color: var(--border-strong);
-}
-
-.ebels-breadcrumb__current {
-  color: var(--text-primary);
-}
-
 /* ----- Grid ----- */
 .ebels-product__grid {
   display: grid;

@@ -1,0 +1,93 @@
+{{ 'ebels-new-in.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Pulls the genuinely newest products across your ENTIRE store (every
+  collection), sorted by creation date — fully automatic, no collection to
+  create or maintain. Whenever you add a new product, it just shows up here
+  on its own until enough newer products push it past the limit below.
+{%- endcomment -%}
+
+<div class="ebels-newin page-width" data-new-in-section>
+  <script type="application/json" data-money-format>{{ shop.money_format | json }}</script>
+
+  <div class="ebels-newin__header" data-reveal>
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ebels-h2 ebels-newin__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="ebels-body ebels-newin__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="ebels-newin__grid">
+    {%- assign newin_products = collections.all.products | sort: 'created_at' | reverse -%}
+    {%- for product in newin_products limit: section.settings.products_to_show -%}
+        {%- assign newin_variant = product.selected_or_first_available_variant -%}
+        <div class="ebels-newin__card" data-reveal>
+          <button type="button" class="ebels-newin__wishlist" data-wishlist-toggle-newin aria-label="Add to wishlist" aria-pressed="false">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          </button>
+
+          <a href="{{ product.url }}" class="ebels-newin__media-link" aria-label="{{ product.title | escape }}">
+            <div class="ebels-newin__media">
+              {%- if product.featured_image != blank -%}
+                {{ product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'ebels-newin__img', widths: '250, 375, 500' }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'ebels-newin__img' }}
+              {%- endif -%}
+            </div>
+          </a>
+
+          <div class="ebels-newin__info">
+            <a href="{{ product.url }}" class="ebels-newin__title-link">
+              <h3 class="ebels-newin__title">{{ product.title }}</h3>
+            </a>
+            <p class="ebels-newin__price">{{ newin_variant.price | money }}</p>
+            <button
+              type="button"
+              class="ebels-btn ebels-newin__add-to-bag"
+              data-add-to-bag-newin
+              data-variant-id="{{ newin_variant.id }}"
+              {% unless newin_variant.available %}disabled{% endunless %}
+            >
+              {%- if newin_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+            </button>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+</div>
+
+<script src="{{ 'ebels-new-in.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels New In",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "New In"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "The latest additions across all collections"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    { "name": "Ebels New In" }
+  ]
+}
+{% endschema %}

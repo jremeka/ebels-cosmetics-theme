@@ -1,19 +1,36 @@
 {
   "sections": {
-    "collection_header": {
-      "type": "ebels-collection-header",
-      "settings": { "eyebrow": "Ebels Collection" },
-      "blocks": {
-        "floral": { "type": "filter_icon", "settings": { "label": "Floral", "tag": "Floral" } },
-        "woody": { "type": "filter_icon", "settings": { "label": "Woody", "tag": "Woody" } },
-        "citrus": { "type": "filter_icon", "settings": { "label": "Citrus", "tag": "Citrus" } }
-      },
-      "block_order": ["floral", "woody", "citrus"]
+    "collections_header": {
+      "type": "ebels-collections-list-header",
+      "settings": {
+        "heading": "Our Collections",
+        "subheading": "Explore our curated range of luxury beauty essentials"
+      }
     },
-    "collection_grid": {
-      "type": "ebels-collection-grid",
-      "settings": { "columns_desktop": 3, "products_per_page": 24, "hover_image_index": 2 }
+    "collections_grid": {
+      "type": "ebels-collections-list-grid",
+      "settings": {
+        "heading": "Shop by Collection",
+        "subheading": "Explore our curated collections"
+      }
+    },
+    "new_in": {
+      "type": "ebels-new-in",
+      "settings": {
+        "heading": "New In",
+        "subheading": "The latest additions across all collections",
+        "products_to_show": 4
+      }
+    },
+    "crafted_with_care": {
+      "type": "ebels-crafted-with-care"
+    },
+    "offers": {
+      "type": "ebels-offers-strip"
+    },
+    "newsletter": {
+      "type": "ebels-newsletter"
     }
   },
-  "order": ["collection_header", "collection_grid"]
+  "order": ["collections_header", "collections_grid", "new_in", "crafted_with_care", "offers", "newsletter"]
 }

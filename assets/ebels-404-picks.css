@@ -1,0 +1,108 @@
+/* ==========================================================================
+   EBELS 404 PICKS — "While you're here" hand-picked product grid
+   Loaded by sections/ebels-404-picks.liquid
+   ========================================================================== */
+
+.ebels-404p {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-10);
+}
+
+.ebels-404p__header {
+  text-align: center;
+  margin-bottom: var(--space-10);
+}
+
+.ebels-404p__heading {
+  margin-bottom: var(--space-2);
+}
+
+.ebels-404p__subheading {
+  color: var(--text-secondary);
+}
+
+.ebels-404p__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-404p__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.ebels-404p__media-link {
+  display: block;
+  text-decoration: none;
+}
+
+.ebels-404p__media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.ebels-404p__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.ebels-404p__card:hover .ebels-404p__img {
+  transform: scale(1.05);
+}
+
+.ebels-404p__title-link {
+  text-decoration: none;
+}
+
+.ebels-404p__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ebels-404p__subtitle {
+  font-size: var(--text-caption-size);
+  color: var(--text-secondary);
+  margin: 2px 0;
+}
+
+.ebels-404p__price {
+  font-size: var(--text-body-sm-size);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: var(--space-1) 0 var(--space-3);
+}
+
+.ebels-404p__add-to-bag {
+  width: 100%;
+  background: var(--ebels-ink);
+  color: #FFFFFF;
+  border: none;
+  font-size: var(--text-caption-size);
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.ebels-404p__add-to-bag:hover {
+  opacity: 0.85;
+}
+
+.ebels-404p__add-to-bag[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ebels-404p__add-to-bag.is-added {
+  background: var(--status-success);
+}

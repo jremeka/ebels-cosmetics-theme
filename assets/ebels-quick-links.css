@@ -1,0 +1,52 @@
+/* ==========================================================================
+   EBELS QUICK LINKS
+   Loaded by sections/ebels-quick-links.liquid
+   ========================================================================== */
+
+.ebels-ql {
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-16);
+  text-align: center;
+}
+
+.ebels-ql__heading {
+  margin-bottom: var(--space-2);
+}
+
+.ebels-ql__subheading {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+.ebels-ql__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media screen and (min-width: 750px) {
+  .ebels-ql__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.ebels-ql__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.ebels-ql__link:hover {
+  border-color: var(--border-brand);
+  color: var(--text-brand);
+  transform: translateY(-2px);
+}
