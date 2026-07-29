@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "ebels-wishlist" },
+    "newsletter": { "type": "ebels-newsletter" }
+  },
+  "order": ["main", "newsletter"]
+}

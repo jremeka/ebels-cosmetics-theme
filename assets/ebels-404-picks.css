@@ -57,6 +57,7 @@
 
 .ebels-404p__card:hover .ebels-404p__img {
   transform: scale(1.05);
+  position: relative;
 }
 
 .ebels-404p__title-link {
@@ -87,7 +88,7 @@
 .ebels-404p__add-to-bag {
   width: 100%;
   background: var(--ebels-ink);
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   font-size: var(--text-caption-size);
   padding-top: var(--space-2);

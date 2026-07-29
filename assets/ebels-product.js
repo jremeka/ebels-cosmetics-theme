@@ -229,7 +229,7 @@
     }
   }
 
-  /* ----- Wishlist stub ----- */
+  /* ----- Wishlist — real persistence via ebels-wishlist.js ----- */
   function initWishlist(root) {
     var btn = root.querySelector('[data-wishlist-toggle]');
     if (!btn) return;
@@ -244,10 +244,9 @@
         + '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>'
         + '</svg>' + (!pressed ? 'Added to Wishlist' : 'Add to Wishlist');
 
-      // Dispatch a custom event — hook the real wishlist save/remove logic to this later
       root.dispatchEvent(new CustomEvent('ebels:wishlist-toggle', {
         bubbles: true,
-        detail: { productId: root.getAttribute('data-product-id'), added: !pressed }
+        detail: { handle: btn.getAttribute('data-product-handle'), added: !pressed }
       }));
     });
   }

@@ -41,7 +41,7 @@
     });
   });
 
-  /* ----- Wishlist stub — same deferred pattern as the product page heart button ----- */
+  /* ----- Wishlist — real persistence via ebels-wishlist.js ----- */
   document.querySelectorAll('[data-wishlist-toggle-newin]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var pressed = btn.getAttribute('aria-pressed') === 'true';
@@ -49,7 +49,7 @@
 
       document.dispatchEvent(new CustomEvent('ebels:wishlist-toggle', {
         bubbles: true,
-        detail: { added: !pressed }
+        detail: { handle: btn.getAttribute('data-product-handle'), added: !pressed }
       }));
     });
   });

@@ -1,0 +1,64 @@
+.ebels-gc-how {
+  text-align: center;
+  padding-top: var(--space-12, 48px);
+  padding-bottom: var(--space-12, 48px);
+}
+
+.ebels-gc-how__eyebrow {
+  display: block;
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-caption-size, 12px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-brand, #EA5B1D);
+  margin-bottom: var(--space-2, 8px);
+}
+
+.ebels-gc-how__title {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h2-size, 36px);
+  color: var(--text-primary, #221B16);
+  margin: 0 0 var(--space-10, 40px);
+}
+
+.ebels-gc-how__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8, 32px);
+}
+
+.ebels-gc-how__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border-brand, #EA5B1D);
+  color: var(--brand-primary, #EA5B1D);
+  margin-bottom: var(--space-4, 16px);
+}
+
+.ebels-gc-how__step h3 {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h5-size, 20px);
+  color: var(--text-primary, #221B16);
+  margin: 0 0 var(--space-2, 8px);
+}
+
+.ebels-gc-how__step p {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  color: var(--text-secondary, #8C8279);
+  font-size: var(--text-body-sm-size, 14px);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .ebels-gc-how__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8, 32px);
+  }
+}

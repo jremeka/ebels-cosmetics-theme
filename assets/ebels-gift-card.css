@@ -1,0 +1,132 @@
+/* ==========================================================================
+   EBELS GIFT CARD
+   Restyles Dawn's REAL, native gift-card product page — the denomination
+   variant picker (product-form__input--pill), the recipient form
+   (recipient-checkbox, recipient-fields, gift-card-recipient-form.liquid),
+   and the buy button. Nothing here is custom-built; it's all Dawn's
+   working gift-card mechanism, just made to look like the brand.
+   Loaded on the gift card product template only.
+   ========================================================================== */
+
+/* ----- Denomination pills (product-form__input--pill) ----- */
+.product-form__input--pill .form__label {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-caption-size, 12px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary, #8C8279);
+  margin-bottom: var(--space-3, 12px);
+}
+
+.product-form__input--pill fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 8px);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-form__input--pill label {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size, 14px);
+  color: var(--text-primary, #221B16);
+  border: 1px solid var(--border-default, #F1B8B0);
+  border-radius: var(--radius-full, 999px);
+  padding: var(--space-3, 12px) var(--space-6, 24px);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.product-form__input--pill input:checked + label {
+  background: var(--ebels-ink, #221B16);
+  border-color: var(--ebels-ink, #221B16);
+  color: #fff;
+}
+
+/* ----- Price display ----- */
+.price {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  color: var(--text-primary, #221B16);
+}
+
+/* ----- Recipient "send as gift" checkbox ----- */
+.recipient-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size, 15px);
+  color: var(--text-primary, #221B16);
+  cursor: pointer;
+  margin: var(--space-6, 24px) 0;
+}
+
+.recipient-checkbox svg {
+  color: var(--brand-primary, #EA5B1D);
+}
+
+/* ----- Recipient fields (name/email/message/send-on) ----- */
+.recipient-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  margin-top: var(--space-4, 16px);
+}
+
+.recipient-fields hr {
+  border: none;
+  border-top: 1px solid var(--border-default, #F1B8B0);
+  margin: 0 0 var(--space-2, 8px);
+}
+
+.recipient-fields .field__input {
+  width: 100%;
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-body-sm-size, 14px);
+  color: var(--text-primary, #221B16);
+  border: 1px solid var(--border-default, #F1B8B0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-3, 12px) var(--space-4, 14px);
+  background: var(--bg-primary, #fff);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipient-fields .field__input:focus {
+  outline: none;
+  border-color: var(--border-brand, #EA5B1D);
+  box-shadow: 0 0 0 3px rgba(234, 91, 29, 0.1);
+}
+
+.recipient-fields .field__label {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-caption-size, 12px);
+  font-weight: 600;
+  color: var(--text-secondary, #8C8279);
+  margin-bottom: var(--space-1, 4px);
+  display: block;
+}
+
+/* ----- Buy button ----- */
+.product-form__submit {
+  width: 100%;
+  background: var(--brand-secondary, #7D1F3D);
+  color: #fff;
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-full, 999px);
+  padding: var(--space-4, 16px);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.product-form__submit:hover {
+  opacity: 0.9;
+}

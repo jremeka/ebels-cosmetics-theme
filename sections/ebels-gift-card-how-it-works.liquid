@@ -1,0 +1,52 @@
+{{ 'ebels-gift-card-how-it-works.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-gc-how page-width">
+  {%- if section.settings.eyebrow != blank -%}
+    <span class="ebels-gc-how__eyebrow" data-reveal>{{ section.settings.eyebrow }}</span>
+  {%- endif -%}
+  <h2 class="ebels-gc-how__title" data-reveal>{{ section.settings.title }}</h2>
+
+  <div class="ebels-gc-how__grid">
+    {%- for block in section.blocks -%}
+      <div class="ebels-gc-how__step" data-reveal {{ block.shopify_attributes }}>
+        <span class="ebels-gc-how__icon" aria-hidden="true">{{ block.settings.icon }}</span>
+        <h3>{{ forloop.index }}. {{ block.settings.title }}</h3>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ebels GC How It Works",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "PURE & SIMPLE" },
+    { "type": "text", "id": "title", "label": "Title", "default": "How It Works" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 60, "step": 4, "unit": "px", "label": "Padding top", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 60, "step": 4, "unit": "px", "label": "Padding bottom", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji or symbol)", "default": "\u2726" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Choose Amount" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Select from our preset tiers or specify a custom amount." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ebels GC How It Works",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" }
+      ]
+    }
+  ]
+}
+{% endschema %}

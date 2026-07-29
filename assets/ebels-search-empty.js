@@ -50,7 +50,7 @@
 
     return ''
       + '<div class="ebels-se__card">'
-      +   '<button type="button" class="ebels-se__wishlist" data-search-empty-wishlist aria-label="Add to wishlist" aria-pressed="false">'
+      +   '<button type="button" class="ebels-se__wishlist" data-search-empty-wishlist data-wishlist-btn data-product-handle="' + product.handle + '" aria-label="Add to wishlist" aria-pressed="false">'
       +     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>'
       +   '</button>'
       +   '<a href="' + product.url + '" class="ebels-se__media-link">'
@@ -73,7 +73,7 @@
         btn.setAttribute('aria-pressed', String(!pressed));
         document.dispatchEvent(new CustomEvent('ebels:wishlist-toggle', {
           bubbles: true,
-          detail: { added: !pressed }
+          detail: { handle: btn.getAttribute('data-product-handle'), added: !pressed }
         }));
       });
     });

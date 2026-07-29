@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hub": { "type": "ebels-policies-hub" },
+    "newsletter": { "type": "ebels-newsletter" }
+  },
+  "order": ["hub", "newsletter"]
+}

@@ -1,0 +1,40 @@
+{{ 'ebels-wishlist.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-wl page-width" data-wishlist-page>
+  {%- render 'ebels-breadcrumb', override_current: 'My Wishlist' -%}
+
+  <div class="ebels-wl__header" data-reveal>
+    <h1 class="ebels-wl__title">
+      My Wishlist
+      <span class="ebels-wl__count-badge"><span data-wishlist-page-count>0</span> items</span>
+    </h1>
+    <button type="button" class="ebels-btn ebels-btn--outline ebels-wl__share" data-wishlist-share>
+      Share Wishlist
+    </button>
+  </div>
+
+  <h2 class="ebels-wl__section-title" data-reveal>Your favorite items</h2>
+
+  <div class="ebels-wl__grid" data-wishlist-grid></div>
+
+  <div class="ebels-wl__empty" data-wishlist-empty hidden>
+    <p>Your wishlist is empty.</p>
+    <a href="{{ routes.all_products_collection_url }}" class="ebels-btn ebels-btn--secondary">
+      Start Browsing
+    </a>
+  </div>
+</div>
+
+<script src="{{ 'ebels-wishlist.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Wishlist",
+  "settings": [
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 60, "step": 4, "unit": "px", "label": "Padding top", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 60, "step": 4, "unit": "px", "label": "Padding bottom", "default": 48 }
+  ],
+  "presets": [{ "name": "Ebels Wishlist" }]
+}
+{% endschema %}
