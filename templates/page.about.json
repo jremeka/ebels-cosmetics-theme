@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "hero": { "type": "ebels-about-hero" },
+    "intro": { "type": "ebels-about-intro" },
+    "values": { "type": "ebels-about-values" },
+    "stats": { "type": "ebels-about-stats" },
+    "promise": { "type": "ebels-about-promise" },
+    "cta": { "type": "ebels-about-cta" },
+    "promo": { "type": "ebels-promo-banner" },
+    "newsletter": { "type": "ebels-newsletter" }
+  },
+  "order": ["hero", "intro", "values", "stats", "promise", "cta", "promo", "newsletter"]
+}

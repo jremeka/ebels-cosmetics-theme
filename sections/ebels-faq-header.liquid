@@ -1,0 +1,66 @@
+{{ 'ebels-faq-header.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-faq-header page-width">
+  {%- render 'ebels-breadcrumb', override_current: 'FAQ' -%}
+
+  <div class="ebels-faq-header__content" data-reveal>
+    <h1 class="ebels-faq-header__title">{{ section.settings.title }}</h1>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="ebels-faq-header__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    <div class="ebels-faq-header__search">
+      <input type="search" placeholder="Search our help centre..." data-faq-search aria-label="Search FAQs">
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="ebels-faq-header__pills">
+        <button type="button" class="ebels-faq-header__pill is-active" data-faq-pill="all">All</button>
+        {%- for block in section.blocks -%}
+          <button type="button" class="ebels-faq-header__pill" data-faq-pill="{{ block.settings.category | escape }}" {{ block.shopify_attributes }}>
+            {{ block.settings.category }}
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ebels FAQ Header",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Frequently Asked Questions" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Everything you need to know about shopping with EBELS" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 60, "step": 4, "unit": "px", "label": "Padding bottom", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category pill",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category name",
+          "info": "Must exactly match a category name used in the FAQ Accordion section below",
+          "default": "Shipping"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ebels FAQ Header",
+      "blocks": [
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" }
+      ]
+    }
+  ]
+}
+{% endschema %}

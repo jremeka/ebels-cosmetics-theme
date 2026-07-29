@@ -1,0 +1,21 @@
+.ebels-contact-faq-banner__bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4, 16px);
+  border: 1px solid var(--border-default, #F1B8B0);
+  border-radius: var(--radius-full, 999px);
+  padding: var(--space-4, 16px) var(--space-6, 28px);
+  transition: border-color 0.3s ease;
+}
+
+.ebels-contact-faq-banner__bar:hover {
+  border-color: var(--border-brand, #EA5B1D);
+}
+
+.ebels-contact-faq-banner__text {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h6-size, 18px);
+  color: var(--text-primary, #221B16);
+}

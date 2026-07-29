@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "header": { "type": "ebels-faq-header" },
+    "accordion": { "type": "ebels-faq-accordion" },
+    "cta": { "type": "ebels-faq-cta" },
+    "newsletter": { "type": "ebels-newsletter" }
+  },
+  "order": ["header", "accordion", "cta", "newsletter"]
+}

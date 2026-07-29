@@ -1,0 +1,69 @@
+{{ 'ebels-about-promise.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-about-promise page-width" data-reveal>
+  <div class="ebels-about-promise__content">
+    <h2 class="ebels-about-promise__title">{{ section.settings.title }}</h2>
+    <div class="ebels-about-promise__body">{{ section.settings.body }}</div>
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="ebels-about-promise__list">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            <span class="ebels-about-promise__check" aria-hidden="true">&#10003;</span>
+            {{ block.settings.text }}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+
+  <div class="ebels-about-promise__media">
+    {%- if section.settings.image -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 900 }}"
+        alt="{{ section.settings.image.alt | escape }}"
+        loading="lazy"
+        width="900"
+        height="{{ 900 | divided_by: section.settings.image.aspect_ratio }}"
+      >
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ebels About Promise",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Our Promise" },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text",
+      "default": "<p>At EBELS, we stand by every product we curate. We guarantee quality, ethical sourcing, and sustainable packaging.</p>"
+    },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Checklist item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Quality Guarantee" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ebels About Promise",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

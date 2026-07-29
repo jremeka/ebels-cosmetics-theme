@@ -1,0 +1,310 @@
+.ebels-contact-info {
+  padding-top: var(--space-8, 32px);
+  padding-bottom: var(--space-12, 60px);
+}
+
+.ebels-contact-info__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4, 16px);
+  margin-bottom: var(--space-12, 48px);
+}
+
+.ebels-contact-info__card {
+  border: 1px solid var(--border-default, #F1B8B0);
+  border-radius: var(--radius-xl, 16px);
+  padding: var(--space-5, 24px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.ebels-contact-info__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(34, 27, 22, 0.1);
+  border-color: var(--border-brand, #EA5B1D);
+}
+
+.ebels-contact-info__card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-brand, #EA5B1D);
+  color: var(--brand-primary, #EA5B1D);
+  margin-bottom: var(--space-3, 14px);
+}
+
+.ebels-contact-info__card-title {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h6-size, 18px);
+  color: var(--text-primary, #221B16);
+  margin: 0 0 var(--space-1, 4px);
+}
+
+.ebels-contact-info__card-link {
+  display: block;
+  color: var(--text-brand, #EA5B1D);
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size, 14px);
+  text-decoration: none;
+}
+
+.ebels-contact-info__card-detail {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  color: var(--text-secondary, #8C8279);
+  font-size: var(--text-body-sm-size, 13px);
+  margin: var(--space-1, 4px) 0 0;
+}
+
+.ebels-contact-info__card-button {
+  margin-top: var(--space-3, 12px);
+  padding-top: var(--space-2, 8px);
+  padding-bottom: var(--space-2, 8px);
+}
+
+.ebels-contact-info__main {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-12, 48px);
+  align-items: start;
+}
+
+.ebels-contact-info__form-title {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h3-size, 30px);
+  color: var(--text-primary, #221B16);
+  margin: 0 0 var(--space-2, 8px);
+}
+
+.ebels-contact-info__form-subtitle {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  color: var(--text-secondary, #8C8279);
+  font-size: var(--text-body-sm-size, 14px);
+  margin: 0 0 var(--space-6, 24px);
+}
+
+.ebels-contact-info__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4, 16px);
+}
+
+.ebels-contact-info__field {
+  margin-bottom: var(--space-4, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1, 6px);
+}
+
+.ebels-contact-info__field label {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-caption-size, 12px);
+  font-weight: 600;
+  color: var(--text-primary, #221B16);
+}
+
+.ebels-contact-info__field input,
+.ebels-contact-info__field select,
+.ebels-contact-info__field textarea {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-body-sm-size, 14px);
+  color: var(--text-primary, #221B16);
+  border: 1px solid var(--border-default, #F1B8B0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-3, 12px) var(--space-4, 14px);
+  background: var(--bg-primary, #fff);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ebels-contact-info__field textarea {
+  resize: vertical;
+}
+
+.ebels-contact-info__field input:focus,
+.ebels-contact-info__field select:focus,
+.ebels-contact-info__field textarea:focus {
+  outline: none;
+  border-color: var(--border-brand, #EA5B1D);
+  box-shadow: 0 0 0 3px rgba(234, 91, 29, 0.1);
+}
+
+.ebels-contact-info__submit {
+  width: 100%;
+  padding: var(--space-4, 16px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ebels-contact-info__success {
+  background: var(--bg-secondary, #FFFBF7);
+  color: var(--text-primary, #221B16);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-3, 12px) var(--space-4, 16px);
+  margin-bottom: var(--space-4, 16px);
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-body-sm-size, 14px);
+}
+
+.ebels-contact-info__errors {
+  color: var(--status-error, #DC2626);
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-body-sm-size, 14px);
+  margin-bottom: var(--space-4, 16px);
+}
+
+.ebels-contact-info__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6, 24px);
+}
+
+.ebels-contact-info__address-card {
+  border: 1px solid var(--border-default, #F1B8B0);
+  border-radius: var(--radius-xl, 16px);
+  padding: var(--space-5, 20px);
+}
+
+.ebels-contact-info__address-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  margin-bottom: var(--space-3, 14px);
+}
+
+.ebels-contact-info__address-label {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-caption-size, 12px);
+  font-weight: 600;
+  color: var(--text-secondary, #8C8279);
+  flex: 1;
+}
+
+.ebels-contact-info__address-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.ebels-contact-info__address-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border-default, #F1B8B0);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ebels-contact-info__address-dot.is-active {
+  background: var(--brand-primary, #EA5B1D);
+  transform: scale(1.2);
+}
+
+.ebels-contact-info__address-arrow {
+  background: none;
+  border: 1px solid var(--border-default, #F1B8B0);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-primary, #221B16);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.ebels-contact-info__address-arrow:hover {
+  border-color: var(--border-brand, #EA5B1D);
+  color: var(--brand-primary, #EA5B1D);
+}
+
+.ebels-contact-info__address-country {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h5-size, 20px);
+  color: var(--text-primary, #221B16);
+  margin: 0 0 var(--space-2, 8px);
+}
+
+.ebels-contact-info__address-line {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  color: var(--text-secondary, #8C8279);
+  font-size: var(--text-body-sm-size, 13px);
+  margin: 0 0 var(--space-4, 16px);
+}
+
+.ebels-contact-info__address-map {
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius-md, 8px);
+  object-fit: cover;
+  display: block;
+}
+
+.ebels-contact-info__address-map--placeholder {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--bg-secondary, #FFFBF7),
+    var(--bg-secondary, #FFFBF7) 10px,
+    var(--bg-primary, #fff) 10px,
+    var(--bg-primary, #fff) 20px
+  );
+}
+
+/* ----- Crossfade instead of hard show/hide ----- */
+.ebels-contact-info__address-viewport {
+  position: relative;
+}
+
+.ebels-contact-info__address-slide {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.ebels-contact-info__address-slide.is-active {
+  display: block;
+  opacity: 1;
+}
+
+.ebels-contact-info__hours {
+  border: 1px solid var(--border-default, #F1B8B0);
+  border-radius: var(--radius-xl, 16px);
+  padding: var(--space-5, 20px);
+}
+
+.ebels-contact-info__hours-title {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h6-size, 18px);
+  color: var(--text-primary, #221B16);
+  margin: 0 0 var(--space-3, 14px);
+}
+
+.ebels-contact-info__hours-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-body-sm-size, 14px);
+  color: var(--text-secondary, #8C8279);
+  padding: var(--space-2, 8px) 0;
+  border-top: 1px solid var(--border-default, #F1B8B0);
+}
+
+.ebels-contact-info__hours-row:first-child {
+  border-top: none;
+}
+
+@media screen and (max-width: 989px) {
+  .ebels-contact-info__cards,
+  .ebels-contact-info__main {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .ebels-contact-info__row {
+    grid-template-columns: 1fr;
+  }
+}

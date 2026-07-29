@@ -40,21 +40,14 @@
                 <p class="ebels-sr__desc">{{ item.description | strip_html | truncatewords: 14 }}</p>
                 <p class="ebels-sr__price">{{ sr_variant.price | money }}</p>
 
-                <div class="ebels-sr__bottom-row">
-                  {%- if shade_option_index > -1 -%}
-                    {%- assign shade_option = item.options_with_values[shade_option_index] -%}
-                    <div class="ebels-sr__swatches">
-                      {%- for value in shade_option.values limit: 4 -%}
-                        <span class="ebels-sr__swatch" style="--swatch-color: {{ value.swatch.color | default: '#8C8279' }};" title="{{ value }}"></span>
-                      {%- endfor -%}
-                    </div>
-                  {%- else -%}
-                    <span></span>
-                  {%- endif -%}
-                  <a href="{{ item.url }}" class="ebels-sr__arrow" aria-label="View {{ item.title | escape }}">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                  </a>
-                </div>
+                {%- if shade_option_index > -1 -%}
+                  {%- assign shade_option = item.options_with_values[shade_option_index] -%}
+                  <div class="ebels-sr__swatches">
+                    {%- for value in shade_option.values limit: 4 -%}
+                      <span class="ebels-sr__swatch" style="--swatch-color: {{ value.swatch.color | default: '#8C8279' }};" title="{{ value }}"></span>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
 
                 <button
                   type="button"

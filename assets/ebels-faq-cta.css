@@ -1,0 +1,43 @@
+.ebels-faq-cta {
+  max-width: 820px;
+}
+
+.ebels-faq-cta__card {
+  text-align: center;
+  border: 1px solid var(--border-default, #F1B8B0);
+  border-radius: var(--radius-2xl, 24px);
+  padding: var(--space-10, 40px) var(--space-6, 28px);
+  transition: border-color 0.3s ease;
+}
+
+.ebels-faq-cta__card:hover {
+  border-color: var(--border-brand, #EA5B1D);
+}
+
+.ebels-faq-cta__title {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h2-size, 36px);
+  color: var(--text-primary, #221B16);
+  margin: 0 0 var(--space-2, 8px);
+}
+
+.ebels-faq-cta__subtitle {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  color: var(--text-secondary, #8C8279);
+  margin: 0 0 var(--space-6, 24px);
+}
+
+.ebels-faq-cta__buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3, 12px);
+  flex-wrap: wrap;
+}
+
+.ebels-faq-cta__hours {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-caption-size, 12px);
+  color: var(--text-secondary, #8C8279);
+  margin: var(--space-5, 18px) 0 0;
+}

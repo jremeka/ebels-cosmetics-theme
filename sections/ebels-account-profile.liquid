@@ -235,7 +235,7 @@
     </div>
   </div>
 
-  <a href="{{ routes.account_logout_url }}" class="ebels-acc-prof__logout">Log Out</a>
+  <a href="{{ routes.account_logout_url }}?return_url={{ shop.url | append: '/pages/my-account' | url_encode }}" class="ebels-acc-prof__logout">Log Out</a>
 </div>
 {%- endif -%}
 

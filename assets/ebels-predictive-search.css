@@ -1,13 +1,15 @@
 /* ==========================================================================
-   EBELS PREDICTIVE SEARCH
-   Restyles Dawn's existing predictive search modal + dropdown (from
-   snippets/header-search.liquid and snippets/predictive-search-results.liquid)
-   to match the Ebels brand. Pure CSS override — the underlying JS/logic
-   (debounced fetch, keyboard nav) is untouched, since it already works.
+   EBELS PREDICTIVE SEARCH — v2 (Quick Search redesign)
+   Restyles + restructures Dawn's predictive search modal + dropdown from:
+     - snippets/header-search.liquid
+     - snippets/predictive-search-results.liquid  (2 small Liquid additions:
+       "See all results" link at top, "Trending Searches" pills at bottom —
+       see chat notes for the exact insertions. Everything else here is
+       pure CSS on top of Dawn's existing, unmodified markup/JS.)
    Loaded once globally from layout/theme.liquid.
    ========================================================================== */
 
-/* ----- Modal shell (the full search overlay triggered by the header icon) ----- */
+/* ----- Modal shell ----- */
 .search-modal .modal-overlay {
   background: rgba(34, 27, 22, 0.5);
 }
@@ -17,16 +19,15 @@
   border-radius: var(--radius-lg);
   border: none;
   box-shadow: 0 20px 60px rgba(34, 27, 22, 0.2);
-  max-width: 640px;
+  max-width: 720px;
   padding: var(--space-6);
 }
 
-/* ----- The search input itself ----- */
 .search-modal__form .search__input {
   font-family: var(--font-body);
   font-size: var(--text-body-lg-size, 18px);
   color: var(--text-primary);
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--border-brand);
   border-radius: var(--radius-full);
   background: var(--bg-primary);
 }
@@ -38,7 +39,7 @@
 
 .search-modal__form .search__button,
 .search-modal__form .reset__button {
-  color: var(--text-secondary);
+  color: var(--brand-primary);
 }
 
 .search-modal__close-button {
@@ -51,36 +52,125 @@
 
 /* ----- Predictive dropdown container ----- */
 .predictive-search {
-  border: none;
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
   box-shadow: 0 16px 40px rgba(34, 27, 22, 0.14);
   margin-top: var(--space-3);
   background: var(--bg-primary);
   font-family: var(--font-body);
+  padding: 0;
+}
+
+/* CSS `order` lets us re-sequence Dawn's DOM without touching the JS.
+   Render order in the DOM is: see-all link, results-groups-wrapper
+   (Quick Matches + Suggested Products), loading spinner, search-for
+   button, trending searches. We want: see-all, quick matches, suggested
+   products, trending. The old "search-for" button is redundant with the
+   new see-all link, so it's visually hidden rather than reordered. */
+predictive-search .predictive-search {
+  display: flex;
+  flex-direction: column;
+}
+
+.predictive-search__see-all {
+  order: 1;
+  display: block;
+  padding: var(--space-4) var(--space-5) var(--space-3);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm-size);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.predictive-search__see-all mark {
+  background: none;
+  color: var(--brand-primary);
+}
+
+.predictive-search__see-all:hover {
+  color: var(--brand-primary);
 }
 
 .predictive-search__results-groups-wrapper {
-  border-bottom-color: var(--border-default);
-  padding: var(--space-2) 0 var(--space-4);
+  order: 2;
+  border-bottom: none;
+  padding: var(--space-2) 0 var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-/* ----- Section labels (PRODUCTS / SUGGESTIONS) ----- */
+/* Dawn's old "search for" term button — redundant now with the see-all
+   link at top, hide it rather than delete (keeps JS untouched). */
+.predictive-search__search-for-button {
+  order: 3;
+  display: none !important;
+}
+
+.predictive-search__trending {
+  order: 4;
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  border-top: 1px solid var(--border-default);
+}
+
+/* ----- Section labels: Quick Matches / Suggested Products / Trending ----- */
 .predictive-search__heading {
   font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  font-size: var(--text-body-md-size, 16px);
+  font-weight: 600;
+  font-family: var(--font-heading);
+  letter-spacing: normal;
+  text-transform: none;
   color: var(--text-secondary);
-  border-bottom-color: var(--border-default);
+  border-bottom: none;
   margin: 0 var(--space-5);
   padding: var(--space-4) 0 var(--space-2);
 }
 
-/* ----- Result rows ----- */
-.predictive-search__item {
-  padding: var(--space-3) var(--space-5);
+/* ----- Quick Matches (query suggestions) — plain list, brand-orange match ----- */
+.predictive-search__result-group:first-child .predictive-search__results-list {
+  padding: 0 var(--space-5);
+}
+
+.predictive-search__result-group:first-child .predictive-search__item {
+  padding: var(--space-1) 0;
+  border-radius: 0;
+}
+
+.predictive-search__item-query-result mark {
+  color: var(--brand-primary);
+  background: none;
+  font-weight: 700;
+}
+
+.predictive-search__item-query-result *:not(mark) {
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+/* ----- Suggested Products — 2-column card grid ----- */
+.predictive-search__result-group:last-child .predictive-search__results-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-5) 0;
+}
+
+.predictive-search__result-group:last-child .predictive-search__list-item {
+  list-style: none;
+}
+
+.predictive-search__item--link-with-thumbnail {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  grid-column-gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
+  width: 100%;
 }
 
 .predictive-search__list-item[aria-selected='true'] > *,
@@ -97,18 +187,19 @@
   color: var(--text-brand);
 }
 
-/* ----- Product results (with thumbnail) ----- */
-.predictive-search__item--link-with-thumbnail {
-  grid-template-columns: 56px 1fr;
-  grid-column-gap: var(--space-4);
-  align-items: center;
-}
-
 .predictive-search__image {
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   background: var(--bg-secondary);
   aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+.predictive-search__item-vendor {
+  font-size: var(--text-caption-size, 10px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
 }
 
 .predictive-search__item-heading {
@@ -116,48 +207,45 @@
   font-weight: 600;
   font-size: var(--text-body-sm-size);
   color: var(--text-primary);
-}
-
-.predictive-search__item-vendor {
-  font-size: var(--text-caption-size);
-  color: var(--text-secondary);
-  text-transform: none;
-  letter-spacing: normal;
+  margin-top: var(--space-1);
 }
 
 .predictive-search__item .price {
-  color: var(--text-primary);
-  font-weight: 700;
-  font-size: var(--text-body-sm-size);
-}
-
-/* ----- "Search for '...'" row at the bottom ----- */
-.predictive-search__item--term {
-  border-top: 1px solid var(--border-default);
-  margin-top: var(--space-2);
-  padding: var(--space-4) var(--space-5);
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: var(--text-body-sm-size);
-  color: var(--text-primary);
-}
-
-.predictive-search__item--term:hover {
-  color: var(--text-brand);
-}
-
-.predictive-search__item--term .icon-arrow {
   color: var(--brand-primary);
-  transition: transform 0.2s ease;
-}
-
-.predictive-search__item--term:hover .icon-arrow {
-  transform: translateX(3px);
-}
-
-/* ----- Suggestion / query text ----- */
-.predictive-search__item-query-result mark {
-  color: var(--text-brand);
-  background: none;
   font-weight: 700;
+  font-size: var(--text-body-sm-size);
+  margin-top: var(--space-1);
+}
+
+/* ----- Trending Searches pills ----- */
+.predictive-search__trending-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.predictive-search__trending-pill {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.predictive-search__trending-pill:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+@media screen and (max-width: 749px) {
+  .predictive-search__result-group:last-child .predictive-search__results-list {
+    grid-template-columns: 1fr;
+  }
 }

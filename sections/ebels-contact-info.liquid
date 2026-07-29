@@ -1,0 +1,215 @@
+{{ 'ebels-contact-info.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  EBELS CONTACT INFO
+  Uses Shopify's native {% form 'contact' %} tag — a real, working
+  mechanism (submits to Shopify, arrives as a customer inquiry in
+  Settings > Notifications, or forwards to a connected email/inbox app).
+  No fake stub here, unlike some other deferred features on this project.
+{%- endcomment -%}
+
+<div class="ebels-contact-info page-width">
+  {%- if section.blocks.size > 0 -%}
+    <div class="ebels-contact-info__cards">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'card' -%}
+          <div class="ebels-contact-info__card" data-reveal {{ block.shopify_attributes }}>
+            <span class="ebels-contact-info__card-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+            <h3 class="ebels-contact-info__card-title">{{ block.settings.title }}</h3>
+            {%- if block.settings.link_text != blank -%}
+              <a href="{{ block.settings.link_url }}" class="ebels-contact-info__card-link">
+                {{ block.settings.link_text }}
+              </a>
+            {%- endif -%}
+            {%- if block.settings.detail != blank -%}
+              <p class="ebels-contact-info__card-detail">{{ block.settings.detail }}</p>
+            {%- endif -%}
+            {%- if block.settings.button_text != blank -%}
+              <button type="button" class="ebels-btn ebels-btn--secondary ebels-contact-info__card-button">
+                {{ block.settings.button_text }}
+              </button>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="ebels-contact-info__main" data-reveal>
+    <div class="ebels-contact-info__form-col">
+      <h2 class="ebels-contact-info__form-title">Send Us a Message</h2>
+      <p class="ebels-contact-info__form-subtitle">Fill out the form below and our team will get back to you shortly.</p>
+
+      {%- form 'contact', class: 'ebels-contact-info__form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="ebels-contact-info__success">Thanks — your message has been sent. We'll be in touch shortly.</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="ebels-contact-info__errors">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+
+        <div class="ebels-contact-info__row">
+          <div class="ebels-contact-info__field">
+            <label for="ContactFirstName">First Name</label>
+            <input type="text" id="ContactFirstName" name="contact[first_name]" placeholder="Enter your first name">
+          </div>
+          <div class="ebels-contact-info__field">
+            <label for="ContactLastName">Last Name</label>
+            <input type="text" id="ContactLastName" name="contact[last_name]" placeholder="Enter your last name">
+          </div>
+        </div>
+
+        <div class="ebels-contact-info__field">
+          <label for="ContactEmail">Email Address</label>
+          <input
+            type="email"
+            id="ContactEmail"
+            name="contact[email]"
+            value="{{ form.email }}"
+            placeholder="hello@example.com"
+            required
+          >
+        </div>
+
+        <div class="ebels-contact-info__field">
+          <label for="ContactSubject">Subject</label>
+          <select id="ContactSubject" name="contact[subject]">
+            <option value="">Select a topic</option>
+            {%- assign subjects = section.settings.subjects | split: ',' -%}
+            {%- for subject in subjects -%}
+              <option value="{{ subject | strip }}">{{ subject | strip }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+
+        <div class="ebels-contact-info__field">
+          <label for="ContactMessage">Message</label>
+          <textarea id="ContactMessage" name="contact[body]" rows="5" placeholder="Tell us how we can help..." required></textarea>
+        </div>
+
+        <button type="submit" class="ebels-btn ebels-btn--secondary ebels-contact-info__submit">Send Message</button>
+      {%- endform -%}
+    </div>
+
+    <div class="ebels-contact-info__side">
+      {%- assign address_blocks = section.blocks | where: 'type', 'address' -%}
+      {%- if address_blocks.size > 0 -%}
+        <div class="ebels-contact-info__address-card" data-address-carousel>
+          <div class="ebels-contact-info__address-nav">
+            {%- if address_blocks.size > 1 -%}
+              <button type="button" class="ebels-contact-info__address-arrow" data-address-prev aria-label="Previous location">&lsaquo;</button>
+            {%- endif -%}
+            <span class="ebels-contact-info__address-label">
+              {%- if address_blocks.size > 1 -%}Locations{%- else -%}Main Address{%- endif -%}
+            </span>
+            {%- if address_blocks.size > 1 -%}
+              <div class="ebels-contact-info__address-dots">
+                {%- for block in address_blocks -%}
+                  <span class="ebels-contact-info__address-dot{% if forloop.first %} is-active{% endif %}"></span>
+                {%- endfor -%}
+              </div>
+              <button type="button" class="ebels-contact-info__address-arrow" data-address-next aria-label="Next location">&rsaquo;</button>
+            {%- endif -%}
+          </div>
+
+          <div class="ebels-contact-info__address-viewport">
+            {%- for block in address_blocks -%}
+              <div class="ebels-contact-info__address-slide{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+                <h3 class="ebels-contact-info__address-country">{{ block.settings.country }}</h3>
+                <p class="ebels-contact-info__address-line">{{ block.settings.address }}</p>
+                {%- if block.settings.map_image -%}
+                  <img
+                    class="ebels-contact-info__address-map"
+                    src="{{ block.settings.map_image | image_url: width: 700 }}"
+                    alt="Map of {{ block.settings.country | escape }}"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <div class="ebels-contact-info__address-map ebels-contact-info__address-map--placeholder" aria-hidden="true"></div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- assign hour_blocks = section.blocks | where: 'type', 'hours' -%}
+      {%- if hour_blocks.size > 0 -%}
+        <div class="ebels-contact-info__hours">
+          <h3 class="ebels-contact-info__hours-title">Business Hours</h3>
+          {%- for block in hour_blocks -%}
+            <div class="ebels-contact-info__hours-row" {{ block.shopify_attributes }}>
+              <span>{{ block.settings.days }}</span>
+              <span>{{ block.settings.hours }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'ebels-contact-info.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Ebels Contact Info",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subjects",
+      "label": "Subject dropdown options",
+      "info": "Comma-separated",
+      "default": "Order Support, Product Question, Returns, Wholesale, Other"
+    },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 60, "step": 4, "unit": "px", "label": "Padding top", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Info card",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji or symbol)", "default": "\u2709" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Email Us" },
+        { "type": "text", "id": "link_text", "label": "Link text (optional)", "default": "hello@ebelscosmetics.com" },
+        { "type": "url", "id": "link_url", "label": "Link URL" },
+        { "type": "text", "id": "detail", "label": "Detail text", "default": "We respond within 24 hours" },
+        { "type": "text", "id": "button_text", "label": "Button text (optional)" }
+      ]
+    },
+    {
+      "type": "address",
+      "name": "Location",
+      "settings": [
+        { "type": "text", "id": "country", "label": "Country / region label", "default": "United States" },
+        { "type": "textarea", "id": "address", "label": "Address", "default": "123 Main Street, Suite 100, New York, NY 10001" },
+        { "type": "image_picker", "id": "map_image", "label": "Map image (optional)" }
+      ]
+    },
+    {
+      "type": "hours",
+      "name": "Hours row",
+      "settings": [
+        { "type": "text", "id": "days", "label": "Day(s)", "default": "Mon-Fri" },
+        { "type": "text", "id": "hours", "label": "Hours", "default": "9:00 AM - 6:00 PM" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ebels Contact Info",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "address" },
+        { "type": "hours" },
+        { "type": "hours" },
+        { "type": "hours" }
+      ]
+    }
+  ]
+}
+{% endschema %}

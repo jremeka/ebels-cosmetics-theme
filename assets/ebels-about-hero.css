@@ -1,0 +1,42 @@
+.ebels-about-hero__banner {
+  position: relative;
+  border-radius: var(--radius-2xl, 24px);
+  overflow: hidden;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: var(--space-4, 16px);
+  background-image: var(--ebels-hero-bg, var(--brand-gradient, linear-gradient(135deg, #EA5B1D, #F7B733)));
+  background-size: cover;
+  background-position: center;
+}
+
+.ebels-about-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 14, 10, 0.15) 0%, rgba(20, 14, 10, 0.55) 100%);
+}
+
+.ebels-about-hero__content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  padding: var(--space-6, 24px);
+  max-width: 640px;
+}
+
+.ebels-about-hero__title {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 5vw, var(--text-display-size, 56px));
+  margin: 0 0 var(--space-2, 8px);
+}
+
+.ebels-about-hero__subtitle {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: var(--text-body-lg-size, 18px);
+  opacity: 0.92;
+  margin: 0;
+}

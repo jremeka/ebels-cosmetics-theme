@@ -1,0 +1,24 @@
+.ebels-about-cta {
+  text-align: center;
+  padding-top: var(--space-12, 60px);
+  padding-bottom: var(--space-12, 60px);
+}
+
+.ebels-about-cta__title {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h1-size, 48px);
+  color: var(--text-primary, #221B16);
+  margin: 0 0 var(--space-6, 24px);
+}
+
+.ebels-about-cta__button {
+  padding: var(--space-4, 16px) var(--space-10, 40px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease, transform 0.1s ease, box-shadow 0.3s ease;
+}
+
+.ebels-about-cta__button:hover {
+  box-shadow: 0 10px 28px rgba(234, 91, 29, 0.28);
+}

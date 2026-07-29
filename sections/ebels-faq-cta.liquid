@@ -1,0 +1,42 @@
+{{ 'ebels-faq-cta.css' | asset_url | stylesheet_tag }}
+
+<div class="ebels-faq-cta page-width" data-reveal>
+  <div class="ebels-faq-cta__card">
+    <h2 class="ebels-faq-cta__title">{{ section.settings.title }}</h2>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="ebels-faq-cta__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    <div class="ebels-faq-cta__buttons">
+      {%- if section.settings.primary_label != blank -%}
+        <a href="{{ section.settings.primary_link }}" class="ebels-btn ebels-btn--secondary">{{ section.settings.primary_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.secondary_label != blank -%}
+        <a href="{{ section.settings.secondary_link }}" class="ebels-btn ebels-btn--outline">{{ section.settings.secondary_label }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.hours_text != blank -%}
+      <p class="ebels-faq-cta__hours">{{ section.settings.hours_text }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ebels FAQ CTA",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Still have questions?" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Our beauty experts are here to help" },
+    { "type": "text", "id": "primary_label", "label": "Primary button label", "default": "Contact Us" },
+    { "type": "url", "id": "primary_link", "label": "Primary button link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button label", "default": "Live Chat" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary button link" },
+    { "type": "text", "id": "hours_text", "label": "Hours text", "default": "Mon-Fri 9am-6pm, Sat 10am-4pm" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 60, "step": 4, "unit": "px", "label": "Padding top", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 60, "step": 4, "unit": "px", "label": "Padding bottom", "default": 40 }
+  ],
+  "presets": [{ "name": "Ebels FAQ CTA" }]
+}
+{% endschema %}

@@ -1,6 +1,9 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
 <div id="predictive-search-results" role="listbox">
   {%- if predictive_search.performed -%}
+    <a href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}" class="predictive-search__see-all">
+      See all results for "<mark>{{ predictive_search.terms }}</mark>"
+    </a>
     {% assign first_column_results_size = predictive_search.resources.queries.size
       | plus: predictive_search.resources.collections.size
       | plus: predictive_search.resources.pages.size
@@ -18,7 +21,7 @@
     {%- if predictive_search.resources.queries.size > 0 or predictive_search.resources.collections.size > 0 -%}
       <div>
         <h2 id="predictive-search-queries" class="predictive-search__heading text-body caption-with-letter-spacing">
-          {{- 'templates.search.suggestions' | t -}}
+         Quick Matches
         </h2>
         <ul
           id="predictive-search-results-queries-list"
@@ -121,7 +124,7 @@
               id="predictive-search-products"
               class="predictive-search__heading text-body caption-with-letter-spacing"
             >
-              {{- 'templates.search.products' | t -}}
+              Suggested Products
             </h2>
             <ul
               id="predictive-search-results-products-list"
@@ -264,5 +267,19 @@
         endif
       %}
     </span>
+
+    {%- assign trending_terms = settings.predictive_search_trending_terms | split: ',' -%}
+    {%- if trending_terms.size > 0 -%}
+      <div class="predictive-search__trending">
+        <h2 class="predictive-search__heading">Trending Searches</h2>
+        <div class="predictive-search__trending-pills">
+          {%- for term in trending_terms -%}
+            <a href="{{ routes.search_url }}?q={{ term | strip | url_encode }}" class="predictive-search__trending-pill">
+              {{ term | strip }}
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
   {%- endif -%}
 </div>

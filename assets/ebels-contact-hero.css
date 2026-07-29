@@ -1,0 +1,20 @@
+.ebels-contact-hero__content {
+  text-align: center;
+  max-width: 640px;
+  margin: var(--space-6, 32px) auto 0;
+}
+
+.ebels-contact-hero__title {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h1-size, 48px);
+  color: var(--text-primary, #221B16);
+  margin: 0 0 var(--space-3, 12px);
+}
+
+.ebels-contact-hero__subtitle {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  color: var(--text-secondary, #8C8279);
+  font-size: var(--text-body-lg-size, 17px);
+  margin: 0;
+}

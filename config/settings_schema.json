@@ -1,5 +1,17 @@
 [
   {
+  "name": "Predictive Search",
+  "settings": [
+    {
+      "type": "text",
+      "id": "predictive_search_trending_terms",
+      "label": "Trending search terms",
+      "info": "Comma-separated. Shown as pills in the search dropdown.",
+      "default": "Perfumes, Foundation, Mascara, Serum"
+    }
+  ]
+},
+  {
     "name": "theme_info",
     "theme_name": "Dawn",
     "theme_version": "15.5.0",

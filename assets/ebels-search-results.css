@@ -86,17 +86,10 @@
   margin: var(--space-1) 0 var(--space-2);
 }
 
-.ebels-sr__bottom-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-3);
-  min-height: 20px;
-}
-
 .ebels-sr__swatches {
   display: flex;
   gap: 6px;
+  margin-bottom: var(--space-3);
 }
 
 .ebels-sr__swatch {
@@ -107,26 +100,10 @@
   box-shadow: 0 0 0 1px rgba(34, 27, 22, 0.12);
 }
 
-.ebels-sr__arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: var(--radius-full);
-  background: var(--bg-secondary);
-  color: var(--ebels-ink);
-}
-
-.ebels-sr__arrow:hover {
-  background: var(--ebels-ink);
-  color: #FFFFFF;
-}
-
 .ebels-sr__add-to-bag {
   width: 100%;
   background: var(--ebels-ink);
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   font-size: var(--text-caption-size);
   padding-top: var(--space-2);
@@ -173,7 +150,7 @@
 .ebels-sr__page-number.is-current {
   background: var(--ebels-ink);
   border-color: var(--ebels-ink);
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 700;
 }
 
