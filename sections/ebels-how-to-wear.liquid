@@ -1,38 +1,68 @@
 {{ 'ebels-how-to-wear.css' | asset_url | stylesheet_tag }}
 
-<div class="ebels-htw page-width">
-  <div class="ebels-htw__header" data-reveal>
-    {%- if section.settings.heading != blank -%}
-      <h2 class="ebels-h2 ebels-htw__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-    {%- if section.settings.subheading != blank -%}
-      <p class="ebels-body ebels-htw__subheading">{{ section.settings.subheading }}</p>
-    {%- endif -%}
-  </div>
+{%- comment -%}
+  EBELS HOW TO WEAR
+  Steps now pull from a real per-product metafield instead of being
+  hardcoded the same on every product. Metafield: custom.how_to_wear_steps
+  (multi-line text). Format, one step per line:
+    Step Title :: Step description text
+  Example:
+    Prep & Prime :: Exfoliate gently with a sugar scrub and apply a light lip balm.
+  See the schema audit doc for exact metafield setup instructions.
+  Section hides entirely if the product has no value for this metafield —
+  correct behavior for product types (perfume, bags) that don't need a
+  "how to wear" guide at all.
+{%- endcomment -%}
 
-  {%- if section.blocks.size > 0 -%}
+{%- assign htw_raw = product.metafields.custom.how_to_wear_steps.value -%}
+
+{%- if htw_raw != blank -%}
+  <div class="ebels-htw page-width">
+    <div class="ebels-htw__header" data-reveal>
+      {%- if section.settings.heading != blank -%}
+        <h2 class="ebels-h2 ebels-htw__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="ebels-body ebels-htw__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- liquid
+      assign htw_lines = htw_raw | newline_to_br | split: '<br />'
+      assign step_index = 0
+    -%}
+
     <div class="ebels-htw__grid">
-      {%- for block in section.blocks -%}
-        <div class="ebels-htw__step" data-reveal {{ block.shopify_attributes }}>
-          <div class="ebels-htw__image">
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'ebels-htw__img', widths: '400, 600, 800' }}
-            {%- else -%}
-              {{ 'lifestyle-1' | placeholder_svg_tag: 'ebels-htw__img' }}
+      {%- for line in htw_lines -%}
+        {%- assign trimmed_line = line | strip -%}
+        {%- if trimmed_line != blank -%}
+          {%- assign step_index = step_index | plus: 1 -%}
+          {%- assign parts = trimmed_line | split: '::' -%}
+          {%- assign step_title = parts[0] | strip -%}
+          {%- assign step_description = parts[1] | strip -%}
+          {%- assign step_image = section.blocks[forloop.index0].settings.image -%}
+
+          <div class="ebels-htw__step" data-reveal>
+            <div class="ebels-htw__image">
+              {%- if step_image != blank -%}
+                {{ step_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'ebels-htw__img', widths: '400, 600, 800' }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'ebels-htw__img' }}
+              {%- endif -%}
+            </div>
+            <p class="ebels-label ebels-htw__step-label">Step {{ step_index }}</p>
+            {%- if step_title != blank -%}
+              <h3 class="ebels-h5 ebels-htw__step-title">{{ step_title }}</h3>
+            {%- endif -%}
+            {%- if step_description != blank -%}
+              <p class="ebels-body-sm ebels-htw__step-description">{{ step_description }}</p>
             {%- endif -%}
           </div>
-          <p class="ebels-label ebels-htw__step-label">Step {{ forloop.index }}</p>
-          {%- if block.settings.title != blank -%}
-            <h3 class="ebels-h5 ebels-htw__step-title">{{ block.settings.title }}</h3>
-          {%- endif -%}
-          {%- if block.settings.description != blank -%}
-            <p class="ebels-body-sm ebels-htw__step-description">{{ block.settings.description }}</p>
-          {%- endif -%}
-        </div>
+        {%- endif -%}
       {%- endfor -%}
     </div>
-  {%- endif -%}
-</div>
+  </div>
+{%- endif -%}
 
 {% schema %}
 {
@@ -48,29 +78,19 @@
       "type": "text",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Get the perfect pout in 3 simple steps"
+      "default": "Get the perfect look in a few simple steps"
     }
   ],
   "blocks": [
     {
-      "type": "step",
-      "name": "Step",
+      "type": "step_image",
+      "name": "Step image",
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Step image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Step title",
-          "default": "Prep & Prime"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Step description"
+          "label": "Image",
+          "info": "Matched to a step by position — first image block = step 1, etc. Optional; falls back to a placeholder if left blank."
         }
       ]
     }
@@ -79,27 +99,9 @@
     {
       "name": "Ebels How to Wear",
       "blocks": [
-        {
-          "type": "step",
-          "settings": {
-            "title": "Prep & Prime",
-            "description": "Exfoliate gently with a sugar scrub and apply a light lip balm."
-          }
-        },
-        {
-          "type": "step",
-          "settings": {
-            "title": "Line & Define",
-            "description": "Trace the natural contour of your lips with a matching liner."
-          }
-        },
-        {
-          "type": "step",
-          "settings": {
-            "title": "Apply & Blot",
-            "description": "Glide Velvet Rouge across lips. Blot with a tissue for a soft focus effect."
-          }
-        }
+        { "type": "step_image" },
+        { "type": "step_image" },
+        { "type": "step_image" }
       ]
     }
   ]

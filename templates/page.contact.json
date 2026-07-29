@@ -1,10 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": { "type": "ebels-contact-hero" },
-    "info": { "type": "ebels-contact-info" },
-    "social": { "type": "ebels-contact-social" },
-    "faqbanner": { "type": "ebels-contact-faq-banner" },
-    "newsletter": { "type": "ebels-newsletter" }
+    "hero": {
+      "type": "ebels-contact-hero",
+      "settings": {}
+    },
+    "info": {
+      "type": "ebels-contact-info",
+      "settings": {}
+    },
+    "social": {
+      "type": "ebels-contact-social",
+      "settings": {}
+    },
+    "faqbanner": {
+      "type": "ebels-contact-faq-banner",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "ebels-newsletter",
+      "settings": {}
+    }
   },
-  "order": ["hero", "info", "social", "faqbanner", "newsletter"]
+  "order": [
+    "hero",
+    "info",
+    "social",
+    "faqbanner",
+    "newsletter"
+  ]
 }

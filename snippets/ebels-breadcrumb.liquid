@@ -34,6 +34,8 @@
 
     {%- when 'collection' -%}
       <span class="ebels-crumb__sep">/</span>
+      <a href="{{ routes.collections_url }}" class="ebels-crumb__link">All Collections</a>
+      <span class="ebels-crumb__sep">/</span>
       <span class="ebels-crumb__current">{{ override_current | default: collection.title }}</span>
 
     {%- when 'list-collections' -%}

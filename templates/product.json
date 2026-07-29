@@ -1,130 +1,141 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
-  "type": "ebels-product-main",
-  "settings": {}
-},
-"ebels_tabs": {
-  "type": "ebels-product-tabs",
-  "blocks": {
-    "description": {
-      "type": "tab",
+      "type": "ebels-product-main",
       "settings": {
-        "label": "Description",
-        "heading": "A Masterpiece in Matte",
-        "body": "<p>Velvet Rouge is the culmination of three years of laboratory testing...</p>",
-        "checklist_items": "12-hour long wear formula\nVelvet matte finish — no drying, no flaking\nEnriched with Vitamin E & Shea Butter\nDermatologist tested, cruelty-free\nNet weight: 3.5g"
+        "short_description": "",
+        "delivery_line_1": "Free delivery on orders over £50",
+        "delivery_line_2": "Order within 2h for next-day delivery"
       }
     },
-    "ingredients": {
-      "type": "tab",
-      "settings": { "label": "Ingredients" }
+    "ebels_tabs": {
+      "type": "ebels-product-tabs",
+      "blocks": {
+        "description": {
+          "type": "tab",
+          "settings": {
+            "label": "Description",
+            "use_product_description": true
+          }
+        }
+      },
+      "block_order": [
+        "description"
+      ],
+      "settings": {}
     },
-    "how_to_use": {
-      "type": "tab",
-      "settings": { "label": "How to Use" }
-    },
-    "shipping": {
-      "type": "tab",
-      "settings": { "label": "Shipping & Returns" }
-    }
-  },
-  "block_order": ["description", "ingredients", "how_to_use", "shipping"]
-},
-"ebels_how_to_wear": {
-  "type": "ebels-how-to-wear",
-  "blocks": {
-    "step_1": {
-      "type": "step",
+    "ebels_complete_look": {
+      "type": "ebels-complete-look",
       "settings": {
-        "title": "Prep & Prime",
-        "description": "Exfoliate gently with a sugar scrub and apply a light lip balm."
+        "heading": "Complete the Look",
+        "subheading": "Pair this with these bestsellers"
       }
     },
-    "step_2": {
-      "type": "step",
+    "ebels_reviews": {
+      "type": "ebels-reviews",
+      "blocks": {
+        "review_TKxfDb": {
+          "type": "review",
+          "settings": {
+            "author_name": "Sarah M.",
+            "date_text": "2 days ago",
+            "rating": 5,
+            "title": "Absolutely obsessed!",
+            "body": "",
+            "helpful_count": 0
+          }
+        }
+      },
+      "block_order": [
+        "review_TKxfDb"
+      ],
       "settings": {
-        "title": "Line & Define",
-        "description": "Trace the natural contour of your lips with a matching liner."
+        "average_rating": 4.8,
+        "review_count": 312,
+        "percent_5": 72,
+        "percent_4": 18,
+        "percent_3": 6,
+        "percent_2": 3,
+        "percent_1": 1
       }
     },
-    "step_3": {
-      "type": "step",
+    "ebels_real_looks": {
+      "type": "ebels-real-looks",
+      "blocks": {
+        "post_fq44QB": {
+          "type": "post",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/Gemini_Generated_Image_hdds7phdds7phdds.png",
+            "alt_text": "",
+            "handle": "@lipqueen",
+            "link_url": ""
+          }
+        },
+        "post_mjndfG": {
+          "type": "post",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/fashion-model-in-fur.jpg",
+            "alt_text": "",
+            "handle": "@lipqueen",
+            "link_url": ""
+          }
+        },
+        "post_LeiAqx": {
+          "type": "post",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/face-treatment-with-a-smile.jpg",
+            "alt_text": "",
+            "handle": "@lipqueen",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "post_fq44QB",
+        "post_mjndfG",
+        "post_LeiAqx"
+      ],
       "settings": {
-        "title": "Apply & Blot",
-        "description": "Glide Velvet Rouge across lips. Blot with a tissue for a soft focus effect."
+        "heading": "Real People, Real Looks",
+        "subheading": "See how our community wears this look. Tag us",
+        "hashtag": "#EBELSPureGrace"
       }
-    }
-  },
-  "block_order": ["step_1", "step_2", "step_3"]
-},
-"ebels_complete_look": {
-  "type": "ebels-complete-look",
-  "settings": {
-    "heading": "Complete the Look",
-    "subheading": "Pair Velvet Rouge with these bestsellers"
-  },
-  "blocks": {
-    "product_1": {
-      "type": "product",
-      "settings": { "product": "precision-liner" }
     },
-    "product_2": {
-      "type": "product",
-      "settings": { "product": "suede-no-5" }
+    "ebels_recently_viewed": {
+      "type": "ebels-recently-viewed",
+      "settings": {
+        "heading": "Recently Viewed",
+        "view_all_link": "/collections/all",
+        "products_to_show": 4
+      }
     },
-    "product_3": {
-      "type": "product",
-      "settings": { "product": "silk-clutch" }
-    },
-    "product_4": {
-      "type": "product",
-      "settings": { "product": "luminous-base" }
-    }
-  },
-  "block_order": ["product_1", "product_2", "product_3", "product_4"]
-},
-"ebels_reviews": {
-  "type": "ebels-reviews",
-  "settings": {
-    "average_rating": 4.8,
-    "review_count": 312,
-    "percent_5": 72,
-    "percent_4": 18,
-    "percent_3": 6,
-    "percent_2": 3,
-    "percent_1": 1
-  }
-},
-"ebels_real_looks": {
-  "type": "ebels-real-looks",
-  "settings": {
-    "heading": "Real People, Real Looks",
-    "subheading": "See how our community wears this look. Tag us",
-    "hashtag": "#EBELSvelvetrouge"
-  }
-},
-"ebels_recently_viewed": {
-  "type": "ebels-recently-viewed",
-  "settings": {
-    "heading": "Recently Viewed",
-    "view_all_link": "/collections/all",
-    "products_to_show": 4
-  }
-},
     "disclosures": {
       "type": "disclosures",
       "settings": {
+        "heading": "Disclosures",
+        "heading_size": "h2",
+        "open_by_default": false,
+        "color_scheme": "",
         "padding_top": 36,
         "padding_bottom": 0
       }
-    },
-    
+    }
   },
   "order": [
     "main",
     "ebels_tabs",
-    "ebels_how_to_wear",
     "ebels_complete_look",
     "ebels_reviews",
     "ebels_real_looks",

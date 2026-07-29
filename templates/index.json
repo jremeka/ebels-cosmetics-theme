@@ -1,75 +1,504 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "ebels_hero_ifqdGb": {
+      "type": "ebels-hero",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "slide_XfRW4B": {
+          "type": "slide",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "image": "shopify://shop_images/hero.png",
+            "badge": "Bundles",
+            "heading": "Bundles and Collections",
+            "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
+            "button_label": "Shop collections",
+            "button_link": ""
           }
         },
-        "button": {
-          "type": "buttons",
+        "slide_4HeMnk": {
+          "type": "slide",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "image": "shopify://shop_images/fall-fashion-on-black-brick.jpg",
+            "badge": "New Arrival",
+            "heading": "Summer Glow Collection",
+            "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
+            "button_label": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide_VPxFMz": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/hero_1_87fb98fd-2712-4228-88be-80d5dd133b33.png",
+            "badge": "New Arrival",
+            "heading": "Ebels handy chic",
+            "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
+            "button_label": "Get Carrying",
+            "button_link": "shopify://products/a2046-20-1"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "slide_XfRW4B",
+        "slide_4HeMnk",
+        "slide_VPxFMz"
       ],
+      "name": "Ebels Hero",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "autoplay": true,
+        "autoplay_speed": 5
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "ebels_collection_list_B7KwEf": {
+      "type": "ebels-collection-list",
+      "blocks": {
+        "collection_item_MAMLbN": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "luxe-aura-copy",
+            "custom_title": ""
+          }
+        },
+        "collection_item_9ePnYa": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "trueskin-foundations",
+            "custom_title": ""
+          }
+        },
+        "collection_item_UKAPHC": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "luxe-aura-copy",
+            "custom_title": ""
+          }
+        },
+        "collection_item_JyYcNw": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "perfumes",
+            "custom_title": ""
+          }
+        },
+        "collection_item_8V8G3p": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "truecharm-lipsticks",
+            "custom_title": ""
+          }
+        },
+        "collection_item_F78pTA": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "trueskin-foundations",
+            "custom_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_item_MAMLbN",
+        "collection_item_9ePnYa",
+        "collection_item_UKAPHC",
+        "collection_item_JyYcNw",
+        "collection_item_8V8G3p",
+        "collection_item_F78pTA"
+      ],
+      "name": "Ebels Collection List",
+      "settings": {}
+    },
+    "ebels_best_sellers_WYU4d7": {
+      "type": "ebels-best-sellers",
+      "blocks": {
+        "card_YGW9w9": {
+          "type": "card",
+          "settings": {
+            "product": "pure-grace-perfume",
+            "title": "",
+            "description": "An infinitely crisp, clean fragrance for everyday wear.",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "card_KRGrWi": {
+          "type": "card",
+          "settings": {
+            "product": "sandstone-carryall",
+            "title": "",
+            "description": "A spacious, earthy tote for your daily essentials.",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "card_mHfW9w": {
+          "type": "card",
+          "settings": {
+            "product": "pure-joy-perfume",
+            "title": "",
+            "description": "A radiant, uplifting fragrance bursting with bright florals and sunshine.",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "card_cb4z48": {
+          "type": "card",
+          "settings": {
+            "product": "a2046-20-1",
+            "title": "",
+            "description": "A sleek, rich-green bucket bag crafted for effortless everyday style.",
+            "button_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_YGW9w9",
+        "card_KRGrWi",
+        "card_mHfW9w",
+        "card_cb4z48"
+      ],
+      "name": "Ebels Best Sellers",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "heading": "Ebels best sellers",
+        "subheading": "Browse through our collection of most-loved and top-rated essentials."
+      }
+    },
+    "ebels_category_grid_pPDCyJ": {
+      "type": "ebels-category-grid",
+      "blocks": {
+        "tab_c6Gkzz": {
+          "type": "tab",
+          "settings": {
+            "collection": "luxe-aura-copy",
+            "label": ""
+          }
+        },
+        "tab_yqg3NM": {
+          "type": "tab",
+          "settings": {
+            "collection": "perfumes",
+            "label": ""
+          }
+        },
+        "tab_KFVbg4": {
+          "type": "tab",
+          "settings": {
+            "collection": "truecharm-lipsticks",
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_c6Gkzz",
+        "tab_yqg3NM",
+        "tab_KFVbg4"
+      ],
+      "name": "Ebels Shop by Category",
+      "settings": {
+        "heading": "Shop by Category",
+        "subheading": "Explore our curated collections",
+        "products_limit": 4
+      }
+    },
+    "ebels_ugc_strip_FRWNqP": {
+      "type": "ebels-ugc-strip",
+      "blocks": {
+        "card_93K6UE": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/Ebels Perfumes Marketing Video.mp4",
+            "handle": "",
+            "product": "pure-joy-perfume"
+          }
+        },
+        "card_qDxzUn": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Card_Image_2.png",
+            "handle": "",
+            "product": "pure-grace-perfume"
+          }
+        },
+        "card_y9YEQG": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Card_Image_1.png",
+            "handle": "",
+            "product": "sandstone-carryall"
+          }
+        },
+        "card_Ny69hp": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Card_Image_5.png",
+            "handle": "",
+            "product": "a2046-20-1"
+          }
+        },
+        "card_78ypLH": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Card_Image_3.png",
+            "handle": "",
+            "product": "pure-joy-perfume"
+          }
+        },
+        "card_MjY6QG": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Card_Image_4.png",
+            "handle": "",
+            "product": "pure-grace-perfume"
+          }
+        }
+      },
+      "block_order": [
+        "card_93K6UE",
+        "card_qDxzUn",
+        "card_y9YEQG",
+        "card_Ny69hp",
+        "card_78ypLH",
+        "card_MjY6QG"
+      ],
+      "name": "Ebels UGC Strip",
+      "settings": {
+        "heading": "See it on Ebels Ladies",
+        "subheading": "Real customers, real looks. Tag #EBELSbabes for a chance to be featured."
+      }
+    },
+    "ebels_promo_banner_pfdtMt": {
+      "type": "ebels-promo-banner",
+      "blocks": {
+        "banner_c9nzEH": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_y10sx4y10sx4y10s.png",
+            "badge": "Luminaire",
+            "heading": "Summer Radiance Shine",
+            "text": "Up to 40% off site wide andIn-Store",
+            "button_label": "Purchase today!",
+            "button_link": "",
+            "content_position": "left",
+            "text_theme": "light",
+            "overlay": 0,
+            "button_style": "white",
+            "kenburns": true
+          }
+        }
+      },
+      "block_order": [
+        "banner_c9nzEH"
+      ],
+      "name": "Ebels Promo Banner",
+      "settings": {
+        "height": "standard",
+        "autoplay": true,
+        "autoplay_speed": 7
+      }
+    },
+    "ebels_promo_tiles_NQc4gH": {
+      "type": "ebels-promo-tiles",
+      "blocks": {
+        "tile_9xVWjf": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/shiny-lipstick-in-black-and-white.jpg",
+            "fallback_color": "#f1b8b0",
+            "badge": "",
+            "heading": "Class Lipsticks",
+            "text": "",
+            "button_label": "Shop Now",
+            "link": "shopify://collections/all",
+            "text_theme": "dark",
+            "overlay": 0,
+            "button_style": "ink"
+          }
+        },
+        "tile_AtR6Da": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/face-treatment-with-a-smile.jpg",
+            "fallback_color": "#f1b8b0",
+            "badge": "",
+            "heading": "Face & Foundations",
+            "text": "",
+            "button_label": "Shop Now",
+            "link": "shopify://collections/all",
+            "text_theme": "dark",
+            "overlay": 10,
+            "button_style": "white"
+          }
+        },
+        "tile_edzxPN": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/istockphoto-1832208611-612x612.jpg",
+            "fallback_color": "#f1b8b0",
+            "badge": "",
+            "heading": "Sets & Bundles",
+            "text": "",
+            "button_label": "Shop Now",
+            "link": "shopify://collections/all",
+            "text_theme": "light",
+            "overlay": 40,
+            "button_style": "white"
+          }
+        },
+        "tile_niN4rH": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/model-in-neutral-colors-by-window.jpg",
+            "fallback_color": "#f1b8b0",
+            "badge": "",
+            "heading": "Authentic Hair",
+            "text": "",
+            "button_label": "Shop Hair",
+            "link": "shopify://collections/all",
+            "text_theme": "dark",
+            "overlay": 55,
+            "button_style": "ink"
+          }
+        }
+      },
+      "block_order": [
+        "tile_9xVWjf",
+        "tile_AtR6Da",
+        "tile_edzxPN",
+        "tile_niN4rH"
+      ],
+      "name": "Ebels Promo Tiles",
+      "settings": {}
+    },
+    "ebels_bundles_carousel_3WGcbR": {
+      "type": "ebels-bundles-carousel",
+      "blocks": {
+        "bundle_8ibmmj": {
+          "type": "bundle",
+          "settings": {
+            "product": "pure-grace-perfume",
+            "contents": ""
+          }
+        },
+        "bundle_TCbWpp": {
+          "type": "bundle",
+          "settings": {
+            "product": "pure-joy-perfume",
+            "contents": ""
+          }
+        },
+        "bundle_rddHqB": {
+          "type": "bundle",
+          "settings": {
+            "product": "real-man-perfume-coming-soon",
+            "contents": ""
+          }
+        },
+        "bundle_pPneU3": {
+          "type": "bundle",
+          "settings": {
+            "product": "a2046-20-1",
+            "contents": ""
+          }
+        },
+        "bundle_cwUkYm": {
+          "type": "bundle",
+          "settings": {
+            "product": "sandstone-carryall",
+            "contents": ""
+          }
+        },
+        "bundle_aRGWhC": {
+          "type": "bundle",
+          "settings": {
+            "product": "the-glam-night-out",
+            "contents": ""
+          }
+        },
+        "bundle_JAhp74": {
+          "type": "bundle",
+          "settings": {
+            "product": "",
+            "contents": ""
+          }
+        }
+      },
+      "block_order": [
+        "bundle_8ibmmj",
+        "bundle_TCbWpp",
+        "bundle_rddHqB",
+        "bundle_pPneU3",
+        "bundle_cwUkYm",
+        "bundle_aRGWhC",
+        "bundle_JAhp74"
+      ],
+      "name": "Ebels Bundles Carousel",
+      "settings": {
+        "heading": "Shop Bundles",
+        "subheading": "Save more when you bundle your favourites together."
+      }
+    },
+    "ebels_offers_strip_FxUpPN": {
+      "type": "ebels-offers-strip",
+      "blocks": {
+        "offer_ME7LnP": {
+          "type": "offer",
+          "settings": {
+            "icon": "tag",
+            "title": "Up to 50% off",
+            "text": "On selected sets & bundles — while stocks last",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "offer_nmwzV6": {
+          "type": "offer",
+          "settings": {
+            "icon": "truck",
+            "title": "Free delivery",
+            "text": "On all orders over $50 — no code needed",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "offer_ME7LnP",
+        "offer_nmwzV6"
+      ],
+      "name": "Ebels Offers Strip",
+      "settings": {
+        "background": "#7d1f3d"
+      }
+    },
+    "ebels_newsletter_X6bYwh": {
+      "type": "ebels-newsletter",
+      "name": "Ebels Newsletter",
+      "settings": {
+        "background": "#221b16",
+        "eyebrow": "Join the Inner Circle",
+        "heading": "Be the First to Know",
+        "text": "New drops, exclusive offers, and beauty tips — delivered straight to your inbox.",
+        "button_label": "Subscribe"
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "ebels_hero_ifqdGb",
+    "ebels_collection_list_B7KwEf",
+    "ebels_best_sellers_WYU4d7",
+    "ebels_category_grid_pPDCyJ",
+    "ebels_ugc_strip_FRWNqP",
+    "ebels_promo_banner_pfdtMt",
+    "ebels_promo_tiles_NQc4gH",
+    "ebels_bundles_carousel_3WGcbR",
+    "ebels_offers_strip_FxUpPN",
+    "ebels_newsletter_X6bYwh"
   ]
 }

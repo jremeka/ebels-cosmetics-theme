@@ -23,8 +23,13 @@
 
 .ebels-cg__breadcrumb-wrap {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+.ebels-cg__breadcrumb-wrap .ebels-crumb {
+  margin-bottom: 0;
 }
 
 .ebels-cg__count {

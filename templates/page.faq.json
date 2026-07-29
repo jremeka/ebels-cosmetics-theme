@@ -1,9 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "header": { "type": "ebels-faq-header" },
-    "accordion": { "type": "ebels-faq-accordion" },
-    "cta": { "type": "ebels-faq-cta" },
-    "newsletter": { "type": "ebels-newsletter" }
+    "header": {
+      "type": "ebels-faq-header",
+      "settings": {}
+    },
+    "accordion": {
+      "type": "ebels-faq-accordion",
+      "settings": {}
+    },
+    "cta": {
+      "type": "ebels-faq-cta",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "ebels-newsletter",
+      "settings": {}
+    }
   },
-  "order": ["header", "accordion", "cta", "newsletter"]
+  "order": [
+    "header",
+    "accordion",
+    "cta",
+    "newsletter"
+  ]
 }

@@ -1,5 +1,20 @@
 {{ 'ebels-product-tabs.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%}
+  EBELS PRODUCT TABS
+  Each tab block can pull REAL per-product content two ways instead of
+  showing the same static text on every product:
+  1. use_product_description — pulls product.description directly
+     (Description tab). No setup needed — every product already has this.
+  2. use_metafield + metafield_key — pulls product.metafields.<key>
+     (Ingredients / How to Use / Shipping & Returns tabs). Requires
+     creating the metafield definition once in Admin, then filling it in
+     per product. See the schema audit doc for exact definitions to create.
+  If neither is checked, falls back to the static heading/body typed
+  directly into the block — useful for content that's genuinely the same
+  across every product (rare, but the option stays available).
+{%- endcomment -%}
+
 <div class="ebels-tabs page-width" data-tabs-section>
 
   {%- if section.blocks.size > 0 -%}
@@ -25,6 +40,16 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign checklist_items = block.settings.checklist_items | newline_to_br | split: '<br />'
+
+          assign tab_body = block.settings.body
+          assign tab_heading = block.settings.heading
+
+          if block.settings.use_product_description
+            assign tab_body = product.description
+          elsif block.settings.use_metafield and block.settings.metafield_key != blank
+            assign mf_parts = block.settings.metafield_key | split: '.'
+            assign tab_body = product.metafields[mf_parts[0]][mf_parts[1]].value
+          endif
         -%}
         <div
           class="ebels-tabs__panel{% if forloop.first %} is-active{% endif %}"
@@ -37,11 +62,13 @@
         >
           <div class="ebels-tabs__panel-grid">
             <div class="ebels-tabs__panel-text">
-              {%- if block.settings.heading != blank -%}
-                <h2 class="ebels-h3">{{ block.settings.heading }}</h2>
+              {%- if tab_heading != blank -%}
+                <h2 class="ebels-h3">{{ tab_heading }}</h2>
               {%- endif -%}
-              {%- if block.settings.body != blank -%}
-                <div class="ebels-body ebels-tabs__body">{{ block.settings.body }}</div>
+              {%- if tab_body != blank -%}
+                <div class="ebels-body ebels-tabs__body">{{ tab_body }}</div>
+              {%- else -%}
+                <p class="ebels-body ebels-tabs__empty">No {{ block.settings.label | downcase }} information added for this product yet.</p>
               {%- endif -%}
             </div>
 
@@ -85,20 +112,40 @@
           "default": "Description"
         },
         {
+          "type": "checkbox",
+          "id": "use_product_description",
+          "label": "Use this product's real Description field",
+          "info": "Pulls from the product's own Description in Admin — correct automatically for every product, no extra setup. Recommended for the Description tab.",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "use_metafield",
+          "label": "Use a product metafield instead",
+          "info": "For content that's genuinely per-product but isn't the Description field — e.g. Ingredients, How to Use. Requires creating the metafield definition once in Admin first.",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "metafield_key",
+          "label": "Metafield key",
+          "info": "Format: namespace.key — e.g. custom.ingredients — must exactly match a metafield definition in Admin > Settings > Custom data > Products"
+        },
+        {
           "type": "text",
           "id": "heading",
-          "label": "Heading (optional)"
+          "label": "Heading (optional, used only if neither option above is checked)"
         },
         {
           "type": "richtext",
           "id": "body",
-          "label": "Body text"
+          "label": "Body text (used only if neither option above is checked)"
         },
         {
           "type": "textarea",
           "id": "checklist_items",
           "label": "Checklist items (optional)",
-          "info": "One item per line. Leave blank to hide the checklist column."
+          "info": "One item per line. Same on every product — fine for generic claims, but shows identically everywhere."
         }
       ]
     }
@@ -109,19 +156,15 @@
       "blocks": [
         {
           "type": "tab",
-          "settings": {
-            "label": "Description",
-            "heading": "A Masterpiece in Matte",
-            "checklist_items": "12-hour long wear formula\nVelvet matte finish — no drying, no flaking\nEnriched with Vitamin E & Shea Butter\nDermatologist tested, cruelty-free\nNet weight: 3.5g"
-          }
+          "settings": { "label": "Description", "use_product_description": true }
         },
         {
           "type": "tab",
-          "settings": { "label": "Ingredients" }
+          "settings": { "label": "Ingredients", "use_metafield": true, "metafield_key": "custom.ingredients" }
         },
         {
           "type": "tab",
-          "settings": { "label": "How to Use" }
+          "settings": { "label": "How to Use", "use_metafield": true, "metafield_key": "custom.how_to_use" }
         },
         {
           "type": "tab",

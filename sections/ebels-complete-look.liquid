@@ -1,58 +1,67 @@
 {{ 'ebels-complete-look.css' | asset_url | stylesheet_tag }}
 
-<div class="ebels-ctl page-width" data-complete-look-section>
-  <div class="ebels-ctl__header" data-reveal>
-    {%- if section.settings.heading != blank -%}
-      <h2 class="ebels-h2 ebels-ctl__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-    {%- if section.settings.subheading != blank -%}
-      <p class="ebels-body ebels-ctl__subheading">{{ section.settings.subheading }}</p>
-    {%- endif -%}
-  </div>
+{%- comment -%}
+  EBELS COMPLETE THE LOOK
+  Now pulls from a real per-product metafield instead of a fixed set of
+  4 products hardcoded in the template — every product can have its own
+  hand-picked pairing, chosen right from that product's own edit page.
+  Metafield: custom.complete_the_look (type: List of products).
+  See the schema audit doc for exact metafield setup instructions.
+  Section hides entirely if the product has no pairings set.
+{%- endcomment -%}
 
-  {%- if section.blocks.size > 0 -%}
+{%- assign ctl_products = product.metafields.custom.complete_the_look.value -%}
+
+{%- if ctl_products != blank and ctl_products.size > 0 -%}
+  <div class="ebels-ctl page-width" data-complete-look-section>
+    <div class="ebels-ctl__header" data-reveal>
+      {%- if section.settings.heading != blank -%}
+        <h2 class="ebels-h2 ebels-ctl__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="ebels-body ebels-ctl__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
     <div class="ebels-ctl__grid">
-      {%- for block in section.blocks -%}
-        {%- assign ctl_product = block.settings.product -%}
-        {%- if ctl_product != blank -%}
-          {%- assign ctl_variant = ctl_product.selected_or_first_available_variant -%}
-          <div class="ebels-ctl__card" data-reveal {{ block.shopify_attributes }}>
-            <a href="{{ ctl_product.url }}" class="ebels-ctl__media-link" aria-label="{{ ctl_product.title | escape }}">
-              <div class="ebels-ctl__media">
-                {%- if ctl_product.featured_image != blank -%}
-                  {{ ctl_product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'ebels-ctl__img', widths: '300, 450, 600' }}
-                {%- else -%}
-                  {{ 'product-1' | placeholder_svg_tag: 'ebels-ctl__img' }}
-                {%- endif -%}
-              </div>
-            </a>
-            <div class="ebels-ctl__info">
-              <a href="{{ ctl_product.url }}" class="ebels-ctl__title-link">
-                <h3 class="ebels-ctl__title">{{ ctl_product.title }}</h3>
-              </a>
-              <p class="ebels-ctl__price">{{ ctl_variant.price | money }}</p>
-
-              <div class="ebels-ctl__rating" data-review-placeholder>
-                <span class="ebels-ctl__stars" aria-hidden="true">★★★★★</span>
-                <span class="ebels-caption">4.9 (120 reviews)</span>
-              </div>
-
-              <button
-                type="button"
-                class="ebels-btn ebels-btn--outline ebels-ctl__add-to-bag"
-                data-add-to-bag-ctl
-                data-variant-id="{{ ctl_variant.id }}"
-                {% unless ctl_variant.available %}disabled{% endunless %}
-              >
-                {%- if ctl_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
-              </button>
+      {%- for ctl_product in ctl_products -%}
+        {%- assign ctl_variant = ctl_product.selected_or_first_available_variant -%}
+        <div class="ebels-ctl__card" data-reveal>
+          <a href="{{ ctl_product.url }}" class="ebels-ctl__media-link" aria-label="{{ ctl_product.title | escape }}">
+            <div class="ebels-ctl__media">
+              {%- if ctl_product.featured_image != blank -%}
+                {{ ctl_product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'ebels-ctl__img', widths: '300, 450, 600' }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'ebels-ctl__img' }}
+              {%- endif -%}
             </div>
+          </a>
+          <div class="ebels-ctl__info">
+            <a href="{{ ctl_product.url }}" class="ebels-ctl__title-link">
+              <h3 class="ebels-ctl__title">{{ ctl_product.title }}</h3>
+            </a>
+            <p class="ebels-ctl__price">{{ ctl_variant.price | money }}</p>
+
+            <div class="ebels-ctl__rating" data-review-placeholder>
+              <span class="ebels-ctl__stars" aria-hidden="true">★★★★★</span>
+              <span class="ebels-caption">4.9 (120 reviews)</span>
+            </div>
+
+            <button
+              type="button"
+              class="ebels-btn ebels-btn--outline ebels-ctl__add-to-bag"
+              data-add-to-bag-ctl
+              data-variant-id="{{ ctl_variant.id }}"
+              {% unless ctl_variant.available %}disabled{% endunless %}
+            >
+              {%- if ctl_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+            </button>
           </div>
-        {%- endif -%}
+        </div>
       {%- endfor -%}
     </div>
-  {%- endif -%}
-</div>
+  </div>
+{%- endif -%}
 
 <script src="{{ 'ebels-complete-look.js' | asset_url }}" defer></script>
 
@@ -71,19 +80,6 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "Pair this with these bestsellers"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "product",
-      "name": "Product",
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product"
-        }
-      ]
     }
   ],
   "presets": [

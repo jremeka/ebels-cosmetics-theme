@@ -1,13 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": { "type": "ebels-about-hero" },
-    "intro": { "type": "ebels-about-intro" },
-    "values": { "type": "ebels-about-values" },
-    "stats": { "type": "ebels-about-stats" },
-    "promise": { "type": "ebels-about-promise" },
-    "cta": { "type": "ebels-about-cta" },
-    "promo": { "type": "ebels-promo-banner" },
-    "newsletter": { "type": "ebels-newsletter" }
+    "hero": {
+      "type": "ebels-about-hero",
+      "settings": {}
+    },
+    "intro": {
+      "type": "ebels-about-intro",
+      "settings": {}
+    },
+    "values": {
+      "type": "ebels-about-values",
+      "settings": {}
+    },
+    "stats": {
+      "type": "ebels-about-stats",
+      "settings": {}
+    },
+    "promise": {
+      "type": "ebels-about-promise",
+      "settings": {}
+    },
+    "cta": {
+      "type": "ebels-about-cta",
+      "settings": {}
+    },
+    "promo": {
+      "type": "ebels-promo-banner",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "ebels-newsletter",
+      "settings": {}
+    }
   },
-  "order": ["hero", "intro", "values", "stats", "promise", "cta", "promo", "newsletter"]
+  "order": [
+    "hero",
+    "intro",
+    "values",
+    "stats",
+    "promise",
+    "cta",
+    "promo",
+    "newsletter"
+  ]
 }

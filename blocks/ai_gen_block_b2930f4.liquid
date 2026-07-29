@@ -1,0 +1,477 @@
+{% doc %}
+  @prompt
+    Can we generate the password input for when the website is restricted and dev has to put a password, the form seems to be broken. it just shows a error in what seems to be code
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-password-input-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ai-password-input-container-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    text-align: center;
+  }
+
+  .ai-password-input-logo-{{ ai_gen_id }} {
+    margin-bottom: 24px;
+  }
+
+  .ai-password-input-logo-{{ ai_gen_id }} img {
+    max-width: {{ block.settings.logo_width }}px;
+    height: auto;
+  }
+
+  .ai-password-input-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+
+  .ai-password-input-message-{{ ai_gen_id }} {
+    font-size: {{ block.settings.message_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 32px;
+    opacity: 0.8;
+  }
+
+  .ai-password-input-form-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: {{ block.settings.form_max_width }}px;
+  }
+
+  .ai-password-input-field-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .ai-password-input-field-{{ ai_gen_id }} {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: {{ block.settings.input_border_thickness }}px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    background-color: {{ block.settings.input_background_color }};
+    color: {{ block.settings.input_text_color }};
+  }
+
+  .ai-password-input-field-{{ ai_gen_id }}:focus {
+    outline: 2px solid {{ block.settings.button_color }};
+    outline-offset: 2px;
+  }
+
+  .ai-password-input-field-{{ ai_gen_id }}::placeholder {
+    color: {{ block.settings.input_text_color }};
+    opacity: 0.5;
+  }
+
+  .ai-password-input-button-{{ ai_gen_id }} {
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-password-input-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  .ai-password-input-error-{{ ai_gen_id }} {
+    color: {{ block.settings.error_color }};
+    font-size: 14px;
+    margin-top: 8px;
+    text-align: left;
+  }
+
+  .ai-password-input-footer-{{ ai_gen_id }} {
+    margin-top: 24px;
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+  }
+
+  .ai-password-input-footer-{{ ai_gen_id }} a {
+    color: {{ block.settings.link_color }};
+    text-decoration: underline;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-password-input-container-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding | times: 0.7 }}px;
+    }
+
+    .ai-password-input-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+
+    .ai-password-input-message-{{ ai_gen_id }} {
+      font-size: {{ block.settings.message_size | times: 0.9 }}px;
+    }
+
+    .ai-password-input-field-wrapper-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-password-input-button-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<password-input-{{ ai_gen_id }}
+  class="ai-password-input-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-password-input-container-{{ ai_gen_id }}">
+    {% if block.settings.show_logo and block.settings.logo %}
+      <div class="ai-password-input-logo-{{ ai_gen_id }}">
+        <img
+          src="{{ block.settings.logo | image_url: width: 600 }}"
+          alt="{{ shop.name }}"
+          width="{{ block.settings.logo_width }}"
+          height="auto"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+
+    {% if block.settings.heading != blank %}
+      <h1 class="ai-password-input-heading-{{ ai_gen_id }}">
+        {{ block.settings.heading }}
+      </h1>
+    {% endif %}
+
+    {% if block.settings.message != blank %}
+      <p class="ai-password-input-message-{{ ai_gen_id }}">
+        {{ block.settings.message }}
+      </p>
+    {% endif %}
+
+    <div class="ai-password-input-form-wrapper-{{ ai_gen_id }}">
+      {% form 'storefront_password' %}
+        <div class="ai-password-input-field-wrapper-{{ ai_gen_id }}">
+          <input
+            type="password"
+            name="password"
+            class="ai-password-input-field-{{ ai_gen_id }}"
+            placeholder="{{ block.settings.input_placeholder }}"
+            aria-label="Password"
+            {% if form.errors %}
+              aria-invalid="true"
+              aria-describedby="ai-password-input-error-{{ ai_gen_id }}"
+            {% endif %}
+            required
+            autofocus
+          >
+          <button
+            type="submit"
+            class="ai-password-input-button-{{ ai_gen_id }}"
+          >
+            {{ block.settings.button_text }}
+          </button>
+        </div>
+
+        {% if form.errors %}
+          <div
+            id="ai-password-input-error-{{ ai_gen_id }}"
+            class="ai-password-input-error-{{ ai_gen_id }}"
+          >
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+      {% endform %}
+    </div>
+
+    {% if block.settings.show_footer_text and block.settings.footer_text != blank %}
+      <div class="ai-password-input-footer-{{ ai_gen_id }}">
+        {{ block.settings.footer_text }}
+      </div>
+    {% endif %}
+  </div>
+</password-input-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class PasswordInput{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        const input = this.querySelector('.ai-password-input-field-{{ ai_gen_id }}');
+        
+        if (input) {
+          input.focus();
+        }
+      }
+    }
+
+    customElements.define('password-input-{{ ai_gen_id }}', PasswordInput{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Password input",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Show logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 150
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Enter store using password"
+    },
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "Message",
+      "default": "Our store is currently password protected. Please enter the password to continue."
+    },
+    {
+      "type": "text",
+      "id": "input_placeholder",
+      "label": "Input placeholder",
+      "default": "Enter password"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Enter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_footer_text",
+      "label": "Show footer text",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "<p>Store owner? <a href=\"/admin\">Log in here</a></p>"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "form_max_width",
+      "min": 300,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "label": "Form max width",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "error_color",
+      "label": "Error",
+      "default": "#D82C0D"
+    },
+    {
+      "type": "header",
+      "content": "Input style"
+    },
+    {
+      "type": "color",
+      "id": "input_background_color",
+      "label": "Background",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Border",
+      "default": "#cccccc"
+    },
+    {
+      "type": "range",
+      "id": "input_border_thickness",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Hover background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "message_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Message size",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Password input"
+    }
+  ]
+}
+{% endschema %}

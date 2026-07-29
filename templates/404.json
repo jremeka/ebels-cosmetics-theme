@@ -1,20 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "not_found": {
-      "type": "ebels-404"
+      "type": "ebels-404",
+      "settings": {}
     },
     "picks": {
-      "type": "ebels-404-picks"
+      "type": "ebels-404-picks",
+      "settings": {}
     },
     "quick_links": {
-      "type": "ebels-quick-links"
+      "type": "ebels-quick-links",
+      "settings": {}
     },
     "offers": {
-      "type": "ebels-offers-strip"
+      "type": "ebels-offers-strip",
+      "settings": {}
     },
     "newsletter": {
-      "type": "ebels-newsletter"
+      "type": "ebels-newsletter",
+      "settings": {}
     }
   },
-  "order": ["not_found", "picks", "quick_links", "offers", "newsletter"]
+  "order": [
+    "not_found",
+    "picks",
+    "quick_links",
+    "offers",
+    "newsletter"
+  ]
 }
