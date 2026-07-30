@@ -1,6 +1,6 @@
 {{ 'ebels-account-header.css' | asset_url | stylesheet_tag }}
 
-{%- unless customer -%}
+{%- unless customer or request.design_mode -%}
   {%- liquid
     assign login_url = routes.account_login_url
     if login_url contains '?'
