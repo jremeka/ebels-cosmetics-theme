@@ -1,7 +1,77 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "ebels_collections_list_header_JKhmiL": {
+      "type": "ebels-collections-list-header",
+      "name": "Ebels Collections Header",
+      "settings": {
+        "heading": "Shop by Collection",
+        "subheading": "Explore our curated collections"
+      }
+    },
+    "ebels_collections_list_grid_DAgdHr": {
+      "type": "ebels-collections-list-grid",
+      "blocks": {
+        "collection_item_99EWTW": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "perfumes",
+            "custom_title": ""
+          }
+        },
+        "collection_item_fVyhmL": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "luxe-aura-copy",
+            "custom_title": ""
+          }
+        },
+        "collection_item_tthqLq": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "truecharm-lipsticks",
+            "custom_title": ""
+          }
+        },
+        "collection_item_MyTbDC": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "custom_title": ""
+          }
+        },
+        "collection_item_yapDxh": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "trueskin-foundations",
+            "custom_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_item_99EWTW",
+        "collection_item_fVyhmL",
+        "collection_item_tthqLq",
+        "collection_item_MyTbDC",
+        "collection_item_yapDxh"
+      ],
+      "name": "Ebels Collections Grid",
+      "settings": {
+        "heading": "",
+        "subheading": ""
+      }
+    },
     "main": {
       "type": "main-list-collections",
+      "disabled": true,
       "settings": {
         "title": "Collections",
         "sort": "alphabetical",
@@ -9,9 +79,32 @@
         "columns_desktop": 3,
         "columns_mobile": "2"
       }
+    },
+    "ebels_new_in_yftafE": {
+      "type": "ebels-new-in",
+      "name": "Ebels New In",
+      "settings": {
+        "heading": "New In",
+        "subheading": "The latest additions across all collections",
+        "products_to_show": 4
+      }
+    },
+    "ebels_crafted_with_care_aWFfEp": {
+      "type": "ebels-crafted-with-care",
+      "name": "Ebels Crafted With Care",
+      "settings": {
+        "heading": "Crafted with Care",
+        "text": "<p>Every EBELS product is thoughtfully formulated and designed to celebrate your natural beauty. From our signature fragrances to our handcrafted bags, each piece tells a story of elegance and self-expression.</p>",
+        "link_text": "Learn Our Story",
+        "link_url": "shopify://pages/about-us"
+      }
     }
   },
   "order": [
-    "main"
+    "ebels_collections_list_header_JKhmiL",
+    "ebels_collections_list_grid_DAgdHr",
+    "main",
+    "ebels_new_in_yftafE",
+    "ebels_crafted_with_care_aWFfEp"
   ]
 }

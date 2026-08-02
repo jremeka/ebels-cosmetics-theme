@@ -77,30 +77,15 @@
         "hover_image_index": 2
       }
     },
-    "ebels_new_in_pKxRgL": {
-      "type": "ebels-new-in",
-      "name": "Ebels New In",
-      "settings": {
-        "heading": "New In",
-        "subheading": "The latest additions across all collections",
-        "products_to_show": 4
-      }
-    },
-    "ebels_crafted_with_care_FxCdKP": {
-      "type": "ebels-crafted-with-care",
-      "name": "Ebels Crafted With Care",
-      "settings": {
-        "heading": "Crafted with Care",
-        "text": "<p>Every EBELS product is thoughtfully formulated and designed to celebrate your natural beauty. From our signature fragrances to our handcrafted bags, each piece tells a story of elegance and self-expression.</p>",
-        "link_text": "Learn Our Story",
-        "link_url": "shopify://pages/about-us"
-      }
+    "ebels_collection_switcher_UinpEp": {
+      "type": "ebels-collection-switcher",
+      "name": "Ebels Collection Switcher",
+      "settings": {}
     }
   },
   "order": [
     "ebels_collection_header_7BKFey",
     "ebels_collection_grid_JcwKCc",
-    "ebels_new_in_pKxRgL",
-    "ebels_crafted_with_care_FxCdKP"
+    "ebels_collection_switcher_UinpEp"
   ]
 }

@@ -13,7 +13,7 @@
       "type": "ebels-account-header",
       "name": "Ebels Account Header",
       "settings": {
-        "show_member_badge": true,
+        "show_member_badge": false,
         "member_badge_text": "EBELS Member"
       }
     },
