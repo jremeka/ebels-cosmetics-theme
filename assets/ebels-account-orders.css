@@ -7,6 +7,9 @@
   padding-top: var(--space-10);
   padding-bottom: var(--space-4);
 }
+.ebels-acc-ord[hidden] {
+  display: none;
+}
 
 .ebels-acc-ord[hidden] {
   display: none;
@@ -60,8 +63,8 @@
 }
 
 .ebels-acc-ord__status--transit {
-  color: #B8860B;
-  background: color-mix(in srgb, #B8860B 12%, transparent);
+  color: #b8860b;
+  background: color-mix(in srgb, #b8860b 12%, transparent);
 }
 
 .ebels-acc-ord__status--processing {
@@ -212,7 +215,7 @@
 .ebels-acc-ord__fav-add {
   width: 100%;
   background: var(--ebels-ink);
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   font-size: var(--text-caption-size);
   padding-top: var(--space-2);
@@ -242,7 +245,7 @@
 .ebels-acc-ord__empty-cta {
   display: inline-block;
   background: var(--ebels-ink);
-  color: #FFFFFF;
+  color: #ffffff;
   padding: var(--space-3) var(--space-8);
   border-radius: var(--radius-full);
   text-decoration: none;

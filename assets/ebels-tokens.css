@@ -123,6 +123,19 @@
     --text-h4-size: 20px;       --text-h4-line: 26px;
   }
 }
+/* ==========================================================================
+    VIEW TRANSITIONS - Between pages, for browsers that support it.
+    https://developer.chrome.com/docs/web-platform/view-trans
+   ========================================================================== */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(.22, .61, .36, 1);
+}
 
 /* ==========================================================================
    BASE TYPOGRAPHY CLASSES

@@ -1,6 +1,6 @@
 {{ 'ebels-account-foryou.css' | asset_url | stylesheet_tag }}
 
-{%- if customer -%}
+{%- if customer or request.design_mode -%}
 <div class="ebels-acc-fy page-width" data-account-tab-panel="foryou" hidden>
 
   {%- comment -%}

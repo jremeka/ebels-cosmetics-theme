@@ -12,6 +12,17 @@
     "ebels_hero_ifqdGb": {
       "type": "ebels-hero",
       "blocks": {
+        "slide_NQAaJf": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_20b1lg20b1lg20b1.png",
+            "badge": "New Arrival",
+            "heading": "Summer Glow Collection",
+            "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
+            "button_label": "Shop Now",
+            "button_link": ""
+          }
+        },
         "slide_XfRW4B": {
           "type": "slide",
           "settings": {
@@ -47,6 +58,7 @@
         }
       },
       "block_order": [
+        "slide_NQAaJf",
         "slide_XfRW4B",
         "slide_4HeMnk",
         "slide_VPxFMz"

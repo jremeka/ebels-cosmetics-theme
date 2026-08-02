@@ -12,7 +12,7 @@
   <script>window.location.href = "{{ login_url }}{{ login_separator }}return_to={{ '/pages/my-account' | url_encode }}";</script>
 {%- endunless -%}
 
-{%- if customer -%}
+{%- if customer or request.design_mode -%}
 <div class="ebels-acc-header page-width" data-account-tabs>
   <div class="ebels-acc-header__intro">
     <h1 class="ebels-acc-header__title">Welcome back, {{ customer.first_name | default: 'there' }}</h1>

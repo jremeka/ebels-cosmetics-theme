@@ -1,0 +1,158 @@
+/* ==========================================================================
+   EBELS COLLECTION SWITCHER — peek cards on the left/right screen edges
+   Loaded by sections/ebels-collection-switcher.liquid
+   ========================================================================== */
+
+.ebels-cswitch {
+  position: fixed;
+  top: 50%;
+  z-index: 40;
+  width: 220px;
+  height: 260px;
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  background-color: var(--ebels-ink);
+  background-image: var(--ebels-cswitch-bg);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 12px 32px rgba(34, 27, 22, 0.22);
+  transition: transform 0.35s cubic-bezier(.22,.61,.36,1);
+}
+
+.ebels-cswitch__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(34, 27, 22, 0.35) 0%, rgba(34, 27, 22, 0.75) 100%);
+}
+
+.ebels-cswitch--prev {
+  left: 0;
+  transform: translateY(-50%) translateX(-65%);
+  border-top-right-radius: var(--radius-lg, 12px);
+  border-bottom-right-radius: var(--radius-lg, 12px);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ebels-cswitch--next {
+  right: 0;
+  transform: translateY(-50%) translateX(65%);
+  border-top-left-radius: var(--radius-lg, 12px);
+  border-bottom-left-radius: var(--radius-lg, 12px);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ebels-cswitch:hover {
+  transform: translateY(-50%) translateX(0);
+}
+
+.ebels-cswitch__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  padding: var(--space-6, 24px);
+  color: #fff;
+}
+
+.ebels-cswitch--prev .ebels-cswitch__content {
+  margin-left: auto;
+  text-align: right;
+  align-items: flex-end;
+  padding-right: var(--space-8, 36px);
+}
+
+.ebels-cswitch--next .ebels-cswitch__content {
+  padding-left: var(--space-8, 36px);
+}
+
+.ebels-cswitch__eyebrow {
+  font-family: var(--font-body, 'Archivo', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brand-primary, #EA5B1D);
+}
+
+.ebels-cswitch__title {
+  font-family: var(--font-heading, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: var(--text-h5-size, 20px);
+  line-height: 1.2;
+}
+
+.ebels-cswitch__arrow {
+  position: absolute;
+  top: var(--space-4, 16px);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.ebels-cswitch--prev .ebels-cswitch__arrow {
+  left: var(--space-4, 16px);
+}
+
+.ebels-cswitch--next .ebels-cswitch__arrow {
+  right: var(--space-4, 16px);
+}
+
+/* ----- Mobile: slim bar instead of edge-peeking (too cramped on small screens) ----- */
+.ebels-cswitch-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 989px) {
+  .ebels-cswitch {
+    display: none;
+  }
+
+  .ebels-cswitch-mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3, 12px);
+    background: var(--ebels-ink);
+    border-radius: var(--radius-md, 8px);
+    padding: var(--space-4, 14px) var(--space-5, 18px);
+    margin: var(--space-6, 24px) var(--space-4, 16px) 0;
+  }
+
+  .ebels-cswitch-mobile__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2, 6px);
+    font-family: var(--font-body, 'Archivo', sans-serif);
+    font-weight: 600;
+    font-size: var(--text-caption-size, 12px);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .ebels-cswitch-mobile__link--next {
+    margin-left: auto;
+  }
+}
+
+/* Subtle enter animation so a fresh arrival from a switcher click still feels like a transition */
+@keyframes ebels-cswitch-page-enter {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.ebels-cg,
+.ebels-cg__meta {
+  animation: ebels-cswitch-page-enter 0.4s ease both;
+}

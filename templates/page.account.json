@@ -9,12 +9,34 @@
  */
 {
   "sections": {
-    "account_header": {
+    "ebels_account_header_NqMfXg": {
       "type": "ebels-account-header",
-      "settings": {}
+      "name": "Ebels Account Header",
+      "settings": {
+        "show_member_badge": true,
+        "member_badge_text": "EBELS Member"
+      }
     },
     "account_foryou": {
       "type": "ebels-account-foryou",
+      "blocks": {
+        "product_8YpVwy": {
+          "type": "product",
+          "settings": {
+            "product": "pure-grace-perfume"
+          }
+        },
+        "product_iMJmrd": {
+          "type": "product",
+          "settings": {
+            "product": "pure-joy-perfume"
+          }
+        }
+      },
+      "block_order": [
+        "product_8YpVwy",
+        "product_iMJmrd"
+      ],
       "settings": {}
     },
     "account_orders": {
@@ -25,21 +47,22 @@
       "type": "ebels-account-profile",
       "settings": {}
     },
-    "offers": {
-      "type": "ebels-offers-strip",
-      "settings": {}
-    },
     "newsletter": {
       "type": "ebels-newsletter",
-      "settings": {}
+      "settings": {
+        "background": "#221b16",
+        "eyebrow": "Join the Inner Circle",
+        "heading": "Be the First to Know",
+        "text": "New drops, exclusive offers, and beauty tips — delivered straight to your inbox.",
+        "button_label": "Subscribe"
+      }
     }
   },
   "order": [
-    "account_header",
+    "ebels_account_header_NqMfXg",
     "account_foryou",
     "account_orders",
     "account_profile",
-    "offers",
     "newsletter"
   ]
 }

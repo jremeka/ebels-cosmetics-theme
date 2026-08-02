@@ -1,90 +1,84 @@
-/* ==========================================================================
-   EBELS ACCOUNT — Profile tab
-   Handles opening/closing the Add/Edit Address modals, PLUS submitting all
-   address forms (add/edit/remove) via fetch instead of a normal browser
-   form submission. Shopify's classic customer_address form redirects to
-   its own native /account/addresses page on success by default — since
-   we're using this form on our own custom branded page instead, a normal
-   submission would kick the person out to that unbranded page. Submitting
-   via fetch() means the browser's URL never changes, so they stay right
-   here the whole time. The main profile form (name/email/beauty profile)
-   is left as a normal native submission since that one already redirects
-   back correctly on its own.
-   ========================================================================== */
-
 (function () {
   'use strict';
 
-  document.querySelectorAll('[data-address-modal-open]').forEach(function (btn) {
+  var root = document.querySelector('[data-account-tab-panel="profile"]');
+  if (!root && !document.querySelector('[data-modal="profile-info-modal"]')) return;
+
+  document.querySelectorAll('[data-modal-open]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var targetId = btn.getAttribute('data-address-modal-open');
-      var modal = document.querySelector('[data-address-modal="' + targetId + '"]');
-      if (modal) {
-        modal.hidden = false;
-        document.body.style.overflow = 'hidden';
-      }
+      var id = btn.getAttribute('data-modal-open');
+      var modal = document.querySelector('[data-modal="' + id + '"]');
+      if (modal) modal.hidden = false;
     });
   });
 
-  document.querySelectorAll('[data-address-modal-close]').forEach(function (btn) {
+  document.querySelectorAll('[data-modal-close]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var modal = btn.closest('[data-address-modal]');
-      if (modal) {
-        modal.hidden = true;
-        document.body.style.overflow = '';
-      }
+      var modal = btn.closest('[data-modal]');
+      if (modal) modal.hidden = true;
     });
   });
 
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') return;
-    document.querySelectorAll('[data-address-modal]:not([hidden])').forEach(function (modal) {
-      modal.hidden = true;
-      document.body.style.overflow = '';
-    });
-  });
+  var submittableForms = document.querySelectorAll(
+    '.ebels-acc-modal__form, .ebels-acc-address-item__remove-form'
+  );
 
-  /* ----- Submit address forms (add/edit) via fetch, stay on this page ----- */
-  document.querySelectorAll('.ebels-acc-modal__form').forEach(function (form) {
+  submittableForms.forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      submitAddressForm(form);
-    });
-  });
 
-  /* ----- Submit the "Remove" mini-forms the same way ----- */
-  document.querySelectorAll('.ebels-acc-prof__remove-form').forEach(function (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!confirm('Remove this address?')) return;
-      submitAddressForm(form);
-    });
-  });
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var originalText = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Saving…';
+      }
 
-  function submitAddressForm(form) {
-    var submitBtn = form.querySelector('button[type="submit"]');
-    var originalText = submitBtn ? submitBtn.textContent : '';
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Saving…';
-    }
-
-    fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'X-Requested-With': 'XMLHttpRequest' }
-    })
-      .then(function () {
-        // Reload THIS page (URL never changed, so this reloads our branded
-        // page, not Shopify's native one) to show the updated address list.
-        window.location.reload();
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
       })
-      .catch(function () {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText;
-        }
-        alert('Something went wrong saving that address. Please try again.');
+        .then(function () {
+          window.location.reload();
+        })
+        .catch(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+        });
+    });
+  });
+
+  var marketingToggle = document.querySelector('[data-marketing-toggle]');
+  if (marketingToggle) {
+    marketingToggle.addEventListener('change', function () {
+      var form = marketingToggle.closest('form');
+      if (!form) return;
+
+      var formData = new FormData(form);
+      if (!marketingToggle.checked) {
+        formData.set('customer[accepts_marketing]', '0');
+      }
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      }).catch(function () {
+        marketingToggle.checked = !marketingToggle.checked;
       });
+    });
   }
+
+  document.querySelectorAll('.ebels-acc-modal__form').forEach(function (form) {
+    function updateSaveState() {
+      var saveBtn = form.querySelector('.ebels-acc-modal__save');
+      if (!saveBtn) return;
+      saveBtn.classList.toggle('is-ready', form.checkValidity());
+    }
+    updateSaveState();
+    form.addEventListener('input', updateSaveState);
+  });
 })();

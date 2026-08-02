@@ -1,0 +1,99 @@
+{{ 'ebels-collection-switcher.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  EBELS COLLECTION SWITCHER
+  Peek cards on the left/right screen edges linking to the previous/next
+  collection, based on settings.collection_switcher_handles — a simple
+  comma-separated list in Theme Settings, editable anytime without code.
+
+  IMPORTANT: collections['some-handle'] for a handle that matches no real
+  collection does NOT return nil in Shopify Liquid — it returns an empty
+  collection-shaped object instead. So checking `!= null` is always true,
+  even for a bad handle. Fixed by checking a real field (.title) against
+  `blank` instead, which correctly treats that empty object as nothing.
+{%- endcomment -%}
+
+{%- liquid
+  assign switcher_handles = settings.collection_switcher_handles | split: ','
+  assign prev_collection = blank
+  assign next_collection = blank
+  assign found_current = false
+
+  for handle in switcher_handles
+    assign trimmed_handle = handle | strip
+    assign loop_collection = collections[trimmed_handle]
+
+    if found_current and next_collection.title == blank
+      assign next_collection = loop_collection
+    endif
+
+    if trimmed_handle == collection.handle
+      assign found_current = true
+    else
+      unless found_current
+        assign prev_collection = loop_collection
+      endunless
+    endif
+  endfor
+-%}
+
+{%- if prev_collection.title != blank -%}
+  <a
+    href="{{ prev_collection.url }}"
+    class="ebels-cswitch ebels-cswitch--prev"
+    style="{% if prev_collection.image != blank %}--ebels-cswitch-bg: url('{{ prev_collection.image | image_url: width: 500 }}');{% endif %}"
+  >
+    <span class="ebels-cswitch__overlay"></span>
+    <span class="ebels-cswitch__arrow" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </span>
+    <span class="ebels-cswitch__content">
+      <span class="ebels-cswitch__eyebrow">Previous Collection</span>
+      <span class="ebels-cswitch__title">{{ prev_collection.title }}</span>
+    </span>
+  </a>
+{%- endif -%}
+
+{%- if next_collection.title != blank -%}
+  <a
+    href="{{ next_collection.url }}"
+    class="ebels-cswitch ebels-cswitch--next"
+    style="{% if next_collection.image != blank %}--ebels-cswitch-bg: url('{{ next_collection.image | image_url: width: 500 }}');{% endif %}"
+  >
+    <span class="ebels-cswitch__overlay"></span>
+    <span class="ebels-cswitch__arrow" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </span>
+    <span class="ebels-cswitch__content">
+      <span class="ebels-cswitch__eyebrow">Next Collection</span>
+      <span class="ebels-cswitch__title">{{ next_collection.title }}</span>
+    </span>
+  </a>
+{%- endif -%}
+
+{%- if prev_collection.title != blank or next_collection.title != blank -%}
+  <div class="ebels-cswitch-mobile">
+    {%- if prev_collection.title != blank -%}
+      <a href="{{ prev_collection.url }}" class="ebels-cswitch-mobile__link ebels-cswitch-mobile__link--prev">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        {{ prev_collection.title }}
+      </a>
+    {%- else -%}
+      <span></span>
+    {%- endif -%}
+    {%- if next_collection.title != blank -%}
+      <a href="{{ next_collection.url }}" class="ebels-cswitch-mobile__link ebels-cswitch-mobile__link--next">
+        {{ next_collection.title }}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Ebels Collection Switcher",
+  "settings": [],
+  "presets": [{ "name": "Ebels Collection Switcher" }]
+}
+{% endschema %}

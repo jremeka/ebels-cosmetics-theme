@@ -1,6 +1,6 @@
 {{ 'ebels-account-orders.css' | asset_url | stylesheet_tag }}
 
-{%- if customer -%}
+{%- if customer or request.design_mode -%}
 <div class="ebels-acc-ord page-width" data-account-tab-panel="orders" hidden>
   <script type="application/json" data-money-format>{{ shop.money_format | json }}</script>
 
@@ -104,7 +104,13 @@
                 <a href="{{ line_item.product.url }}" class="ebels-acc-ord__fav-media-link">
                   <div class="ebels-acc-ord__fav-media">
                     {%- if line_item.image -%}
-                      <img src="{{ line_item.image | image_url: width: 400 }}" alt="{{ line_item.title | escape }}" loading="lazy">
+                      <img
+                        src="{{ line_item.image | image_url: width: 400 }}"
+                        alt="{{ line_item.title | escape }}"
+                        loading="lazy"
+                        width="400"
+                        height="{{ 400 | divided_by: line_item.image.aspect_ratio }}"
+                      >
                     {%- else -%}
                       {{ 'product-1' | placeholder_svg_tag: 'ebels-acc-ord__fav-img' }}
                     {%- endif -%}

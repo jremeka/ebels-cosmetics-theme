@@ -11,6 +11,18 @@
     }
   ]
 },
+{
+  "name": "Collection Switcher",
+  "settings": [
+    {
+      "type": "text",
+      "id": "collection_switcher_handles",
+      "label": "Collections to include, in order",
+      "info": "Comma-separated collection handles, e.g. perfumes, bags, lipsticks — this controls both the order and which collections show up in the peek-card switcher on collection pages.",
+      "default": "perfumes, bags, lipsticks"
+    }
+  ]
+},
   {
     "name": "theme_info",
     "theme_name": "Dawn",
