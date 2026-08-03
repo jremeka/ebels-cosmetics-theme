@@ -15,9 +15,29 @@
         "padding_top": 32,
         "padding_bottom": 48
       }
+    },
+    "ebels_collection_header_tc3djY": {
+      "type": "ebels-collection-header",
+      "name": "Ebels Collection Header",
+      "settings": {
+        "eyebrow": ""
+      }
+    },
+    "ebels_newsletter_krc487": {
+      "type": "ebels-newsletter",
+      "name": "Ebels Newsletter",
+      "settings": {
+        "background": "#221b16",
+        "eyebrow": "Join the Inner Circle",
+        "heading": "Be the First to Know",
+        "text": "New drops, exclusive offers, and beauty tips — delivered straight to your inbox.",
+        "button_label": "Subscribe"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "ebels_collection_header_tc3djY",
+    "ebels_newsletter_krc487"
   ]
 }

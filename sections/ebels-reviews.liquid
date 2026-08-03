@@ -1,205 +1,26 @@
-{{ 'ebels-reviews.css' | asset_url | stylesheet_tag }}
-
 {%- comment -%}
-  REVIEWS INTEGRATION NOTE
-  Everything in this section is currently driven by merchant-entered schema
-  settings/blocks (sample data), not a real review app or metafield.
-  When wiring up a real app (e.g. Judge.me, Loox, Yotpo) or a custom
-  Shopify metafield-based system later:
-    - Replace the "average_rating" / "review_count" / percent_* settings
-      below with values pulled from the app's Liquid tags or metafields.
-    - Replace the block loop with the app's review-list snippet, or loop
-      over a metafield list instead of section.blocks.
-    - The "Write a Review" button already fires a custom event
-      (ebels:write-review) - hook the app's review-form modal to that.
-    - The "Helpful" buttons already fire a custom event
-      (ebels:review-helpful) with the review ID - hook real vote
-      persistence to that instead of the local-only counter currently there.
-  The markup/classes can stay as-is; only the data source needs to change.
+  EBELS REVIEWS
+  Real Judge.me integration — genuinely per-product (uses product.id and
+  product.title directly), replacing the old fake stub entirely. Judge.me's
+  own widget handles the "no reviews yet" state automatically, prompting
+  the visitor to write the first one — no custom empty-state logic needed
+  here, that's real built-in behavior from the app itself.
+
+  IMPORTANT: this snippet alone isn't enough on its own — Judge.me's CSS/JS
+  loads via their Theme App Extension. Confirm in Theme Editor > App
+  embeds that "Judge.me" is toggled ON, or this div will render empty.
 {%- endcomment -%}
 
-<div class="ebels-reviews page-width" data-reviews-section>
-
-  <div class="ebels-reviews__summary" data-reveal>
-    <div class="ebels-reviews__score-block">
-      <p class="ebels-reviews__score">{{ section.settings.average_rating }}</p>
-      <div class="ebels-reviews__score-meta">
-        <span class="ebels-reviews__stars" aria-hidden="true" style="--star-fill: {{ section.settings.average_rating | times: 20 }}%;">★★★★★</span>
-        <p class="ebels-caption">Based on {{ section.settings.review_count }} reviews</p>
-      </div>
-    </div>
-
-    <div class="ebels-reviews__bars">
-      {%- assign percents = section.settings.percent_5 | append: ',' | append: section.settings.percent_4 | append: ',' | append: section.settings.percent_3 | append: ',' | append: section.settings.percent_2 | append: ',' | append: section.settings.percent_1 | split: ',' -%}
-      {%- for percent in percents -%}
-        {%- assign star_count = 5 | minus: forloop.index0 -%}
-        <div class="ebels-reviews__bar-row">
-          <span class="ebels-caption ebels-reviews__bar-label">{{ star_count }} star{% if star_count != 1 %}s{% endif %}</span>
-          <div class="ebels-reviews__bar-track">
-            <div class="ebels-reviews__bar-fill" style="width: {{ percent }}%;"></div>
-          </div>
-          <span class="ebels-caption ebels-reviews__bar-percent">{{ percent }}%</span>
-        </div>
-      {%- endfor -%}
-    </div>
-
-    <button type="button" class="ebels-btn ebels-btn--outline ebels-reviews__write-btn" data-write-review>
-      Write a Review
-    </button>
-  </div>
-
-  {%- if section.blocks.size > 0 -%}
-    <div class="ebels-reviews__list">
-      {%- for block in section.blocks -%}
-        <div class="ebels-reviews__card" data-reveal data-review-id="{{ block.id }}" {{ block.shopify_attributes }}>
-          <div class="ebels-reviews__card-header">
-            <p class="ebels-reviews__author">{{ block.settings.author_name | default: 'Anonymous' }}</p>
-            <p class="ebels-caption ebels-reviews__date">{{ block.settings.date_text }}</p>
-          </div>
-
-          <span class="ebels-reviews__stars ebels-reviews__stars--sm" aria-hidden="true" style="--star-fill: {{ block.settings.rating | times: 20 }}%;">★★★★★</span>
-
-          {%- if block.settings.title != blank -%}
-            <p class="ebels-reviews__card-title">{{ block.settings.title }}</p>
-          {%- endif -%}
-
-          {%- if block.settings.body != blank -%}
-            <p class="ebels-body-sm ebels-reviews__card-body">{{ block.settings.body }}</p>
-          {%- endif -%}
-
-          <button
-            type="button"
-            class="ebels-reviews__helpful"
-            data-helpful-toggle
-            data-count="{{ block.settings.helpful_count | default: 0 }}"
-          >
-            Helpful (<span data-helpful-count>{{ block.settings.helpful_count | default: 0 }}</span>)
-          </button>
-        </div>
-      {%- endfor -%}
-    </div>
-  {%- endif -%}
+<div class="ebels-reviews page-width">
+  <!-- Start of Judge.me code -->
+  {% assign has_legacy = false %}{% if product.metafields.judgeme.widget.size > 20 %}{% assign has_legacy = true %}{% endif %}<div style='clear:both'></div><div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title | escape }}' data-id='{{ product.id }}' data-product-id='{{ product.id }}' data-widget='review' data-auto-install='false' data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}' data-entry-point='review_widget.js' data-entry-key='review-widget/main.js'>{% if has_legacy %}<div class='jdgm-legacy-widget-content' style='display: none;'>{{ product.metafields.judgeme.widget }}</div>{% endif %}</div>{% if product.metafields.judgeme.review_widget_data %}<script>jdgm.data ||= {}; jdgm.data.reviewWidget ||= {}; jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}</script>{% endif %}
+  <!-- End of Judge.me code -->
 </div>
-
-<script src="{{ 'ebels-reviews.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
-  "name": "Ebels Customer Reviews",
-  "settings": [
-    {
-      "type": "range",
-      "id": "average_rating",
-      "label": "Average rating",
-      "min": 0,
-      "max": 5,
-      "step": 0.1,
-      "default": 4.8
-    },
-    {
-      "type": "number",
-      "id": "review_count",
-      "label": "Total review count",
-      "default": 312
-    },
-    {
-      "type": "header",
-      "content": "Star breakdown (%) — should add up to 100"
-    },
-    {
-      "type": "range",
-      "id": "percent_5",
-      "label": "5 star %",
-      "min": 0,
-      "max": 100,
-      "default": 72
-    },
-    {
-      "type": "range",
-      "id": "percent_4",
-      "label": "4 star %",
-      "min": 0,
-      "max": 100,
-      "default": 18
-    },
-    {
-      "type": "range",
-      "id": "percent_3",
-      "label": "3 star %",
-      "min": 0,
-      "max": 100,
-      "default": 6
-    },
-    {
-      "type": "range",
-      "id": "percent_2",
-      "label": "2 star %",
-      "min": 0,
-      "max": 100,
-      "default": 3
-    },
-    {
-      "type": "range",
-      "id": "percent_1",
-      "label": "1 star %",
-      "min": 0,
-      "max": 100,
-      "default": 1
-    }
-  ],
-  "blocks": [
-    {
-      "type": "review",
-      "name": "Review",
-      "settings": [
-        { "type": "text", "id": "author_name", "label": "Reviewer name", "default": "Sarah M." },
-        { "type": "text", "id": "date_text", "label": "Date label", "default": "2 days ago" },
-        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "default": 5 },
-        { "type": "text", "id": "title", "label": "Review title", "default": "Absolutely obsessed!" },
-        { "type": "textarea", "id": "body", "label": "Review body" },
-        { "type": "number", "id": "helpful_count", "label": "Helpful count", "default": 0 }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Ebels Customer Reviews",
-      "blocks": [
-        {
-          "type": "review",
-          "settings": {
-            "author_name": "Sarah M.",
-            "date_text": "2 days ago",
-            "rating": 5,
-            "title": "Absolutely obsessed!",
-            "body": "This lipstick is everything. The color is stunning and it truly lasts all day without drying out my lips. I've repurchased three times now.",
-            "helpful_count": 12
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "author_name": "Amira K.",
-            "date_text": "1 week ago",
-            "rating": 4,
-            "title": "Beautiful shade, slight transfer",
-            "body": "Gorgeous berry tone that complements my skin perfectly. Only giving 4 stars because there is slight transfer on cups. Otherwise flawless.",
-            "helpful_count": 8
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "author_name": "Jessica L.",
-            "date_text": "2 weeks ago",
-            "rating": 5,
-            "title": "Holy grail lipstick",
-            "body": "I have tried so many matte lipsticks and this is by far the best. The formula is incredibly comfortable and the shade is universally flattering.",
-            "helpful_count": 15
-          }
-        }
-      ]
-    }
-  ]
+  "name": "Ebels Reviews",
+  "settings": [],
+  "presets": [{ "name": "Ebels Reviews" }]
 }
 {% endschema %}

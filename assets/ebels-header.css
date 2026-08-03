@@ -15,6 +15,31 @@
   border-bottom: 1px solid rgba(34, 27, 22, 0.06);
 }
 
+.wishlist-count-bubble {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--brand-primary, #ea5b1d);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wishlist-count-bubble[hidden] {
+  display: none;
+}
+
+.header__icon--wishlist {
+  position: relative;
+}
+
 /* ----- Desktop layout: one row ----- */
 @media screen and (min-width: 990px) {
   .header {

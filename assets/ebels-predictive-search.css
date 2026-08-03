@@ -36,6 +36,7 @@
 
 .search-modal__form .search__input:focus {
   border-color: var(--border-brand);
+  border-radius: var(--radius-full) !important;
   box-shadow: none;
 }
 

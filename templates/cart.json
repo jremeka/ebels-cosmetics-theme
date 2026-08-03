@@ -11,28 +11,37 @@
   "sections": {
     "main-cart": {
       "type": "ebels-cart",
-      "settings": {}
+      "settings": {
+        "show_installment_badges": false,
+        "guarantee_text": "If you're not completely satisfied, return any unused product within 30 days for a full refund. Free returns on all orders.",
+        "contact_url": "",
+        "returns_url": "",
+        "empty_message": "Your bag is empty. Let's find something you'll love.",
+        "empty_cta_url": ""
+      }
     },
     "cart-recommendations": {
       "type": "ebels-cart-recommendations",
+      "disabled": true,
       "settings": {
         "eyebrow": "Curated For You",
         "heading": "Recommended For You"
       }
     },
-    "offers": {
-      "type": "ebels-offers-strip",
-      "settings": {}
-    },
     "newsletter": {
       "type": "ebels-newsletter",
-      "settings": {}
+      "settings": {
+        "background": "#221b16",
+        "eyebrow": "Join the Inner Circle",
+        "heading": "Be the First to Know",
+        "text": "New drops, exclusive offers, and beauty tips — delivered straight to your inbox.",
+        "button_label": "Subscribe"
+      }
     }
   },
   "order": [
     "main-cart",
     "cart-recommendations",
-    "offers",
     "newsletter"
   ]
 }

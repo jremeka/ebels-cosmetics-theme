@@ -41,78 +41,16 @@
       }
     },
     "ebels_reviews": {
-      "type": "ebels-reviews",
-      "blocks": {
-        "review_TKxfDb": {
-          "type": "review",
-          "settings": {
-            "author_name": "Sarah M.",
-            "date_text": "2 days ago",
-            "rating": 5,
-            "title": "Absolutely obsessed!",
-            "body": "",
-            "helpful_count": 0
-          }
-        }
-      },
-      "block_order": [
-        "review_TKxfDb"
-      ],
-      "settings": {
-        "average_rating": 4.8,
-        "review_count": 312,
-        "percent_5": 72,
-        "percent_4": 18,
-        "percent_3": 6,
-        "percent_2": 3,
-        "percent_1": 1
-      }
-    },
+  "type": "ebels-reviews",
+  "settings": {}
+},
     "ebels_real_looks": {
-      "type": "ebels-real-looks",
-      "blocks": {
-        "post_fq44QB": {
-          "type": "post",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/Gemini_Generated_Image_hdds7phdds7phdds.png",
-            "alt_text": "",
-            "handle": "@lipqueen",
-            "link_url": ""
-          }
-        },
-        "post_mjndfG": {
-          "type": "post",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/fashion-model-in-fur.jpg",
-            "alt_text": "",
-            "handle": "@lipqueen",
-            "link_url": ""
-          }
-        },
-        "post_LeiAqx": {
-          "type": "post",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/face-treatment-with-a-smile.jpg",
-            "alt_text": "",
-            "handle": "@lipqueen",
-            "link_url": ""
-          }
-        }
-      },
-      "block_order": [
-        "post_fq44QB",
-        "post_mjndfG",
-        "post_LeiAqx"
-      ],
-      "settings": {
-        "heading": "Real People, Real Looks",
-        "subheading": "See how our community wears this look. Tag us",
-        "hashtag": "#EBELSPureGrace"
-      }
-    },
+  "type": "ebels-real-looks",
+  "settings": {
+    "heading": "Real People, Real Looks",
+    "subheading": "See how our community wears this look. Tag us"
+  }
+},
     "ebels_recently_viewed": {
       "type": "ebels-recently-viewed",
       "settings": {

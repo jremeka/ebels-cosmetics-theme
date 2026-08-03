@@ -250,6 +250,14 @@
       </div>
       {% render 'header-search', input_id: 'Search-In-Modal' %}
 
+      <a href="/pages/my-wishlist" class="header__icon header__icon--wishlist link focus-inset" id="wishlist-icon-bubble">
+        <span class="svg-wrapper">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        </span>
+        <span class="visually-hidden">Wishlist</span>
+        <div class="wishlist-count-bubble" data-wishlist-count hidden>0</div>
+      </a>
+
       {%- if shop.customer_accounts_enabled -%}
         <a
         href="/pages/my-account"

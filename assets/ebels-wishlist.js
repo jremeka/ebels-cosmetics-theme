@@ -19,6 +19,8 @@
 (function () {
   'use strict';
 
+  if (window.EbelsWishlist) return; // already initialized elsewhere on this page — don't run twice
+
   var STORAGE_KEY = 'ebels:wishlist';
 
   function getWishlist() {

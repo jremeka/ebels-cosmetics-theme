@@ -88,6 +88,7 @@
         },
         "collection_item_UKAPHC": {
           "type": "collection_item",
+          "disabled": true,
           "settings": {
             "collection": "bags",
             "custom_title": ""
@@ -95,6 +96,7 @@
         },
         "collection_item_JyYcNw": {
           "type": "collection_item",
+          "disabled": true,
           "settings": {
             "collection": "perfumes",
             "custom_title": ""
@@ -102,6 +104,7 @@
         },
         "collection_item_8V8G3p": {
           "type": "collection_item",
+          "disabled": true,
           "settings": {
             "collection": "bags",
             "custom_title": ""
@@ -109,6 +112,7 @@
         },
         "collection_item_F78pTA": {
           "type": "collection_item",
+          "disabled": true,
           "settings": {
             "collection": "perfumes",
             "custom_title": ""
