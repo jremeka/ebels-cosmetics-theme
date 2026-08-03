@@ -11,58 +11,6 @@
   "sections": {
     "ebels_collection_header_7BKFey": {
       "type": "ebels-collection-header",
-      "blocks": {
-        "filter_icon_f33B9L": {
-          "type": "filter_icon",
-          "settings": {
-            "label": "Floral",
-            "tag": ""
-          }
-        },
-        "filter_icon_T7cPUK": {
-          "type": "filter_icon",
-          "settings": {
-            "label": "Floral",
-            "tag": ""
-          }
-        },
-        "filter_icon_b6DgDJ": {
-          "type": "filter_icon",
-          "settings": {
-            "label": "Floral",
-            "tag": ""
-          }
-        },
-        "filter_icon_kLrNNk": {
-          "type": "filter_icon",
-          "settings": {
-            "label": "Floral",
-            "tag": ""
-          }
-        },
-        "filter_icon_wcfgkP": {
-          "type": "filter_icon",
-          "settings": {
-            "label": "Floral",
-            "tag": ""
-          }
-        },
-        "filter_icon_gCxBEn": {
-          "type": "filter_icon",
-          "settings": {
-            "label": "Floral",
-            "tag": ""
-          }
-        }
-      },
-      "block_order": [
-        "filter_icon_f33B9L",
-        "filter_icon_T7cPUK",
-        "filter_icon_b6DgDJ",
-        "filter_icon_kLrNNk",
-        "filter_icon_wcfgkP",
-        "filter_icon_gCxBEn"
-      ],
       "name": "Ebels Collection Header",
       "settings": {
         "eyebrow": "Ebels Collection"

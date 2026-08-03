@@ -21,19 +21,75 @@
     },
     "search_empty": {
       "type": "ebels-search-empty",
-      "settings": {}
+      "settings": {
+        "subtext": "We couldn't find what you're looking for. Try checking your spelling or using more general terms.",
+        "likes_heading": "",
+        "likes_subheading": ""
+      }
     },
     "trending_now": {
       "type": "ebels-trending-now",
-      "settings": {}
+      "blocks": {
+        "term_j9Qkxk": {
+          "type": "term",
+          "disabled": true,
+          "settings": {
+            "term": "new arrivals"
+          }
+        },
+        "term_McPTLW": {
+          "type": "term",
+          "settings": {
+            "term": "Pure Joy"
+          }
+        },
+        "term_EkKMfU": {
+          "type": "term",
+          "settings": {
+            "term": "Bucket bag"
+          }
+        }
+      },
+      "block_order": [
+        "term_j9Qkxk",
+        "term_McPTLW",
+        "term_EkKMfU"
+      ],
+      "settings": {
+        "heading": "Trending Now"
+      }
     },
     "offers": {
       "type": "ebels-offers-strip",
-      "settings": {}
+      "blocks": {
+        "offer_DK3jeC": {
+          "type": "offer",
+          "settings": {
+            "icon": "tag",
+            "title": "Up to 50% off",
+            "text": "On selected sets & bundles — while stocks last",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "offer_DK3jeC"
+      ],
+      "disabled": true,
+      "settings": {
+        "background": "#7d1f3d"
+      }
     },
     "newsletter": {
       "type": "ebels-newsletter",
-      "settings": {}
+      "settings": {
+        "background": "#221b16",
+        "eyebrow": "Join the Inner Circle",
+        "heading": "Be the First to Know",
+        "text": "New drops, exclusive offers, and beauty tips — delivered straight to your inbox.",
+        "button_label": "Subscribe"
+      }
     }
   },
   "order": [

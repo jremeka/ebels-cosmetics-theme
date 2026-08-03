@@ -268,15 +268,22 @@
       %}
     </span>
 
-    {%- assign trending_terms = settings.predictive_search_trending_terms | split: ',' -%}
-    {%- if trending_terms.size > 0 -%}
+    {%- assign trending_lines = settings.predictive_search_trending_terms | newline_to_br | split: '<br />' -%}
+    {%- if trending_lines.size > 0 -%}
       <div class="predictive-search__trending">
         <h2 class="predictive-search__heading">Trending Searches</h2>
         <div class="predictive-search__trending-pills">
-          {%- for term in trending_terms -%}
-            <a href="{{ routes.search_url }}?q={{ term | strip | url_encode }}" class="predictive-search__trending-pill">
-              {{ term | strip }}
-            </a>
+          {%- for line in trending_lines -%}
+            {%- assign trimmed_line = line | strip -%}
+            {%- if trimmed_line != blank -%}
+              {%- assign parts = trimmed_line | split: '|' -%}
+              {%- assign term_label = parts[0] | strip -%}
+              {%- assign term_link = parts[1] | strip -%}
+              {%- unless term_link != blank -%}
+                {%- assign term_link = routes.search_url | append: '?q=' | append: term_label | url_encode -%}
+              {%- endunless -%}
+              <a href="{{ term_link }}" class="predictive-search__trending-pill">{{ term_label }}</a>
+            {%- endif -%}
           {%- endfor -%}
         </div>
       </div>

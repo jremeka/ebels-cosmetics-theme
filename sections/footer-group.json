@@ -18,14 +18,7 @@
           "type": "link_list",
           "settings": {
             "heading": "Shop",
-            "menu": "shop"
-          }
-        },
-        "link_list_qewWBz": {
-          "type": "link_list",
-          "settings": {
-            "heading": "About Us",
-            "menu": "about"
+            "menu": "store"
           }
         },
         "link_list_HDUy7w": {
@@ -39,13 +32,12 @@
           "type": "link_list",
           "settings": {
             "heading": "Help",
-            "menu": "help"
+            "menu": "contact-about"
           }
         }
       },
       "block_order": [
         "link_list_73M76L",
-        "link_list_qewWBz",
         "link_list_HDUy7w",
         "link_list_ypLUBq"
       ],

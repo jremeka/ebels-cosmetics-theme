@@ -16,13 +16,12 @@
 .ebels-about-hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(20, 14, 10, 0.15) 0%, rgba(20, 14, 10, 0.55) 100%);
+  background: var(--ebels-ink, #221B16);
 }
 
 .ebels-about-hero__content {
   position: relative;
   z-index: 1;
-  color: #fff;
   padding: var(--space-6, 24px);
   max-width: 640px;
 }
@@ -37,6 +36,32 @@
 .ebels-about-hero__subtitle {
   font-family: var(--font-body, 'Archivo', sans-serif);
   font-size: var(--text-body-lg-size, 18px);
-  opacity: 0.92;
   margin: 0;
+}
+
+/* ----- Light text theme (dark/busy artwork) ----- */
+.ebels-about-hero__content--light {
+  color: #FFFFFF;
+}
+
+.ebels-about-hero__content--light .ebels-about-hero__title {
+  color: #FFFFFF;
+}
+
+.ebels-about-hero__content--light .ebels-about-hero__subtitle {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* ----- Dark text theme (light/pale artwork) ----- */
+.ebels-about-hero__content--dark {
+  color: var(--text-primary, #221B16);
+}
+
+.ebels-about-hero__content--dark .ebels-about-hero__title {
+  color: var(--text-primary, #221B16);
+}
+
+.ebels-about-hero__content--dark .ebels-about-hero__subtitle {
+  color: var(--text-primary, #221B16);
+  opacity: 0.75;
 }

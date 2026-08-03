@@ -3,12 +3,12 @@
   "name": "Predictive Search",
   "settings": [
     {
-      "type": "text",
-      "id": "predictive_search_trending_terms",
-      "label": "Trending search terms",
-      "info": "Comma-separated. Shown as pills in the search dropdown.",
-      "default": "Perfumes, Foundation, Mascara, Serum"
-    }
+  "type": "textarea",
+  "id": "predictive_search_trending_terms",
+  "label": "Trending searches",
+  "info": "One per line. Format: Label | /path-or-url — e.g. Perfumes | /collections/perfumes. If you skip the | and link, it falls back to a normal search for that word.",
+  "default": "Perfumes | /collections/perfumes\nFoundation | /collections/foundation\nMascara | /collections/mascara\nSerum | /collections/serum"
+}
   ]
 },
 {

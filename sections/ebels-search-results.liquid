@@ -8,8 +8,8 @@
       {%- paginate search.results by section.settings.products_per_page -%}
         <div class="ebels-sr__grid">
           {%- for item in search.results -%}
+            {%- unless item.object_type == 'product' -%}{%- continue -%}{%- endunless -%}
             {%- assign sr_variant = item.selected_or_first_available_variant -%}
-
             {%- assign shade_option_index = -1 -%}
             {%- for option in item.options_with_values -%}
               {%- if option.name == 'Shade' or option.name == 'Color' or option.name == 'Colour' -%}

@@ -1,14 +1,187 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "ebels_contact_hero_jAqQ7J": {
+      "type": "ebels-contact-hero",
+      "name": "Ebels Contact Hero",
+      "settings": {
+        "title": "Get In Touch",
+        "subtitle": "We'd love to hear from you. Our beauty experts are here to help.",
+        "padding_top": 48,
+        "padding_bottom": 24
+      }
+    },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "ebels_contact_info_YEK8z4": {
+      "type": "ebels-contact-info",
+      "blocks": {
+        "card_hUiWrb": {
+          "type": "card",
+          "settings": {
+            "icon": "✉",
+            "title": "Email Us",
+            "link_text": "marketing@ebelscosmetics.com",
+            "link_url": "",
+            "detail": "We respond within 24 hours",
+            "button_text": ""
+          }
+        },
+        "card_4iadGp": {
+          "type": "card",
+          "settings": {
+            "icon": "✉",
+            "title": "Call Us",
+            "link_text": "+44 (0) 20 7946 0958",
+            "link_url": "",
+            "detail": "Mon–Fri 9am–6pm, Sat 10am–4pm",
+            "button_text": ""
+          }
+        },
+        "card_qqJM7H": {
+          "type": "card",
+          "settings": {
+            "icon": "✉",
+            "title": "Email Us",
+            "link_text": "Reach a rep quickly",
+            "link_url": "",
+            "detail": "We respond within 10 mins",
+            "button_text": ""
+          }
+        },
+        "address_mwELtN": {
+          "type": "address",
+          "settings": {
+            "country": "United States",
+            "address": "32100 Solon Road\nSolon, Ohio 44139",
+            "map_image": "shopify://shop_images/Screenshot_2026-08-02_at_16.59.50.png"
+          }
+        },
+        "hours_WL6JNz": {
+          "type": "hours",
+          "disabled": true,
+          "settings": {
+            "days": "Mon-Fri",
+            "hours": "9:00 AM - 6:00 PM"
+          }
+        },
+        "hours_fbLCQP": {
+          "type": "hours",
+          "disabled": true,
+          "settings": {
+            "days": "Mon-Fri",
+            "hours": "9:00 AM - 6:00 PM"
+          }
+        }
+      },
+      "block_order": [
+        "card_hUiWrb",
+        "card_4iadGp",
+        "card_qqJM7H",
+        "address_mwELtN",
+        "hours_WL6JNz",
+        "hours_fbLCQP"
+      ],
+      "name": "Ebels Contact Info",
+      "settings": {
+        "subjects": "Order Support, Product Question, Returns, Wholesale, Other",
+        "padding_top": 32,
+        "padding_bottom": 60
+      }
+    },
+    "ebels_contact_social_MDCHXz": {
+      "type": "ebels-contact-social",
+      "blocks": {
+        "channel_4YNNLK": {
+          "type": "channel",
+          "settings": {
+            "icon": "ꚠ",
+            "platform": "Tiktok",
+            "handle": "@ebelscosmetics",
+            "url": "https://www.tiktok.com/@ebelscosmetics?lang=en"
+          }
+        },
+        "channel_qEw6nG": {
+          "type": "channel",
+          "settings": {
+            "icon": "◎",
+            "platform": "Instagram",
+            "handle": "@ebelscosmetics",
+            "url": "https://www.instagram.com/ebelscosmetics?igsh=MXFjZ3o3bncxZnlzcA=="
+          }
+        },
+        "channel_Aa9nJ7": {
+          "type": "channel",
+          "settings": {
+            "icon": "𝐟",
+            "platform": "Facebook",
+            "handle": "EBELS LLC",
+            "url": "https://www.facebook.com/people/EBELS-LLC/61578281765925/"
+          }
+        },
+        "channel_3httDH": {
+          "type": "channel",
+          "settings": {
+            "icon": "[in]",
+            "platform": "LinkedIn",
+            "handle": "@ebelscosmetics",
+            "url": "https://www.linkedin.com/in/ebelscosmetics/"
+          }
+        }
+      },
+      "block_order": [
+        "channel_4YNNLK",
+        "channel_qEw6nG",
+        "channel_Aa9nJ7",
+        "channel_3httDH"
+      ],
+      "name": "Ebels Contact Social",
+      "settings": {
+        "title": "Follow Us",
+        "subtitle": "Stay connected for beauty tips, new launches, and exclusive offers",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "ebels_contact_faq_banner_8GiBLc": {
+      "type": "ebels-contact-faq-banner",
+      "name": "Ebels Contact FAQ Banner",
+      "settings": {
+        "text": "Looking for quick answers?",
+        "button_label": "Check our FAQ",
+        "button_link": "shopify://pages/faqs",
+        "padding_top": 24,
+        "padding_bottom": 40
+      }
+    },
+    "ebels_collection_header_KMxi8g": {
+      "type": "ebels-collection-header",
+      "name": "Ebels Collection Header",
+      "settings": {
+        "eyebrow": ""
+      }
     }
   },
   "order": [
-    "main"
+    "ebels_contact_hero_jAqQ7J",
+    "main",
+    "ebels_contact_info_YEK8z4",
+    "ebels_contact_social_MDCHXz",
+    "ebels_contact_faq_banner_8GiBLc",
+    "ebels_collection_header_KMxi8g"
   ]
 }

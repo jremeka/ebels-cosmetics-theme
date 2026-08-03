@@ -14,9 +14,11 @@
   background: rgba(34, 27, 22, 0.5);
 }
 
-.search-modal__content {
+.search-modal__content,
+.search-modal__content-top,
+.search-modal__content-bottom {
   background: var(--bg-primary);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg) !important;
   border: none;
   box-shadow: 0 20px 60px rgba(34, 27, 22, 0.2);
   max-width: 720px;
@@ -100,6 +102,9 @@ predictive-search .predictive-search {
   display: flex;
   flex-direction: column;
   gap: 0;
+}
+.predictive-search__result-group:first-child {
+  flex: 1 1 auto !important;
 }
 
 /* Dawn's old "search for" term button — redundant now with the see-all

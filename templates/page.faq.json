@@ -11,25 +11,278 @@
   "sections": {
     "header": {
       "type": "ebels-faq-header",
-      "settings": {}
+      "blocks": {
+        "category_iFCM8a": {
+          "type": "category",
+          "settings": {
+            "category": "Shipping"
+          }
+        },
+        "category_8LWjxK": {
+          "type": "category",
+          "settings": {
+            "category": "Returns & Exchanges"
+          }
+        },
+        "category_q4h8zg": {
+          "type": "category",
+          "settings": {
+            "category": "Products"
+          }
+        },
+        "category_NEmx6f": {
+          "type": "category",
+          "settings": {
+            "category": "Orders and Payments"
+          }
+        }
+      },
+      "block_order": [
+        "category_iFCM8a",
+        "category_8LWjxK",
+        "category_q4h8zg",
+        "category_NEmx6f"
+      ],
+      "settings": {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Everything you need to know about shopping with EBELS",
+        "padding_top": 48,
+        "padding_bottom": 24
+      }
     },
     "accordion": {
       "type": "ebels-faq-accordion",
-      "settings": {}
+      "blocks": {
+        "faq_g3kCp4": {
+          "type": "faq",
+          "settings": {
+            "category": "Shipping",
+            "question": "How long does delivery take?",
+            "answer": "<p>Standard delivery takes 3-5 business days. Express delivery is available for next-day shipping on orders placed before 2pm. We offer free standard shipping on all orders over £50.</p>"
+          }
+        },
+        "faq_jyWnbR": {
+          "type": "faq",
+          "settings": {
+            "category": "Shipping",
+            "question": "Do you ship internationally?",
+            "answer": "<p>Yes, we ship to over 10 countries worldwide. International orders typically arrive within 7-14 business days depending on the destination. Customs duties and taxes may apply and are the responsibility of the recipient.</p>"
+          }
+        },
+        "faq_D9zPpP": {
+          "type": "faq",
+          "settings": {
+            "category": "Shipping",
+            "question": "How can I track my order?",
+            "answer": "<p>Once your order ships, you'll receive a confirmation email with a tracking number and link. You can also log into your account and check the order status under 'My Orders'. Tracking updates in real-time so you always know where your package is.</p>"
+          }
+        },
+        "faq_dL7zgN": {
+          "type": "faq",
+          "settings": {
+            "category": "Shipping",
+            "question": "What are the shipping costs?",
+            "answer": "<p>Standard shipping is free on all orders over £50. For orders under £50, standard shipping is £4.95. Express next-day delivery is available for £7.95. International shipping rates are calculated at checkout based on your location.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_g3kCp4",
+        "faq_jyWnbR",
+        "faq_D9zPpP",
+        "faq_dL7zgN"
+      ],
+      "settings": {
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "ebels_faq_accordion_FEF7Ge": {
+      "type": "ebels-faq-accordion",
+      "blocks": {
+        "faq_Ur6xdL": {
+          "type": "faq",
+          "settings": {
+            "category": "Returns & Exchanges",
+            "question": "What is your return policy?",
+            "answer": "<p>We offer a 30-day return policy on all unused and unopened products. Items must be in their original packaging with all seals intact. Sale items can be returned within 14 days. Simply initiate a return through your account or contact our support team.</p>"
+          }
+        },
+        "faq_ggKQmt": {
+          "type": "faq",
+          "settings": {
+            "category": "Returns & Exchanges",
+            "question": "How do I start a return?",
+            "answer": "<p>Log into your account and navigate to 'My Orders'. Select the order containing the item you'd like to return, click 'Request Return', and follow the prompts. You'll receive a prepaid return label via email within 24 hours.</p>"
+          }
+        },
+        "faq_WgTicp": {
+          "type": "faq",
+          "settings": {
+            "category": "Returns & Exchanges",
+            "question": "Can I exchange a product for a different shade?",
+            "answer": "<p>Absolutely! We offer free shade exchanges on all foundation, concealer, and lipstick products. Start an exchange through your account and select your preferred new shade. We'll ship the replacement as soon as we receive your return.</p>"
+          }
+        },
+        "faq_YV3Ufj": {
+          "type": "faq",
+          "settings": {
+            "category": "Returns & Exchanges",
+            "question": "How long do refunds take?",
+            "answer": "<p>Once we receive your returned item, refunds are processed within 3-5 business days. The refund will be issued to your original payment method. Please allow an additional 2-3 days for the amount to appear in your account depending on your bank.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_Ur6xdL",
+        "faq_ggKQmt",
+        "faq_WgTicp",
+        "faq_YV3Ufj"
+      ],
+      "settings": {
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "ebels_faq_accordion_K6WEJn": {
+      "type": "ebels-faq-accordion",
+      "blocks": {
+        "faq_WJKNJ3": {
+          "type": "faq",
+          "settings": {
+            "category": "Products",
+            "question": "Are your products cruelty-free?",
+            "answer": "<p>Yes, all of our products are 100% cruelty-free and certified by Leaping Bunny. We never test on animals at any stage of product development. Many of our products are also vegan-friendly — look for the vegan badge on the product page.</p>"
+          }
+        },
+        "faq_ndrkFT": {
+          "type": "faq",
+          "settings": {
+            "category": "Products",
+            "question": "How do I find my perfect shade?",
+            "answer": "<p>Try our virtual shade-matching tool on any foundation or concealer product page. Simply upload a selfie or use your camera for a real-time match. You can also visit one of our retail partners for an in-person consultation with a beauty advisor.</p>"
+          }
+        },
+        "faq_rJhcdf": {
+          "type": "faq",
+          "settings": {
+            "category": "Products",
+            "question": "Do you offer samples?",
+            "answer": "<p>Yes! We offer a sample programme where you can try up to 3 products before committing to a full size. Samples are available for £1.50 each and the cost is credited toward your next full-size purchase. Check the product page for sample availability.</p>"
+          }
+        },
+        "faq_XYrkLc": {
+          "type": "faq",
+          "settings": {
+            "category": "Products",
+            "question": "What ingredients do you use?",
+            "answer": "<p>We use clean, dermatologist-tested formulas free from parabens, sulphates, and synthetic fragrances. Every product page includes a full ingredient list and key active highlights. If you have specific allergy concerns, our customer care team can help you find suitable products.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_WJKNJ3",
+        "faq_ndrkFT",
+        "faq_rJhcdf",
+        "faq_XYrkLc"
+      ],
+      "settings": {
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "ebels_faq_accordion_kAimq3": {
+      "type": "ebels-faq-accordion",
+      "blocks": {
+        "faq_QYazwQ": {
+          "type": "faq",
+          "settings": {
+            "category": "Orders and Payments",
+            "question": "What payment methods do you accept?",
+            "answer": "<p>We accept all major credit and debit cards including Visa, Mastercard, and Amex. You can also pay with PayPal, Apple Pay, Google Pay, and Klarna for buy-now-pay-later options. All transactions are securely processed with 256-bit encryption.</p>"
+          }
+        },
+        "faq_EejKtG": {
+          "type": "faq",
+          "settings": {
+            "category": "Orders and Payments",
+            "question": "Can I modify my order after placing it?",
+            "answer": "<p>You can modify or cancel your order within 1 hour of placing it by going to 'My Orders' in your account. After that window, orders move into processing and can no longer be changed. If you need help, reach out to our support team as soon as possible.</p>"
+          }
+        },
+        "faq_zqEc8k": {
+          "type": "faq",
+          "settings": {
+            "category": "Orders and Payments",
+            "question": "Do you offer gift wrapping?",
+            "answer": "<p>Yes, we offer complimentary gift wrapping on all orders. Simply select the gift wrap option at checkout and add an optional personalised message. Your items will arrive beautifully wrapped in our signature tissue paper and ribbon packaging.</p>"
+          }
+        },
+        "faq_pCdwnK": {
+          "type": "faq",
+          "settings": {
+            "category": "Orders and Payments",
+            "question": "How do I apply a discount code?",
+            "answer": "<p>Enter your discount code in the 'Promo Code' field on the checkout page and click 'Apply'. The discount will be reflected in your order total immediately. Only one discount code can be used per order, and codes cannot be combined with other promotions.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_QYazwQ",
+        "faq_EejKtG",
+        "faq_zqEc8k",
+        "faq_pCdwnK"
+      ],
+      "settings": {
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
     },
     "cta": {
       "type": "ebels-faq-cta",
+      "settings": {
+        "title": "Still have questions?",
+        "subtitle": "Our beauty experts are here to help",
+        "primary_label": "Contact Us",
+        "primary_link": "shopify://pages/contact-us",
+        "secondary_label": "",
+        "secondary_link": "",
+        "hours_text": "Mon-Fri 9am-6pm, Sat 10am-4pm",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "ebels_collection_header_xQ7x3D": {
+      "type": "ebels-collection-header",
+      "name": "Ebels Collection Header",
+      "settings": {
+        "eyebrow": ""
+      }
+    },
+    "1785679641ace4fd11": {
+      "type": "_blocks",
       "settings": {}
     },
     "newsletter": {
       "type": "ebels-newsletter",
-      "settings": {}
+      "settings": {
+        "background": "#221b16",
+        "eyebrow": "Join the Inner Circle",
+        "heading": "Be the First to Know",
+        "text": "New drops, exclusive offers, and beauty tips — delivered straight to your inbox.",
+        "button_label": "Subscribe"
+      }
     }
   },
   "order": [
     "header",
     "accordion",
+    "ebels_faq_accordion_FEF7Ge",
+    "ebels_faq_accordion_K6WEJn",
+    "ebels_faq_accordion_kAimq3",
     "cta",
+    "ebels_collection_header_xQ7x3D",
+    "1785679641ace4fd11",
     "newsletter"
   ]
 }

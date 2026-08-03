@@ -20,7 +20,7 @@
             "heading": "Summer Glow Collection",
             "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
             "button_label": "Shop Now",
-            "button_link": ""
+            "button_link": "shopify://collections/all"
           }
         },
         "slide_XfRW4B": {
@@ -31,7 +31,7 @@
             "heading": "Bundles and Collections",
             "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
             "button_label": "Shop collections",
-            "button_link": ""
+            "button_link": "shopify://collections"
           }
         },
         "slide_4HeMnk": {
@@ -42,7 +42,7 @@
             "heading": "Summer Glow Collection",
             "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
             "button_label": "Shop Now",
-            "button_link": ""
+            "button_link": "shopify://collections/all"
           }
         },
         "slide_VPxFMz": {
@@ -51,9 +51,9 @@
             "image": "shopify://shop_images/hero_1_87fb98fd-2712-4228-88be-80d5dd133b33.png",
             "badge": "New Arrival",
             "heading": "Ebels handy chic",
-            "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
+            "text": "Discover our curated selection of affordable luxury everyday bags for the perfect summer look.",
             "button_label": "Get Carrying",
-            "button_link": "shopify://products/a2046-20-1"
+            "button_link": "shopify://collections/bags"
           }
         }
       },
@@ -82,7 +82,7 @@
         "collection_item_9ePnYa": {
           "type": "collection_item",
           "settings": {
-            "collection": "trueskin-foundations",
+            "collection": "perfumes",
             "custom_title": ""
           }
         },
@@ -103,14 +103,14 @@
         "collection_item_8V8G3p": {
           "type": "collection_item",
           "settings": {
-            "collection": "truecharm-lipsticks",
+            "collection": "bags",
             "custom_title": ""
           }
         },
         "collection_item_F78pTA": {
           "type": "collection_item",
           "settings": {
-            "collection": "trueskin-foundations",
+            "collection": "perfumes",
             "custom_title": ""
           }
         }
@@ -129,20 +129,11 @@
     "ebels_best_sellers_WYU4d7": {
       "type": "ebels-best-sellers",
       "blocks": {
-        "card_YGW9w9": {
-          "type": "card",
-          "settings": {
-            "product": "pure-grace-perfume",
-            "title": "",
-            "description": "An infinitely crisp, clean fragrance for everyday wear.",
-            "button_label": "",
-            "link": ""
-          }
-        },
         "card_KRGrWi": {
           "type": "card",
           "settings": {
-            "product": "sandstone-carryall",
+            "product": "onyx-evening-bag",
+            "image": "shopify://shop_images/side_8ae5a007-8912-43e7-b0c6-258601670db6.jpg",
             "title": "",
             "description": "A spacious, earthy tote for your daily essentials.",
             "button_label": "",
@@ -162,19 +153,30 @@
         "card_cb4z48": {
           "type": "card",
           "settings": {
-            "product": "a2046-20-1",
+            "product": "veridian-bucket-bag",
             "title": "",
             "description": "A sleek, rich-green bucket bag crafted for effortless everyday style.",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "card_YGW9w9": {
+          "type": "card",
+          "settings": {
+            "product": "emerald-attache",
+            "image": "shopify://shop_images/side.jpg",
+            "title": "",
+            "description": "An infinitely crisp, clean fragrance for everyday wear.",
             "button_label": "",
             "link": ""
           }
         }
       },
       "block_order": [
-        "card_YGW9w9",
         "card_KRGrWi",
         "card_mHfW9w",
-        "card_cb4z48"
+        "card_cb4z48",
+        "card_YGW9w9"
       ],
       "name": "Ebels Best Sellers",
       "settings": {
@@ -185,13 +187,6 @@
     "ebels_category_grid_pPDCyJ": {
       "type": "ebels-category-grid",
       "blocks": {
-        "tab_c6Gkzz": {
-          "type": "tab",
-          "settings": {
-            "collection": "bags",
-            "label": ""
-          }
-        },
         "tab_yqg3NM": {
           "type": "tab",
           "settings": {
@@ -199,8 +194,16 @@
             "label": ""
           }
         },
+        "tab_c6Gkzz": {
+          "type": "tab",
+          "settings": {
+            "collection": "bags",
+            "label": ""
+          }
+        },
         "tab_KFVbg4": {
           "type": "tab",
+          "disabled": true,
           "settings": {
             "collection": "truecharm-lipsticks",
             "label": ""
@@ -208,8 +211,8 @@
         }
       },
       "block_order": [
-        "tab_c6Gkzz",
         "tab_yqg3NM",
+        "tab_c6Gkzz",
         "tab_KFVbg4"
       ],
       "name": "Ebels Shop by Category",
@@ -233,31 +236,31 @@
         "card_qDxzUn": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Card_Image_2.png",
+            "image": "shopify://shop_images/Card_Image_1_d07b5bda-0ade-40da-861d-b0fa387dd974.png",
             "handle": "",
-            "product": "pure-grace-perfume"
+            "product": "sandstone-carryall"
           }
         },
         "card_y9YEQG": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Card_Image_1.png",
+            "image": "shopify://shop_images/Card_Image_15.png",
             "handle": "",
-            "product": "sandstone-carryall"
+            "product": "pure-grace-perfume"
           }
         },
         "card_Ny69hp": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Card_Image_5.png",
+            "image": "shopify://shop_images/Card_Image_2.png",
             "handle": "",
-            "product": "a2046-20-1"
+            "product": "the-glam-night-out"
           }
         },
         "card_78ypLH": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Card_Image_3.png",
+            "image": "shopify://shop_images/Card_Image_20.png",
             "handle": "",
             "product": "pure-joy-perfume"
           }
@@ -265,9 +268,9 @@
         "card_MjY6QG": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Card_Image_4.png",
+            "image": "shopify://shop_images/Card_Image_3_52ce3716-b7d4-4b37-8fb8-e4d61a2ba159.png",
             "handle": "",
-            "product": "pure-grace-perfume"
+            "product": "veridian-bucket-bag"
           }
         }
       },
@@ -405,17 +408,10 @@
             "contents": ""
           }
         },
-        "bundle_rddHqB": {
-          "type": "bundle",
-          "settings": {
-            "product": "real-man-perfume-coming-soon",
-            "contents": ""
-          }
-        },
         "bundle_pPneU3": {
           "type": "bundle",
           "settings": {
-            "product": "a2046-20-1",
+            "product": "veridian-bucket-bag",
             "contents": ""
           }
         },
@@ -439,16 +435,23 @@
             "product": "",
             "contents": ""
           }
+        },
+        "bundle_rddHqB": {
+          "type": "bundle",
+          "settings": {
+            "product": "real-man-perfume-coming-soon",
+            "contents": ""
+          }
         }
       },
       "block_order": [
         "bundle_8ibmmj",
         "bundle_TCbWpp",
-        "bundle_rddHqB",
         "bundle_pPneU3",
         "bundle_cwUkYm",
         "bundle_aRGWhC",
-        "bundle_JAhp74"
+        "bundle_JAhp74",
+        "bundle_rddHqB"
       ],
       "name": "Ebels Bundles Carousel",
       "settings": {

@@ -125,8 +125,8 @@
 .ebels-rv__add-to-bag {
   width: 100%;
   font-size: var(--text-caption-size);
-  padding-top: var(--space-2);
-  padding-bottom: var(--space-2);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
 }
 
 .ebels-rv__add-to-bag[disabled] {
@@ -150,6 +150,10 @@
 }
 
 @keyframes ebels-rv-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

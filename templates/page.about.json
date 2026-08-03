@@ -11,35 +11,172 @@
   "sections": {
     "hero": {
       "type": "ebels-about-hero",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/About_us_hearo.png",
+        "title": "Our Story",
+        "subtitle": "Where luxury meets self-expression",
+        "text_theme": "light",
+        "overlay": 60,
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
     },
     "intro": {
       "type": "ebels-about-intro",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/Lady.jpg",
+        "eyebrow": "SINCE 2024",
+        "title": "Born from a passion for beauty",
+        "body": "<p>EBELS was founded with a simple belief: every woman deserves access to luxury beauty that celebrates her uniqueness.</p>",
+        "padding_top": 60,
+        "padding_bottom": 0
+      }
     },
     "values": {
       "type": "ebels-about-values",
-      "settings": {}
+      "blocks": {
+        "value_D6EBMh": {
+          "type": "value",
+          "settings": {
+            "icon": "✦",
+            "title": "Conscious Beauty",
+            "text": "We prioritize clean ingredients and sustainable packaging."
+          }
+        },
+        "value_PemVXa": {
+          "type": "value",
+          "settings": {
+            "icon": "✦",
+            "title": "Artisan Craft",
+            "text": "Every product is handpicked for its exceptional quality and craftsmanship, ensuring a standard that never wavers."
+          }
+        },
+        "value_HbfnDQ": {
+          "type": "value",
+          "settings": {
+            "icon": "✦",
+            "title": "Inclusive Luxury",
+            "text": "Beauty for every skin tone and style. We believe luxury is a right, not a privilege, and should be accessible to all."
+          }
+        }
+      },
+      "block_order": [
+        "value_D6EBMh",
+        "value_PemVXa",
+        "value_HbfnDQ"
+      ],
+      "settings": {
+        "title": "What We Stand For",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     },
     "stats": {
       "type": "ebels-about-stats",
-      "settings": {}
+      "blocks": {
+        "stat_mKrFb6": {
+          "type": "stat",
+          "settings": {
+            "number": "50K+",
+            "label": "Happy Customers"
+          }
+        },
+        "stat_hDaEeh": {
+          "type": "stat",
+          "settings": {
+            "number": "200+",
+            "label": "Curated Products"
+          }
+        },
+        "stat_xi6NVW": {
+          "type": "stat",
+          "settings": {
+            "number": "10",
+            "label": "Countries Shipped To"
+          }
+        },
+        "stat_UWRRep": {
+          "type": "stat",
+          "settings": {
+            "number": "4.8★",
+            "label": "Average rating"
+          }
+        }
+      },
+      "block_order": [
+        "stat_mKrFb6",
+        "stat_hDaEeh",
+        "stat_xi6NVW",
+        "stat_UWRRep"
+      ],
+      "settings": {
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
     },
     "promise": {
       "type": "ebels-about-promise",
-      "settings": {}
+      "blocks": {
+        "item_GMLjVz": {
+          "type": "item",
+          "settings": {
+            "text": "Quality Guarantee"
+          }
+        },
+        "item_nbEHiy": {
+          "type": "item",
+          "settings": {
+            "text": "Ethical Sourcing"
+          }
+        },
+        "item_PYUaHG": {
+          "type": "item",
+          "settings": {
+            "text": "Sustainable Packaging"
+          }
+        }
+      },
+      "block_order": [
+        "item_GMLjVz",
+        "item_nbEHiy",
+        "item_PYUaHG"
+      ],
+      "settings": {
+        "title": "Our Promise",
+        "body": "<p>At EBELS, we stand by every product we curate. We guarantee quality, ethical sourcing, and sustainable packaging. But most importantly, we guarantee your satisfaction. If you don't feel like the best version of yourself, we're here to help you find it.</p>",
+        "image": "shopify://shop_images/woman-poses-in-dark-room.jpg",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     },
     "cta": {
       "type": "ebels-about-cta",
-      "settings": {}
+      "settings": {
+        "title": "Ready to discover your signature look?",
+        "button_label": "Shop Now",
+        "button_link": "shopify://collections/all",
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
     },
     "promo": {
       "type": "ebels-promo-banner",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "height": "standard",
+        "autoplay": true,
+        "autoplay_speed": 7
+      }
     },
     "newsletter": {
       "type": "ebels-newsletter",
-      "settings": {}
+      "settings": {
+        "background": "#221b16",
+        "eyebrow": "Join the Inner Circle",
+        "heading": "Be the First to Know",
+        "text": "New drops, exclusive offers, and beauty tips — delivered straight to your inbox.",
+        "button_label": "Subscribe"
+      }
     }
   },
   "order": [
