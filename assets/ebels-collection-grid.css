@@ -216,11 +216,11 @@
   margin-bottom: var(--space-2);
 }
 
-.ebels-cg__stars {
+/* .ebels-cg__stars {
   color: var(--ebels-amber);
   font-size: 11px;
   letter-spacing: 1px;
-}
+} Old fake stars */
 
 .ebels-cg__swatches {
   display: flex;

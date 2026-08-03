@@ -62,10 +62,12 @@
       <p class="ebels-label">{{ product.vendor }}</p>
       <h1 class="ebels-h1">{{ product.title }}</h1>
 
-      <div class="ebels-product__rating" data-review-placeholder>
-        {%- comment -%} Placeholder markup — wire to review app in the reviews phase {%- endcomment -%}
-        <span class="ebels-product__stars" aria-hidden="true">★★★★★</span>
-        <span class="ebels-body-sm">4.8 (312 reviews)</span>
+      <div class="ebels-product__rating">
+        <!-- Start of Judge.me code -->
+        <div style='{{ jm_style }}' class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'>
+          {{ product.metafields.judgeme.badge }}
+        </div>
+        <!-- End of Judge.me code -->
       </div>
 
       <p class="ebels-product__price ebels-h4" data-product-price>

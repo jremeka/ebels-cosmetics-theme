@@ -100,7 +100,7 @@
     var totalDollars = totalCents / 100;
 
     if (totalDollars >= threshold) {
-      shippingMsgEl.textContent = "🚚 You've unlocked free shipping!";
+      // shippingMsgEl.textContent = "🚚 You've unlocked free shipping!";
     } else {
       var remaining = (threshold - totalDollars).toFixed(2);
       shippingMsgEl.textContent = '🚚 You\'re $' + remaining + ' away from free shipping!';

@@ -96,11 +96,11 @@
   margin-bottom: var(--space-2);
 }
 
-.ebels-ctl__stars {
+/* .ebels-ctl__stars {
   color: var(--ebels-amber);
   font-size: 11px;
   letter-spacing: 1px;
-}
+} Old fake stars */
 
 .ebels-ctl__add-to-bag {
   width: 100%;

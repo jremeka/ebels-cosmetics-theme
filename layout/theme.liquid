@@ -289,6 +289,15 @@
 <script src="{{ 'ebels-motion.js' | asset_url }}" defer></script>
 <script src="{{ 'ebels-wishlist.js' | asset_url }}" defer></script>
 {{ 'ebels-wishlist-card.css' | asset_url | stylesheet_tag }}
+<script>
+  const observer78 = new MutationObserver(() => {
+    if (jdgm.customizeBadges) {
+      jdgm.customizeBadges();
+    }
+  });
+  observer78.observe(document.documentElement, { childList: true, subtree: true });
+</script>
+{% comment %} refresh script from judg.me above {% endcomment %}
     {{ 'base.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 

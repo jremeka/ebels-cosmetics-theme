@@ -103,11 +103,11 @@
       +   '</a>'
       +   '<div class="ebels-rv__info">'
       +     '<a href="' + url + '" class="ebels-rv__title-link"><h3 class="ebels-rv__title">' + title + '</h3></a>'
-      +     '<p class="ebels-rv__price">' + price + '</p>'
-      +     '<div class="ebels-rv__rating" data-review-placeholder>'
-      +       '<span class="ebels-rv__stars" aria-hidden="true">★★★★★</span>'
-      +       '<span class="ebels-caption">4.8</span>'
+        +     '<p class="ebels-rv__price">' + price + '</p>'
+      +     '<div class="ebels-rv__rating">'
+      +       "<div class='jdgm-widget jdgm-preview-badge' data-id='" + product.id + "' data-auto-install='false'></div>"
       +     '</div>'
+
       +     '<button type="button" class="ebels-btn ebels-btn--outline ebels-rv__add-to-bag" data-add-to-bag-rv data-variant-id="' + variant.id + '"' + (available ? '' : ' disabled') + '>'
       +       (available ? 'Add to Bag' : 'Sold Out')
       +     '</button>'

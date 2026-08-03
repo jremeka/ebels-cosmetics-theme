@@ -25,6 +25,7 @@
     },
     "ebels_newsletter_krc487": {
       "type": "ebels-newsletter",
+      "disabled": true,
       "name": "Ebels Newsletter",
       "settings": {
         "background": "#221b16",

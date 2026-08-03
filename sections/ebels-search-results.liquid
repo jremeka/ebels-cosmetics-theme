@@ -29,9 +29,12 @@
               </a>
 
               <div class="ebels-sr__info">
-                <div class="ebels-sr__rating" data-review-placeholder>
-                  <span class="ebels-sr__stars" aria-hidden="true">★★★★★</span>
-                  <span class="ebels-caption">(120)</span>
+                <div class="ebels-sr__rating">
+                  <!-- Start of Judge.me code -->
+                  <div style='{{ jm_style }}' class='jdgm-widget jdgm-preview-badge' data-id='{{ item.id }}' data-auto-install='false'>
+                    {{ item.metafields.judgeme.badge }}
+                  </div>
+                  <!-- End of Judge.me code -->
                 </div>
 
                 <a href="{{ item.url }}" class="ebels-sr__title-link">

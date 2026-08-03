@@ -42,9 +42,12 @@
             </a>
             <p class="ebels-ctl__price">{{ ctl_variant.price | money }}</p>
 
-            <div class="ebels-ctl__rating" data-review-placeholder>
-              <span class="ebels-ctl__stars" aria-hidden="true">★★★★★</span>
-              <span class="ebels-caption">4.9 (120 reviews)</span>
+            <div class="ebels-ctl__rating">
+              <!-- Start of Judge.me code -->
+              <div style='{{ jm_style }}' class='jdgm-widget jdgm-preview-badge' data-id='{{ ctl_product.id }}' data-auto-install='false'>
+                {{ ctl_product.metafields.judgeme.badge }}
+              </div>
+              <!-- End of Judge.me code -->
             </div>
 
             <button

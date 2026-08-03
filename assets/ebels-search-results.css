@@ -52,11 +52,11 @@
   margin-bottom: var(--space-1);
 }
 
-.ebels-sr__stars {
+/* .ebels-sr__stars {
   color: var(--ebels-amber);
   font-size: 11px;
   letter-spacing: 1px;
-}
+} fake stars */
 
 .ebels-sr__title-link {
   text-decoration: none;
