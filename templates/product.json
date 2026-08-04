@@ -24,7 +24,12 @@
           "type": "tab",
           "settings": {
             "label": "Description",
-            "use_product_description": true
+            "use_product_description": true,
+            "use_metafield": true,
+            "metafield_key": "",
+            "heading": "",
+            "body": "",
+            "checklist_items": "Soul Seasons Collection\nClean, warm \"soap and water\" accord\nLong-wear formula, skin-close sillage\nCompact glass bottle, ideal for on-the-go touch-ups"
           }
         }
       },
@@ -41,16 +46,16 @@
       }
     },
     "ebels_reviews": {
-  "type": "ebels-reviews",
-  "settings": {}
-},
+      "type": "ebels-reviews",
+      "settings": {}
+    },
     "ebels_real_looks": {
-  "type": "ebels-real-looks",
-  "settings": {
-    "heading": "Real People, Real Looks",
-    "subheading": "See how our community wears this look. Tag us"
-  }
-},
+      "type": "ebels-real-looks",
+      "settings": {
+        "heading": "Real People, Real Looks",
+        "subheading": "See how our community wears this look. Tag us"
+      }
+    },
     "ebels_recently_viewed": {
       "type": "ebels-recently-viewed",
       "settings": {

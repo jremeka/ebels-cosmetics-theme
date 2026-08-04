@@ -39,7 +39,13 @@
     <div class="ebels-tabs__panels">
       {%- for block in section.blocks -%}
         {%- liquid
-          assign checklist_items = block.settings.checklist_items | newline_to_br | split: '<br />'
+          if block.settings.use_checklist_metafield and block.settings.checklist_metafield_key != blank
+            assign checklist_mf_parts = block.settings.checklist_metafield_key | split: '.'
+            assign checklist_source = product.metafields[checklist_mf_parts[0]][checklist_mf_parts[1]].value
+          else
+            assign checklist_source = block.settings.checklist_items
+          endif
+          assign checklist_items = checklist_source | newline_to_br | split: '<br />'
 
           assign tab_body = block.settings.body
           assign tab_heading = block.settings.heading
@@ -72,7 +78,7 @@
               {%- endif -%}
             </div>
 
-            {%- if block.settings.checklist_items != blank -%}
+            {%- if checklist_source != blank -%}
               <ul class="ebels-tabs__checklist">
                 {%- for item in checklist_items -%}
                   {%- assign trimmed_item = item | strip -%}
@@ -142,10 +148,23 @@
           "label": "Body text (used only if neither option above is checked)"
         },
         {
+          "type": "checkbox",
+          "id": "use_checklist_metafield",
+          "label": "Use a product metafield for checklist items",
+          "info": "Requires creating the metafield definition once in Admin first, same as above.",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "checklist_metafield_key",
+          "label": "Checklist metafield key",
+          "info": "Format: namespace.key — e.g. custom.product_highlights"
+        },
+        {
           "type": "textarea",
           "id": "checklist_items",
-          "label": "Checklist items (optional)",
-          "info": "One item per line. Same on every product — fine for generic claims, but shows identically everywhere."
+          "label": "Checklist items (used only if metafield above is off)",
+          "info": "One item per line. Same on every product — fine for truly generic claims only."
         }
       ]
     }
