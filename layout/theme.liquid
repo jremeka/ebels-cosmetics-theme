@@ -291,7 +291,7 @@
 {{ 'ebels-wishlist-card.css' | asset_url | stylesheet_tag }}
 <script>
   const observer78 = new MutationObserver(() => {
-    if (jdgm.customizeBadges) {
+    if (typeof jdgm !== 'undefined' && jdgm.customizeBadges) {
       jdgm.customizeBadges();
     }
   });

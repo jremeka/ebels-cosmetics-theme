@@ -29,7 +29,9 @@
             "metafield_key": "",
             "heading": "",
             "body": "",
-            "checklist_items": "Soul Seasons Collection\nClean, warm \"soap and water\" accord\nLong-wear formula, skin-close sillage\nCompact glass bottle, ideal for on-the-go touch-ups"
+            "use_checklist_metafield": true,
+            "checklist_metafield_key": "custom.product_highlights",
+            "checklist_items": ""
           }
         }
       },

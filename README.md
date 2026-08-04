@@ -1,17 +1,15 @@
-# Ebels Cosmetics — Shopify Theme
+# Ebels Cosmetics — Storefront Theme
 
-Custom Shopify storefront for **Ebels Cosmetics**, a US-market cosmetics and lifestyle
-brand selling handbags, perfumes, wigs, foundation, and lipsticks.
-
-This theme is a heavily customized fork of Shopify's [Dawn](https://github.com/Shopify/dawn)
-reference theme. Every customer-facing page is being rebuilt with custom, brand-specific
-sections — fully editable from the Shopify theme editor, no code required for day-to-day
-content changes.
+The custom Shopify storefront for **Ebels Cosmetics**, a US-market cosmetics and lifestyle
+brand — handbags, perfumes, wigs, foundation, and lipsticks. Every customer-facing page is
+purpose-built for the brand: fully custom sections, fully editable from the theme editor,
+no code required for day-to-day content changes.
 
 ## Live theme
 
 - Shopify admin theme name: **Ebels Custom Dev**
-- Store: `ebelscosmetics.myshopify.com`
+- Storefront: `ebelscosmetics.com`
+- Shopify store (admin/CLI): `ebelscosmetics.myshopify.com`
 
 ## Design system
 
@@ -23,15 +21,18 @@ content changes.
 
 ## Project structure
 
-Custom files are prefixed `ebels-*` throughout `sections/`, `assets/`, and `snippets/` to
-keep them clearly separated from Dawn's original files. Each custom section is generally
-a trio:
+Every custom file is prefixed `ebels-*` throughout `sections/`, `assets/`, and `snippets/`.
+Each section is generally a trio:
 
 ```
 sections/ebels-example.liquid
 assets/ebels-example.css
 assets/ebels-example.js   (only when real interactivity is needed)
 ```
+
+Real per-product content (descriptions, ingredients, how-to-use, cross-sells, UGC posts)
+is driven by Shopify metafields rather than static template content, so every product
+page reflects that specific product — not shared, duplicated content across the catalog.
 
 ## Local development
 
@@ -52,12 +53,6 @@ shopify theme push
 
 Uploads the current local files to the theme on Shopify's servers. Confirm you're pushing
 to **Ebels Custom Dev**, not creating a new theme, when prompted.
-
-## Contributing / working on this project
-
-See `CLAUDE.md` in the project root for full build context, design system details, naming
-conventions, and a running list of known bug patterns to avoid repeating — kept up to date
-as the project progresses.
 
 ## License
 

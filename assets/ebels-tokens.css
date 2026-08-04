@@ -154,7 +154,7 @@
 }
 
 .jdgm-widget,
-.jdgm-widget *:not(.jdgm-star):not(.jdgm-prev-badge__stars) {
+.jdgm-widget *:not(.jdgm-star):not(.jdgm-prev-badge__stars):not(.jm-star-rating__font-icon) {
   font-family: var(--font-body) !important;
 }
 
