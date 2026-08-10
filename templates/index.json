@@ -12,9 +12,23 @@
     "ebels_hero_ifqdGb": {
       "type": "ebels-hero",
       "blocks": {
-        "slide_NQAaJf": {
+        "slide_kWm4Lz": {
           "type": "slide",
           "settings": {
+            "media_type": "video",
+            "video": "shopify://files/videos/0_Woman_Portrait_1280x720.mp4",
+            "badge": "New Arrival",
+            "heading": "Summer Glow Collection",
+            "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections"
+          }
+        },
+        "slide_NQAaJf": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "media_type": "image",
             "image": "shopify://shop_images/Gemini_Generated_Image_20b1lg20b1lg20b1.png",
             "badge": "New Arrival",
             "heading": "Summer Glow Collection",
@@ -25,7 +39,9 @@
         },
         "slide_XfRW4B": {
           "type": "slide",
+          "disabled": true,
           "settings": {
+            "media_type": "image",
             "image": "shopify://shop_images/hero.png",
             "badge": "Bundles",
             "heading": "Bundles and Collections",
@@ -36,7 +52,9 @@
         },
         "slide_4HeMnk": {
           "type": "slide",
+          "disabled": true,
           "settings": {
+            "media_type": "image",
             "image": "shopify://shop_images/fall-fashion-on-black-brick.jpg",
             "badge": "New Arrival",
             "heading": "Summer Glow Collection",
@@ -47,7 +65,9 @@
         },
         "slide_VPxFMz": {
           "type": "slide",
+          "disabled": true,
           "settings": {
+            "media_type": "image",
             "image": "shopify://shop_images/hero_1_87fb98fd-2712-4228-88be-80d5dd133b33.png",
             "badge": "New Arrival",
             "heading": "Ebels handy chic",
@@ -58,6 +78,7 @@
         }
       },
       "block_order": [
+        "slide_kWm4Lz",
         "slide_NQAaJf",
         "slide_XfRW4B",
         "slide_4HeMnk",
@@ -292,36 +313,6 @@
         "subheading": "Real customers, real looks. Tag #EBELSbabes for a chance to be featured."
       }
     },
-    "ebels_promo_banner_pfdtMt": {
-      "type": "ebels-promo-banner",
-      "blocks": {
-        "banner_c9nzEH": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_y10sx4y10sx4y10s.png",
-            "badge": "Luminaire",
-            "heading": "Summer Radiance Shine",
-            "text": "Up to 40% off site wide andIn-Store",
-            "button_label": "Purchase today!",
-            "button_link": "",
-            "content_position": "left",
-            "text_theme": "light",
-            "overlay": 0,
-            "button_style": "white",
-            "kenburns": true
-          }
-        }
-      },
-      "block_order": [
-        "banner_c9nzEH"
-      ],
-      "name": "Ebels Promo Banner",
-      "settings": {
-        "height": "standard",
-        "autoplay": true,
-        "autoplay_speed": 7
-      }
-    },
     "ebels_promo_tiles_NQc4gH": {
       "type": "ebels-promo-tiles",
       "blocks": {
@@ -463,6 +454,36 @@
         "subheading": "Save more when you bundle your favourites together."
       }
     },
+    "ebels_promo_banner_pfdtMt": {
+      "type": "ebels-promo-banner",
+      "blocks": {
+        "banner_c9nzEH": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_y10sx4y10sx4y10s.png",
+            "badge": "Luminaire",
+            "heading": "Summer Radiance Shine",
+            "text": "Up to 40% off site wide andIn-Store",
+            "button_label": "Purchase today!",
+            "button_link": "",
+            "content_position": "left",
+            "text_theme": "light",
+            "overlay": 0,
+            "button_style": "white",
+            "kenburns": true
+          }
+        }
+      },
+      "block_order": [
+        "banner_c9nzEH"
+      ],
+      "name": "Ebels Promo Banner",
+      "settings": {
+        "height": "standard",
+        "autoplay": true,
+        "autoplay_speed": 7
+      }
+    },
     "ebels_offers_strip_FxUpPN": {
       "type": "ebels-offers-strip",
       "blocks": {
@@ -514,9 +535,9 @@
     "ebels_best_sellers_WYU4d7",
     "ebels_category_grid_pPDCyJ",
     "ebels_ugc_strip_FRWNqP",
-    "ebels_promo_banner_pfdtMt",
     "ebels_promo_tiles_NQc4gH",
     "ebels_bundles_carousel_3WGcbR",
+    "ebels_promo_banner_pfdtMt",
     "ebels_offers_strip_FxUpPN",
     "ebels_newsletter_X6bYwh"
   ]

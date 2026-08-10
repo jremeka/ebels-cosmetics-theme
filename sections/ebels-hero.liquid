@@ -3,13 +3,52 @@
   Custom section — slides managed as blocks in the theme editor.
   Matches Figma homepage hero: badge, Fraunces heading, text, CTA,
   image right with espresso gradient overlay, dot navigation.
+
+  Each slide can be an Image or a Video (set per-block via "Slide type").
+  Video slides get small mute (left) / pause (right) controls, autoplay
+  muted, and the carousel waits for the video to finish before advancing
+  to the next slide. If a hero has only one block and it's a video, that
+  video loops forever instead of trying to advance.
 {% endcomment %}
 
 <div class="ebels-hero" id="EbelsHero-{{ section.id }}" data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed | times: 1000 }}">
   <div class="ebels-hero__track">
     {% for block in section.blocks %}
-      <div class="ebels-hero__slide{% if forloop.first %} is-active{% endif %}" data-slide-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
-        {% if block.settings.image %}
+      <div class="ebels-hero__slide{% if forloop.first %} is-active{% endif %}" data-slide-index="{{ forloop.index0 }}" data-media-type="{{ block.settings.media_type }}" {{ block.shopify_attributes }}>
+        {% if block.settings.media_type == 'video' and block.settings.video != null %}
+          <div class="ebels-hero__media ebels-hero__media--video">
+            <video
+              class="ebels-hero__video"
+              muted
+              playsinline
+              preload="{% if forloop.first %}auto{% else %}none{% endif %}"
+              {% if block.settings.video.preview_image %}poster="{{ block.settings.video.preview_image | image_url: width: 2000 }}"{% endif %}
+            >
+              <source src="{{ block.settings.video.sources.last.url }}" type="video/mp4">
+            </video>
+          </div>
+          <div class="ebels-hero__video-controls">
+            <button type="button" class="ebels-hero__video-btn ebels-hero__video-btn--mute" data-hero-mute aria-label="Unmute video">
+              <svg class="ebels-hero__icon ebels-hero__icon-mute-off" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 5 6 9H3v6h3l5 4V5Z" fill="currentColor"/>
+                <path d="m16 9 5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <svg class="ebels-hero__icon ebels-hero__icon-mute-on" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 5 6 9H3v6h3l5 4V5Z" fill="currentColor"/>
+                <path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a9 9 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button type="button" class="ebels-hero__video-btn ebels-hero__video-btn--play" data-hero-play aria-label="Pause video">
+              <svg class="ebels-hero__icon ebels-hero__icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/>
+                <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/>
+              </svg>
+              <svg class="ebels-hero__icon ebels-hero__icon-play" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 5v14l12-7-12-7Z" fill="currentColor"/>
+              </svg>
+            </button>
+          </div>
+        {% elsif block.settings.image %}
           {% if forloop.first %}
             {% assign img_loading = 'eager' %}
           {% else %}
@@ -24,7 +63,10 @@
           </div>
         {% endif %}
         <div class="ebels-hero__overlay"></div>
-        <div class="ebels-hero__content">
+        {% if block.settings.overlay > 0 %}
+          <div class="ebels-hero__overlay-extra" style="opacity: {{ block.settings.overlay | divided_by: 100.0 }};"></div>
+        {% endif %}
+        <div class="ebels-hero__content ebels-hero__content--{{ block.settings.text_theme }} ebels-hero__content--{{ block.settings.content_position }}">
           {% if block.settings.badge != blank %}
             <span class="ebels-hero__badge">{{ block.settings.badge }}</span>
           {% endif %}
@@ -94,6 +136,15 @@
     object-fit: cover;
   }
 
+  .ebels-hero__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: var(--ebels-ink, #221B16);
+  }
+
   .ebels-hero__overlay {
     position: absolute;
     inset: 0;
@@ -101,6 +152,16 @@
       rgba(34, 27, 22, 0.88) 0%,
       rgba(34, 27, 22, 0.65) 35%,
       rgba(34, 27, 22, 0.05) 70%);
+  }
+
+  /* Extra flat darkening layer — sits on top of the gradient above,
+     opacity set inline from the "Darkening overlay" slider. Only
+     rendered when that setting is above 0, so default slides are
+     unaffected. */
+  .ebels-hero__overlay-extra {
+    position: absolute;
+    inset: 0;
+    background: var(--ebels-ink, #221B16);
   }
 
   .ebels-hero__content {
@@ -115,6 +176,18 @@
   padding: 140px var(--space-12) var(--space-12);
   margin-left: max(calc((100vw - 1440px) / 2), 0px);
 }
+
+  .ebels-hero__content--center {
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .ebels-hero__content--right {
+    margin-left: auto;
+    margin-right: max(calc((100vw - 1440px) / 2), 0px);
+    align-items: flex-start;
+  }
 
   .ebels-hero__badge {
     font-family: var(--font-body);
@@ -135,7 +208,6 @@
     font-size: var(--text-h1-size);
     line-height: var(--text-h1-line);
     letter-spacing: var(--text-h1-tracking);
-    color: var(--text-inverse);
     margin: 0 0 var(--space-4);
   }
 
@@ -143,9 +215,16 @@
     font-family: var(--font-body);
     font-size: var(--text-body-size);
     line-height: var(--text-body-line);
-    color: rgba(255, 251, 247, 0.85);
     margin: 0 0 var(--space-6);
   }
+
+  /* Light text theme (dark artwork) — matches current default look */
+  .ebels-hero__content--light .ebels-hero__heading { color: #FFFFFF; }
+  .ebels-hero__content--light .ebels-hero__text { color: rgba(255, 251, 247, 0.85); }
+
+  /* Dark text theme (light artwork) */
+  .ebels-hero__content--dark .ebels-hero__heading { color: var(--text-primary); }
+  .ebels-hero__content--dark .ebels-hero__text { color: var(--text-primary); opacity: 0.75; }
 
   .ebels-hero__dots {
   position: absolute;
@@ -174,6 +253,66 @@
     width: 20px;
   }
 
+  /* ----- Video mute / pause controls ----- */
+  .ebels-hero__video-controls {
+    position: absolute;
+    bottom: var(--space-6);
+    left: var(--space-6);
+    right: var(--space-6);
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+
+  .ebels-hero__video-btn {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: rgba(0, 0, 0, 0.45);
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .ebels-hero__video-btn:hover {
+    background: rgba(0, 0, 0, 0.65);
+    transform: scale(1.06);
+  }
+
+  .ebels-hero__video-btn svg {
+    display: block;
+  }
+
+  .ebels-hero__icon-mute-on {
+    display: none;
+  }
+
+  .ebels-hero__video-btn--mute.is-unmuted .ebels-hero__icon-mute-on {
+    display: block;
+  }
+
+  .ebels-hero__video-btn--mute.is-unmuted .ebels-hero__icon-mute-off {
+    display: none;
+  }
+
+  .ebels-hero__icon-play {
+    display: none;
+  }
+
+  .ebels-hero__video-btn--play.is-paused .ebels-hero__icon-play {
+    display: block;
+  }
+
+  .ebels-hero__video-btn--play.is-paused .ebels-hero__icon-pause {
+    display: none;
+  }
+
   @media screen and (max-width: 749px) {
     .ebels-hero__track { min-height: 100svh; }
     .ebels-hero__content {
@@ -187,50 +326,147 @@
         rgba(34, 27, 22, 0.1) 0%,
         rgba(34, 27, 22, 0.85) 70%);
     }
+    /* Hero text sits at the bottom on mobile, so keep the video controls
+       up near the header instead of colliding with the CTA button. */
+    .ebels-hero__video-controls {
+      top: 84px;
+      bottom: auto;
+      left: var(--space-4);
+      right: var(--space-4);
+    }
   }
 {% endstyle %}
 
 <script>
   (function () {
     function initHero(root) {
-      var slides = root.querySelectorAll('.ebels-hero__slide');
-      var dots = root.querySelectorAll('.ebels-hero__dot');
-      if (slides.length < 2) return;
+      var slides = Array.prototype.slice.call(root.querySelectorAll('.ebels-hero__slide'));
+      var dots = Array.prototype.slice.call(root.querySelectorAll('.ebels-hero__dot'));
+      if (!slides.length) return;
 
       var current = 0;
       var timer = null;
       var autoplay = root.dataset.autoplay === 'true';
       var speed = parseInt(root.dataset.speed, 10) || 6000;
+      var singleSlide = slides.length < 2;
 
-      function goTo(index) {
-        slides[current].classList.remove('is-active');
-        if (dots[current]) dots[current].classList.remove('is-active');
-        current = (index + slides.length) % slides.length;
-        slides[current].classList.add('is-active');
-        if (dots[current]) dots[current].classList.add('is-active');
-      }
-
-      function startAutoplay() {
-        if (!autoplay) return;
-        stopAutoplay();
-        timer = setInterval(function () { goTo(current + 1); }, speed);
+      function getVideo(slide) {
+        return slide.querySelector('.ebels-hero__video');
       }
 
       function stopAutoplay() {
         if (timer) clearInterval(timer);
+        timer = null;
       }
+
+      function startAutoplay() {
+        if (!autoplay || singleSlide) return;
+        stopAutoplay();
+        timer = setInterval(function () { goTo(current + 1); }, speed);
+      }
+
+      function onVideoEnded(e) {
+        e.target.removeEventListener('ended', onVideoEnded);
+        goTo(current + 1);
+      }
+
+      function activateVideo(slide) {
+        var video = getVideo(slide);
+        if (!video) return;
+        var muteBtn = slide.querySelector('[data-hero-mute]');
+        var playBtn = slide.querySelector('[data-hero-play]');
+
+        // Reset to muted + unpaused on every activation — browsers block
+        // autoplay on unmuted video, so this keeps the loop reliable.
+        video.muted = true;
+        video.loop = singleSlide;
+        if (muteBtn) {
+          muteBtn.classList.remove('is-unmuted');
+          muteBtn.setAttribute('aria-label', 'Unmute video');
+        }
+        if (playBtn) {
+          playBtn.classList.remove('is-paused');
+          playBtn.setAttribute('aria-label', 'Pause video');
+        }
+
+        try { video.currentTime = 0; } catch (err) {}
+        video.play().catch(function () {});
+
+        if (!singleSlide) {
+          video.addEventListener('ended', onVideoEnded);
+        }
+      }
+
+      function goTo(index) {
+        var prevSlide = slides[current];
+        var prevVideo = getVideo(prevSlide);
+        if (prevVideo) {
+          prevVideo.pause();
+          prevVideo.removeEventListener('ended', onVideoEnded);
+        }
+        prevSlide.classList.remove('is-active');
+        if (dots[current]) dots[current].classList.remove('is-active');
+
+        current = (index + slides.length) % slides.length;
+
+        var nextSlide = slides[current];
+        nextSlide.classList.add('is-active');
+        if (dots[current]) dots[current].classList.add('is-active');
+
+        if (nextSlide.dataset.mediaType === 'video') {
+          stopAutoplay();
+          activateVideo(nextSlide);
+        } else {
+          startAutoplay();
+        }
+      }
+
+      slides.forEach(function (slide) {
+        var video = getVideo(slide);
+        if (!video) return;
+        var muteBtn = slide.querySelector('[data-hero-mute]');
+        var playBtn = slide.querySelector('[data-hero-play]');
+
+        if (muteBtn) {
+          muteBtn.addEventListener('click', function () {
+            video.muted = !video.muted;
+            muteBtn.classList.toggle('is-unmuted', !video.muted);
+            muteBtn.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
+          });
+        }
+        if (playBtn) {
+          playBtn.addEventListener('click', function () {
+            if (video.paused) {
+              video.play().catch(function () {});
+              playBtn.classList.remove('is-paused');
+              playBtn.setAttribute('aria-label', 'Pause video');
+            } else {
+              video.pause();
+              playBtn.classList.add('is-paused');
+              playBtn.setAttribute('aria-label', 'Play video');
+            }
+          });
+        }
+      });
 
       dots.forEach(function (dot) {
         dot.addEventListener('click', function () {
           goTo(parseInt(dot.dataset.dotIndex, 10));
-          startAutoplay();
         });
       });
 
-      root.addEventListener('mouseenter', stopAutoplay);
-      root.addEventListener('mouseleave', startAutoplay);
+      root.addEventListener('mouseenter', function () {
+        if (slides[current].dataset.mediaType !== 'video') stopAutoplay();
+      });
+      root.addEventListener('mouseleave', function () {
+        if (slides[current].dataset.mediaType !== 'video') startAutoplay();
+      });
 
-      startAutoplay();
+      if (slides[current].dataset.mediaType === 'video') {
+        activateVideo(slides[current]);
+      } else {
+        startAutoplay();
+      }
     }
 
     document.querySelectorAll('.ebels-hero').forEach(initHero);
@@ -258,6 +494,7 @@
       "type": "range",
       "id": "autoplay_speed",
       "label": "Seconds per slide",
+      "info": "Only applies to Image slides — Video slides advance on their own once the video finishes.",
       "min": 3,
       "max": 10,
       "step": 1,
@@ -270,10 +507,26 @@
       "name": "Slide",
       "settings": [
         {
+          "type": "select",
+          "id": "media_type",
+          "label": "Slide type",
+          "options": [
+            { "value": "image", "label": "Image" },
+            { "value": "video", "label": "Video" }
+          ],
+          "default": "image"
+        },
+        {
           "type": "image_picker",
           "id": "image",
           "label": "Background image",
-          "info": "2880 × 1800px recommended. Full-bleed, fills the screen height — keep key subject centered-to-right, since the left ~40% gets a dark overlay for text."
+          "info": "2880 × 1800px recommended. Full-bleed, fills the screen height — keep key subject centered-to-right, since the left ~40% gets a dark overlay for text. Only used when Slide type is Image."
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "MP4, uploaded via Shopify Files. Keep it short and under ~15MB for fast loading. Only used when Slide type is Video — the Background image above is ignored in that case."
         },
         {
           "type": "text",
@@ -303,6 +556,37 @@
           "type": "url",
           "id": "button_link",
           "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "Content position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "text_theme",
+          "label": "Text color",
+          "options": [
+            { "value": "light", "label": "Light (for dark artwork)" },
+            { "value": "dark", "label": "Dark (for light artwork)" }
+          ],
+          "default": "light"
+        },
+        {
+          "type": "range",
+          "id": "overlay",
+          "label": "Darkening overlay",
+          "min": 0,
+          "max": 60,
+          "step": 5,
+          "default": 0,
+          "info": "Adds extra darkening on top of the built-in gradient — helps when text sits on busy artwork."
         }
       ]
     }
