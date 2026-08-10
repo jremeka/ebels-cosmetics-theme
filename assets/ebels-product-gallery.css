@@ -1,0 +1,50 @@
+/* ==========================================================================
+   EBELS PRODUCT GALLERY — capped thumbnails
+   Desktop only (min-width: 750px) — mobile's thumbnail strip already
+   scrolls horizontally instead of wrapping, so it doesn't have the
+   stretching issue this fixes.
+
+   Caps the thumbnail grid at N images (N is set via the
+   ebels_thumb_cap variable in snippets/product-media-gallery.liquid)
+   and shows a "+X" overlay on the last visible thumbnail for anything
+   beyond that. Clicking it reveals the rest inline.
+   ========================================================================== */
+
+@media screen and (min-width: 750px) {
+  .thumbnail-list__item {
+    position: relative;
+  }
+
+  .thumbnail-list__item.ebels-thumb--capped {
+    display: none;
+  }
+
+  .thumbnail-list.ebels-thumbs-expanded .thumbnail-list__item.ebels-thumb--capped {
+    display: block;
+  }
+
+  .ebels-thumb-more {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(34, 27, 22, 0.55);
+    color: #FFFFFF;
+    font-family: var(--font-body, 'Archivo', sans-serif);
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.2s ease;
+  }
+
+  .ebels-thumb-more:hover {
+    background: rgba(34, 27, 22, 0.7);
+  }
+
+  .thumbnail-list.ebels-thumbs-expanded .ebels-thumb-more {
+    display: none;
+  }
+}

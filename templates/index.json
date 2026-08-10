@@ -475,7 +475,8 @@
         "banner_c9nzEH": {
           "type": "banner",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_y10sx4y10sx4y10s.png",
+            "image": "shopify://shop_images/banner_desktop.png",
+            "image_mobile": "shopify://shop_images/banner_mobile.png",
             "badge": "Luminaire",
             "heading": "Summer Radiance Shine",
             "text": "Up to 40% off site wide andIn-Store",

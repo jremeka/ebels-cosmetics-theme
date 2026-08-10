@@ -13,12 +13,13 @@
   --ebels-off-white: #fffbf7;
   --ebels-ink: #221b16;
   --ebels-warm-gray: #8c8279;
-  --ebels-gray-light: #f5f4f2;
+  --ebels-gray-light: #e8e6e3;
   --ebels-flame: #ea5b1d;
   --ebels-amber: #f7b733;
   --ebels-berry: #7d1f3d;
   --ebels-terracotta: #c1592e;
   --ebels-blush: #f1b8b0;
+  --ebels-blush-light: #fbe3dc;
   --ebels-espresso: #3b241c;
 
   /* --------------------------------------------------------------------
@@ -37,7 +38,7 @@
   --surface-primary: var(--ebels-white);
   --surface-elevated: var(--ebels-off-white);
   --surface-brand: var(--ebels-flame);
-  --surface-accent-subtle: var(--ebels-blush);
+  --surface-accent-subtle: var(--ebels-blush-light);
 
   --border-default: var(--ebels-gray-light);
   --border-strong: var(--ebels-warm-gray);
