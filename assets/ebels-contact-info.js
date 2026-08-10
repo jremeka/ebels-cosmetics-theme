@@ -30,3 +30,50 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+/* ----- Copy button (e.g. phone number cards) ----- */
+document.addEventListener('DOMContentLoaded', function () {
+  var buttons = document.querySelectorAll('[data-copy-value]');
+  if (!buttons.length) return;
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var value = btn.getAttribute('data-copy-value');
+      var label = btn.querySelector('[data-copy-label]');
+      var originalText = label ? label.textContent : '';
+
+      function showCopied() {
+        btn.classList.add('is-copied');
+        if (label) label.textContent = 'Copied!';
+        setTimeout(function () {
+          btn.classList.remove('is-copied');
+          if (label) label.textContent = originalText;
+        }, 1800);
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(showCopied).catch(function () {
+          fallbackCopy(value, showCopied);
+        });
+      } else {
+        fallbackCopy(value, showCopied);
+      }
+    });
+  });
+
+  function fallbackCopy(text, onSuccess) {
+    var temp = document.createElement('textarea');
+    temp.value = text;
+    temp.style.position = 'fixed';
+    temp.style.opacity = '0';
+    document.body.appendChild(temp);
+    temp.select();
+    try {
+      document.execCommand('copy');
+      onSuccess();
+    } catch (e) {
+      // Clipboard unavailable — fail silently, button just won't confirm
+    }
+    document.body.removeChild(temp);
+  }
+});

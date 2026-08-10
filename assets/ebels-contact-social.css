@@ -25,6 +25,8 @@
   gap: var(--space-3, 12px);
 }
 
+/* Uses the shared --border-default token — now set to light grey.
+   Hover still goes to your orange border-brand as before. */
 .ebels-contact-social__item {
   display: flex;
   flex-direction: column;

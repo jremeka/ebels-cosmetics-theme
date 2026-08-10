@@ -33,10 +33,11 @@
         "card_hUiWrb": {
           "type": "card",
           "settings": {
-            "icon": "✉",
+            "icon": "📨",
             "title": "Email Us",
             "link_text": "marketing@ebelscosmetics.com",
-            "link_url": "",
+            "link_url": "mailto:marketing@ebelscosmetics.com",
+            "enable_copy": true,
             "detail": "We respond within 24 hours",
             "button_text": ""
           }
@@ -44,21 +45,24 @@
         "card_4iadGp": {
           "type": "card",
           "settings": {
-            "icon": "✉",
+            "icon": "📞",
             "title": "Call Us",
-            "link_text": "+44 (0) 20 7946 0958",
+            "link_text": "+1 (216) 356-0630",
             "link_url": "",
+            "enable_copy": true,
             "detail": "Mon–Fri 9am–6pm, Sat 10am–4pm",
             "button_text": ""
           }
         },
         "card_qqJM7H": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "icon": "✉",
             "title": "Email Us",
             "link_text": "Reach a rep quickly",
             "link_url": "",
+            "enable_copy": false,
             "detail": "We respond within 10 mins",
             "button_text": ""
           }
@@ -68,7 +72,8 @@
           "settings": {
             "country": "United States",
             "address": "32100 Solon Road\nSolon, Ohio 44139",
-            "map_image": "shopify://shop_images/Screenshot_2026-08-02_at_16.59.50.png"
+            "map_image": "shopify://shop_images/Screenshot_2026-08-02_at_16.59.50.png",
+            "map_url": "https://maps.app.goo.gl/kUXgPcxX57fdKYqVA"
           }
         },
         "hours_WL6JNz": {

@@ -13,6 +13,7 @@
   --ebels-off-white: #fffbf7;
   --ebels-ink: #221b16;
   --ebels-warm-gray: #8c8279;
+  --ebels-gray-light: #f5f4f2;
   --ebels-flame: #ea5b1d;
   --ebels-amber: #f7b733;
   --ebels-berry: #7d1f3d;
@@ -38,7 +39,7 @@
   --surface-brand: var(--ebels-flame);
   --surface-accent-subtle: var(--ebels-blush);
 
-  --border-default: var(--ebels-blush);
+  --border-default: var(--ebels-gray-light);
   --border-strong: var(--ebels-warm-gray);
   --border-brand: var(--ebels-flame);
 

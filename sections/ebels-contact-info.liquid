@@ -16,7 +16,18 @@
           <div class="ebels-contact-info__card" data-reveal {{ block.shopify_attributes }}>
             <span class="ebels-contact-info__card-icon" aria-hidden="true">{{ block.settings.icon }}</span>
             <h3 class="ebels-contact-info__card-title">{{ block.settings.title }}</h3>
-            {%- if block.settings.link_text != blank -%}
+            {%- if block.settings.enable_copy and block.settings.link_text != blank -%}
+              <button
+                type="button"
+                class="ebels-contact-info__card-copy"
+                data-copy-value="{{ block.settings.link_text | escape }}"
+              >
+                <span class="ebels-contact-info__card-copy-text" data-copy-label>{{ block.settings.link_text }}</span>
+                <span class="ebels-contact-info__card-copy-icon" aria-hidden="true">
+                  {{ 'icon-copy.svg' | inline_asset_content }}
+                </span>
+              </button>
+            {%- elsif block.settings.link_text != blank -%}
               <a href="{{ block.settings.link_url }}" class="ebels-contact-info__card-link">
                 {{ block.settings.link_text }}
               </a>
@@ -115,17 +126,25 @@
           <div class="ebels-contact-info__address-viewport">
             {%- for block in address_blocks -%}
               <div class="ebels-contact-info__address-slide{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
-                <h3 class="ebels-contact-info__address-country">{{ block.settings.country }}</h3>
-                <p class="ebels-contact-info__address-line">{{ block.settings.address }}</p>
-                {%- if block.settings.map_image -%}
-                  <img
-                    class="ebels-contact-info__address-map"
-                    src="{{ block.settings.map_image | image_url: width: 700 }}"
-                    alt="Map of {{ block.settings.country | escape }}"
-                    loading="lazy"
-                  >
-                {%- else -%}
-                  <div class="ebels-contact-info__address-map ebels-contact-info__address-map--placeholder" aria-hidden="true"></div>
+                {%- if block.settings.map_url != blank -%}
+                  <a href="{{ block.settings.map_url }}" class="ebels-contact-info__address-link" target="_blank" rel="noopener">
+                {%- endif -%}
+                  <h3 class="ebels-contact-info__address-country">{{ block.settings.country }}</h3>
+                  <p class="ebels-contact-info__address-line">{{ block.settings.address }}</p>
+                  {%- if block.settings.map_image -%}
+                    <img
+                      class="ebels-contact-info__address-map"
+                      src="{{ block.settings.map_image | image_url: width: 700 }}"
+                      alt="Map of {{ block.settings.country | escape }}"
+                      loading="lazy"
+                      width="700"
+                      height="180"
+                    >
+                  {%- else -%}
+                    <div class="ebels-contact-info__address-map ebels-contact-info__address-map--placeholder" aria-hidden="true"></div>
+                  {%- endif -%}
+                {%- if block.settings.map_url != blank -%}
+                  </a>
                 {%- endif -%}
               </div>
             {%- endfor -%}
@@ -175,6 +194,13 @@
         { "type": "text", "id": "title", "label": "Title", "default": "Email Us" },
         { "type": "text", "id": "link_text", "label": "Link text (optional)", "default": "hello@ebelscosmetics.com" },
         { "type": "url", "id": "link_url", "label": "Link URL" },
+        {
+          "type": "checkbox",
+          "id": "enable_copy",
+          "label": "Copy button instead of link",
+          "info": "Use for content that can't be linked anywhere, like a phone number. Shows a copy icon next to the link text above instead of making it a clickable link \u2014 Link URL is ignored when this is on.",
+          "default": false
+        },
         { "type": "text", "id": "detail", "label": "Detail text", "default": "We respond within 24 hours" },
         { "type": "text", "id": "button_text", "label": "Button text (optional)" }
       ]
@@ -185,7 +211,13 @@
       "settings": [
         { "type": "text", "id": "country", "label": "Country / region label", "default": "United States" },
         { "type": "textarea", "id": "address", "label": "Address", "default": "123 Main Street, Suite 100, New York, NY 10001" },
-        { "type": "image_picker", "id": "map_image", "label": "Map image (optional)" }
+        { "type": "image_picker", "id": "map_image", "label": "Map image (optional)" },
+        {
+          "type": "url",
+          "id": "map_url",
+          "label": "Google Maps link",
+          "info": "Paste the share link from Google Maps for this location. When set, the address and map become clickable and open Maps in a new tab."
+        }
       ]
     },
     {

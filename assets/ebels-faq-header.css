@@ -8,31 +8,37 @@
   font-family: var(--font-heading, 'Fraunces', serif);
   font-weight: 500;
   font-size: var(--text-h1-size, 48px);
-  color: var(--text-primary, #221B16);
+  color: var(--text-primary, #221b16);
   margin: 0 0 var(--space-3, 12px);
 }
 
 .ebels-faq-header__subtitle {
   font-family: var(--font-body, 'Archivo', sans-serif);
-  color: var(--text-secondary, #8C8279);
+  color: var(--text-secondary, #8c8279);
   font-size: var(--text-body-lg-size, 16px);
   margin: 0 0 var(--space-6, 28px);
 }
 
+/* Intentionally NOT using --border-default here — the search bar needs
+   to stand out against the page's light grey borders, so it keeps the
+   old blush/light-orange color as a fixed value instead of following
+   the token. */
 .ebels-faq-header__search input {
   width: 100%;
   font-family: var(--font-body, 'Archivo', sans-serif);
   font-size: var(--text-body-sm-size, 15px);
-  border: 1px solid var(--border-default, #F1B8B0);
+  border: 1px solid #f1b8b0;
   border-radius: var(--radius-full, 999px);
   padding: var(--space-3, 14px) var(--space-5, 22px);
   background: var(--bg-primary, #fff);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ebels-faq-header__search input:focus {
   outline: none;
-  border-color: var(--border-brand, #EA5B1D);
+  border-color: var(--border-brand, #ea5b1d);
   box-shadow: 0 0 0 3px rgba(234, 91, 29, 0.1);
 }
 
@@ -48,22 +54,26 @@
   font-family: var(--font-body, 'Archivo', sans-serif);
   font-size: var(--text-body-sm-size, 13px);
   font-weight: 600;
-  color: var(--text-primary, #221B16);
+  color: var(--text-primary, #221b16);
   background: transparent;
-  border: 1px solid var(--border-default, #F1B8B0);
+  border: 1px solid var(--border-default, #f1b8b0);
   border-radius: var(--radius-full, 999px);
   padding: var(--space-2, 8px) var(--space-4, 18px);
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
 }
 
 .ebels-faq-header__pill:hover {
-  border-color: var(--border-brand, #EA5B1D);
+  border-color: var(--border-brand, #ea5b1d);
   transform: translateY(-2px);
 }
 
 .ebels-faq-header__pill.is-active {
-  background: var(--bg-inverse, #221B16);
-  border-color: var(--bg-inverse, #221B16);
+  background: var(--bg-inverse, #221b16);
+  border-color: var(--bg-inverse, #221b16);
   color: var(--text-inverse, #fff);
 }

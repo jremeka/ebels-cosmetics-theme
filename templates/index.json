@@ -21,7 +21,10 @@
             "heading": "Summer Glow Collection",
             "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
             "button_label": "Shop Now",
-            "button_link": "shopify://collections"
+            "button_link": "shopify://collections",
+            "content_position": "left",
+            "text_theme": "light",
+            "overlay": 60
           }
         },
         "slide_NQAaJf": {
@@ -34,7 +37,10 @@
             "heading": "Summer Glow Collection",
             "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
             "button_label": "Shop Now",
-            "button_link": "shopify://collections/all"
+            "button_link": "shopify://collections/all",
+            "content_position": "left",
+            "text_theme": "light",
+            "overlay": 0
           }
         },
         "slide_XfRW4B": {
@@ -47,7 +53,10 @@
             "heading": "Bundles and Collections",
             "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
             "button_label": "Shop collections",
-            "button_link": "shopify://collections"
+            "button_link": "shopify://collections",
+            "content_position": "left",
+            "text_theme": "light",
+            "overlay": 0
           }
         },
         "slide_4HeMnk": {
@@ -60,7 +69,10 @@
             "heading": "Summer Glow Collection",
             "text": "Discover our curated selection of sun-kissed essentials for the perfect summer look.",
             "button_label": "Shop Now",
-            "button_link": "shopify://collections/all"
+            "button_link": "shopify://collections/all",
+            "content_position": "left",
+            "text_theme": "light",
+            "overlay": 0
           }
         },
         "slide_VPxFMz": {
@@ -73,7 +85,10 @@
             "heading": "Ebels handy chic",
             "text": "Discover our curated selection of affordable luxury everyday bags for the perfect summer look.",
             "button_label": "Get Carrying",
-            "button_link": "shopify://collections/bags"
+            "button_link": "shopify://collections/bags",
+            "content_position": "left",
+            "text_theme": "light",
+            "overlay": 0
           }
         }
       },
@@ -261,7 +276,7 @@
         "card_qDxzUn": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Card_Image_1_d07b5bda-0ade-40da-861d-b0fa387dd974.png",
+            "video": "shopify://files/videos/new - girl video.mp4",
             "handle": "",
             "product": "sandstone-carryall"
           }
@@ -269,7 +284,7 @@
         "card_y9YEQG": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Card_Image_15.png",
+            "video": "shopify://files/videos/7185887_Women_Cosmetics_720x1280.mp4",
             "handle": "",
             "product": "pure-grace-perfume"
           }
@@ -277,7 +292,7 @@
         "card_Ny69hp": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Card_Image_2.png",
+            "video": "shopify://files/videos/7183731_Woman_Social_Media_1280x720.mp4",
             "handle": "",
             "product": "the-glam-night-out"
           }
@@ -285,15 +300,15 @@
         "card_78ypLH": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Card_Image_20.png",
-            "handle": "",
+            "video": "shopify://files/videos/7185892_Women_Friends_720x1280.mp4",
+            "handle": "@ebelscosmetics",
             "product": "pure-joy-perfume"
           }
         },
         "card_MjY6QG": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Card_Image_3_52ce3716-b7d4-4b37-8fb8-e4d61a2ba159.png",
+            "video": "shopify://files/videos/7183725_Woman_Social_Media_1280x720.mp4",
             "handle": "",
             "product": "veridian-bucket-bag"
           }

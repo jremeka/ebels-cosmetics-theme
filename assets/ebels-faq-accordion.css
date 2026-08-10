@@ -16,6 +16,8 @@
   margin: 0 0 var(--space-4, 16px);
 }
 
+/* Uses the shared --border-default token — now set to light grey.
+   Hover still goes to your orange border-brand as before. */
 .ebels-faq-item {
   border: 1px solid var(--border-default, #F1B8B0);
   border-radius: var(--radius-lg, 12px);

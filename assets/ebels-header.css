@@ -116,6 +116,46 @@
   color: var(--text-brand);
 }
 
+/* ----- Account icon "Hi, [name]" / "Sign In" text label ----- */
+.header__icon--account-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  padding: 0 var(--space-2, 8px);
+  text-decoration: none;
+}
+
+.header__icon--account-text:hover {
+  text-decoration: none;
+}
+
+.header__icon--account-text .svg-wrapper {
+  width: 22px;
+  height: 22px;
+}
+
+.header__account-label {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size, 14px);
+  font-weight: 500;
+  color: inherit;
+  white-space: nowrap;
+}
+
+/* Icon-only on small screens — "Hi, [name]" plus three more icons gets
+   tight fast on mobile widths. Remove this block if you'd rather keep
+   the text visible everywhere. */
+@media screen and (max-width: 989px) {
+  .header__account-label {
+    display: none;
+  }
+
+  .header__icon--account-text {
+    padding: 0;
+  }
+}
+
 /* ==========================================================================
    TRANSPARENT OVERLAY MODE
    Only on pages that contain the Ebels hero (i.e. the homepage).

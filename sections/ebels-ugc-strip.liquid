@@ -2,6 +2,10 @@
   EBELS UGC STRIP — "See it on Ebels Ladies"
   Phone-shaped cards with customer videos (or images), handle overlay,
   tap-to-play, and a shoppable product chip. Snap-scrolls on mobile.
+
+  Desktop (≥990px): all videos autoplay muted as soon as the section
+  renders — nothing else changes, same play/pause + mute buttons.
+  Mobile: unchanged, still click-to-play.
 {% endcomment %}
 
 <div class="ebels-ugc" id="EbelsUgc-{{ section.id }}">
@@ -283,16 +287,7 @@
   (function () {
     function initUgc(root) {
       var cards = root.querySelectorAll('.ebels-ugc__card');
-
-      function pauseAll(except) {
-        cards.forEach(function (card) {
-          var video = card.querySelector('video');
-          if (video && video !== except && !video.paused) {
-            video.pause();
-            card.classList.remove('is-playing');
-          }
-        });
-      }
+      var isDesktop = window.matchMedia('(min-width: 990px)').matches;
 
       cards.forEach(function (card) {
         var video = card.querySelector('video');
@@ -310,12 +305,13 @@
 
         playBtn.addEventListener('click', function () {
           if (video.paused) {
-            pauseAll(video);
+            card.removeAttribute('data-user-paused');
             video.play();
             card.classList.add('is-playing');
           } else {
             video.pause();
             card.classList.remove('is-playing');
+            card.setAttribute('data-user-paused', 'true');
           }
         });
 
@@ -323,18 +319,44 @@
           if (!video.paused) {
             video.pause();
             card.classList.remove('is-playing');
+            card.setAttribute('data-user-paused', 'true');
           }
         });
       });
 
-      // Pause any playing video that scrolls out of view
+      // Desktop only: autoplay muted as each card scrolls into view,
+      // pause as it scrolls out — both directions driven by this one
+      // observer so there's no race with an eager play() call made
+      // before the section is actually visible. A card the person
+      // manually paused stays paused even if it re-enters view.
+      // Mobile is untouched — still click-to-play only.
       if ('IntersectionObserver' in window) {
         var viewObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
-            var video = entry.target.querySelector('video');
-            if (video && !entry.isIntersecting && !video.paused) {
+            var card = entry.target;
+            var video = card.querySelector('video');
+            if (!video) return;
+
+            if (entry.isIntersecting) {
+              if (isDesktop && card.getAttribute('data-user-paused') !== 'true') {
+                video.muted = true;
+                var playPromise = video.play();
+                if (playPromise !== undefined) {
+                  playPromise
+                    .then(function () {
+                      card.classList.add('is-playing');
+                    })
+                    .catch(function () {
+                      // Autoplay blocked by the browser — card just shows the
+                      // paused state, the play button still works manually.
+                    });
+                } else {
+                  card.classList.add('is-playing');
+                }
+              }
+            } else if (!video.paused) {
               video.pause();
-              entry.target.classList.remove('is-playing');
+              card.classList.remove('is-playing');
             }
           });
         }, { threshold: 0.2 });

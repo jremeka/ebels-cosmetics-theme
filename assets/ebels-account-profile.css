@@ -12,8 +12,11 @@
   display: none;
 }
 
+/* Border now uses the shared --border-default token — shadow stays
+   custom (softer/higher-blur than the token system defines elsewhere) */
 .ebels-acc-card {
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--border-default, #f5f4f2);
+  box-shadow: 0 8px 24px rgba(34, 27, 22, 0.05);
   border-radius: var(--radius-lg, 12px);
   padding: var(--space-5);
 }
@@ -43,20 +46,24 @@
   border-radius: var(--radius-full, 999px);
   padding: var(--space-2) var(--space-4);
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
+/* UNCHANGED on purpose — hover stays orange (your brand tokens) */
 .ebels-acc-card__edit:hover {
   border-color: var(--border-brand);
   color: var(--text-brand);
 }
 
+/* CHANGED: light grey instead of the peach/pink bg-secondary token */
 .ebels-acc-field-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: var(--space-3) var(--space-4);
-  background: var(--bg-secondary);
+  background: #f5f4f2;
   border-radius: var(--radius-md, 8px);
 }
 
@@ -79,12 +86,13 @@
   gap: var(--space-3);
 }
 
+/* CHANGED: light grey instead of the peach/pink bg-secondary token */
 .ebels-acc-address-item {
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-4);
-  background: var(--bg-secondary);
+  background: #f5f4f2;
   border-radius: var(--radius-md, 8px);
 }
 
@@ -115,8 +123,8 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--brand-primary);
-  background: var(--surface-accent-subtle, #FBE3DC);
+  color: #7d1f3d;
+  background: rgba(125, 31, 61, 0.07);
   border-radius: var(--radius-full, 999px);
   padding: 2px 8px;
 }
@@ -151,7 +159,7 @@
 }
 
 .ebels-acc-address-item__remove-link {
-  color: var(--brand-secondary, #7D1F3D);
+  color: var(--brand-secondary, #7d1f3d);
 }
 
 .ebels-acc-address-item__remove-form {
@@ -165,13 +173,14 @@
   margin: 0;
 }
 
+/* CHANGED: light grey instead of the peach/pink bg-secondary token */
 .ebels-acc-toggle-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
   padding: var(--space-3) var(--space-4);
-  background: var(--bg-secondary);
+  background: #f5f4f2;
   border-radius: var(--radius-md, 8px);
 }
 
@@ -209,7 +218,7 @@
   width: 42px;
   height: 24px;
   border-radius: var(--radius-full, 999px);
-  background: var(--border-default);
+  background: #dad3cb;
   display: block;
   transition: background 0.2s ease;
   position: relative;
@@ -225,32 +234,49 @@
   background: #fff;
   box-shadow: 0 1px 3px rgba(34, 27, 22, 0.25);
   transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ebels-acc-switch__check {
+  width: 11px;
+  height: 11px;
+  color: transparent;
+  transition: color 0.15s ease;
 }
 
 .ebels-acc-switch input:checked + .ebels-acc-switch__track {
-  background: var(--brand-secondary, #7D1F3D);
+  background: var(--brand-secondary, #7d1f3d);
 }
 
 .ebels-acc-switch input:checked + .ebels-acc-switch__track .ebels-acc-switch__thumb {
   transform: translateX(18px);
 }
 
+.ebels-acc-switch input:checked + .ebels-acc-switch__track .ebels-acc-switch__check {
+  color: var(--brand-secondary, #7d1f3d);
+}
+
+/* Border now uses the shared --border-default token */
 .ebels-acc-prof__logout {
   align-self: flex-start;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: var(--text-body-sm-size);
-  color: var(--text-primary);
-  border: 1px solid var(--border-default);
+  color: #7d1f3d;
+  border: 1px solid var(--border-default, #f5f4f2);
   border-radius: var(--radius-full, 999px);
   padding: var(--space-3) var(--space-6);
   text-decoration: none;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .ebels-acc-prof__logout:hover {
-  border-color: var(--border-brand);
-  color: var(--text-brand);
+  border-color: #7d1f3d;
+  opacity: 0.85;
 }
 
 .ebels-acc-modal {
@@ -311,8 +337,8 @@
 }
 
 .ebels-acc-modal__error {
-  background: var(--surface-accent-subtle, #FBE3DC);
-  color: var(--status-error, #DC2626);
+  background: var(--surface-accent-subtle, #fbe3dc);
+  color: var(--status-error, #dc2626);
   font-family: var(--font-body);
   font-size: var(--text-body-sm-size);
   border-radius: var(--radius-md, 8px);
@@ -357,7 +383,9 @@
   border-radius: var(--radius-md, 8px);
   padding: var(--space-3) var(--space-4);
   background: var(--bg-primary, #fff);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ebels-acc-field input:focus {
@@ -392,7 +420,7 @@
 
 .ebels-acc-modal__save {
   min-width: 100px;
-  background: #7D1F3D;
+  background: #7d1f3d;
   color: #fff;
   border: none;
 }

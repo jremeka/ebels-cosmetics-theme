@@ -1,15 +1,7 @@
 {{ 'ebels-account-header.css' | asset_url | stylesheet_tag }}
 
 {%- unless customer or request.design_mode -%}
-  {%- liquid
-    assign login_url = routes.account_login_url
-    if login_url contains '?'
-      assign login_separator = '&'
-    else
-      assign login_separator = '?'
-    endif
-  -%}
-  <script>window.location.href = "{{ login_url }}{{ login_separator }}return_to={{ '/pages/my-account' | url_encode }}";</script>
+  <script>window.location.href = "/customer_authentication/login?return_to={{ routes.root_url | url_encode }}";</script>
 {%- endunless -%}
 
 {%- if customer or request.design_mode -%}
