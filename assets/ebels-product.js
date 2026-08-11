@@ -60,6 +60,14 @@
     var images = root.querySelectorAll('[data-gallery-image]');
     if (!thumbs.length) return;
 
+    var moreBtn = root.querySelector('[data-ebels-thumb-more]');
+    if (moreBtn) {
+      moreBtn.addEventListener('click', function () {
+        var wrap = moreBtn.closest('.ebels-product__thumbs');
+        if (wrap) wrap.classList.add('is-expanded');
+      });
+    }
+
     thumbs.forEach(function (thumb) {
       thumb.addEventListener('click', function () {
         var index = thumb.getAttribute('data-index');
@@ -67,6 +75,40 @@
         thumbs.forEach(function (t) { t.classList.remove('is-active'); });
         thumb.classList.add('is-active');
       });
+    });
+
+    // Left/Right arrow keys step through the gallery. Ignored while
+    // typing in a field (e.g. the quantity input) so arrow keys there
+    // still work normally.
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+
+      var activeTag = document.activeElement && document.activeElement.tagName;
+      if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
+
+      var thumbsArr = Array.prototype.slice.call(thumbs);
+      var currentIndex = thumbsArr.findIndex(function (t) {
+        return t.classList.contains('is-active');
+      });
+      if (currentIndex === -1) currentIndex = 0;
+
+      var nextIndex = e.key === 'ArrowLeft'
+        ? (currentIndex - 1 + thumbsArr.length) % thumbsArr.length
+        : (currentIndex + 1) % thumbsArr.length;
+
+      var nextThumb = thumbsArr[nextIndex];
+      if (!nextThumb) return;
+
+      // If arrow-key nav lands on a thumbnail still hidden behind the
+      // "+N" cap, expand the strip so the newly-active thumbnail is
+      // actually visible, not just the main image changing silently.
+      if (nextThumb.classList.contains('ebels-product__thumb--capped')) {
+        var wrap = nextThumb.closest('.ebels-product__thumbs');
+        if (wrap) wrap.classList.add('is-expanded');
+      }
+
+      nextThumb.click();
+      nextThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
     });
 
     function showImage(index) {

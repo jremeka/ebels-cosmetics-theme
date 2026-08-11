@@ -43,6 +43,7 @@
 }
 .ebels-product__thumbs {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-3);
   margin-top: var(--space-4);
 }
@@ -50,6 +51,7 @@
 .ebels-product__thumb {
   width: 68px;
   height: 68px;
+  flex-shrink: 0;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1.5px solid transparent;
@@ -57,6 +59,42 @@
   cursor: pointer;
   background: var(--bg-secondary);
   transition: border-color 0.2s ease;
+}
+
+/* Hidden until the "+N" tile is clicked, then wraps onto a new row
+   below since .ebels-product__thumbs now has flex-wrap: wrap */
+.ebels-product__thumb--capped {
+  display: none;
+}
+
+.ebels-product__thumbs.is-expanded .ebels-product__thumb--capped {
+  display: block;
+}
+
+.ebels-product__thumb-more {
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  background: var(--ebels-ink, #221b16);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.ebels-product__thumb-more:hover {
+  opacity: 0.85;
+}
+
+.ebels-product__thumbs.is-expanded .ebels-product__thumb-more {
+  display: none;
 }
 
 .ebels-product__thumb img {

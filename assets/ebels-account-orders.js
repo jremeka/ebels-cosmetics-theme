@@ -7,7 +7,7 @@
 
   initReorderButtons();
   initFavouritesAddToBag();
-  initWriteReviewButtons();
+  initOrderDetailsToggle();
 
   /* ----- Reorder: adds every line item from that order back to cart ----- */
   function initReorderButtons() {
@@ -106,15 +106,18 @@
     });
   }
 
-  /* ----- Write a Review (stub, same pattern as the product page reviews section) ----- */
-  function initWriteReviewButtons() {
-    document.querySelectorAll('[data-account-write-review]').forEach(function (btn) {
+  /* ----- Order details: toggles the inline detail panel open/closed ----- */
+  function initOrderDetailsToggle() {
+    document.querySelectorAll('[data-order-details-toggle]').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var orderId = btn.getAttribute('data-order-id');
-        document.dispatchEvent(new CustomEvent('ebels:write-review', {
-          bubbles: true,
-          detail: { orderId: orderId }
-        }));
+        var panelId = btn.getAttribute('aria-controls');
+        var panel = panelId ? document.getElementById(panelId) : null;
+        if (!panel) return;
+
+        var isOpen = !panel.hidden;
+        panel.hidden = isOpen;
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        btn.textContent = isOpen ? 'View Details' : 'Hide Details';
       });
     });
   }

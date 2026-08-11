@@ -40,6 +40,9 @@
                 <div>
                   <p class="ebels-acc-ord__item-title">{{ line_item.title }}</p>
                   <p class="ebels-caption">Qty: {{ line_item.quantity }}</p>
+                  {%- if line_item.product.url != blank -%}
+                    <a href="{{ line_item.product.url }}#judgeme_product_reviews" class="ebels-acc-ord__item-review-link">Write a Review</a>
+                  {%- endif -%}
                 </div>
               </div>
             {%- endfor -%}
@@ -51,7 +54,9 @@
           </div>
 
           <div class="ebels-acc-ord__actions">
-            <a href="{{ order.order_status_url }}" class="ebels-acc-ord__link">View Details</a>
+            <button type="button" class="ebels-acc-ord__link" data-order-details-toggle aria-expanded="false" aria-controls="OrderDetail-{{ order.id }}">
+              View Details
+            </button>
             {%- assign tracking_url = '' -%}
             {%- for fulfillment in order.fulfillments -%}
               {%- if fulfillment.tracking_url != blank -%}
@@ -66,9 +71,94 @@
               <button type="button" class="ebels-btn ebels-btn--outline ebels-acc-ord__reorder" data-account-reorder data-order-id="{{ order.id }}">
                 Reorder
               </button>
-              <button type="button" class="ebels-btn ebels-btn--outline ebels-acc-ord__review" data-account-write-review data-order-id="{{ order.id }}">
-                Write a Review
-              </button>
+            </div>
+          </div>
+
+          {%- comment -%} Inline order detail panel — hidden by default, toggled open by data-order-details-toggle above {%- endcomment -%}
+          <div id="OrderDetail-{{ order.id }}" class="ebels-acc-ord__detail" data-order-detail hidden>
+
+            <div class="ebels-acc-ord__detail-timeline">
+              <div class="ebels-acc-ord__detail-timeline-step is-complete">
+                <span class="ebels-acc-ord__detail-timeline-dot">✓</span>
+                <div>
+                  <p class="ebels-acc-ord__detail-timeline-label">Confirmed</p>
+                  <p class="ebels-caption">{{ order.created_at | date: '%d %b %Y' }}</p>
+                </div>
+              </div>
+              <div class="ebels-acc-ord__detail-timeline-step{% if order.fulfillment_status == 'fulfilled' or order.fulfillment_status == 'partial' %} is-complete{% endif %}">
+                <span class="ebels-acc-ord__detail-timeline-dot">{% if order.fulfillment_status == 'fulfilled' or order.fulfillment_status == 'partial' %}✓{% else %}○{% endif %}</span>
+                <div>
+                  <p class="ebels-acc-ord__detail-timeline-label">Shipped</p>
+                </div>
+              </div>
+              <div class="ebels-acc-ord__detail-timeline-step{% if order.fulfillment_status == 'fulfilled' %} is-complete{% endif %}">
+                <span class="ebels-acc-ord__detail-timeline-dot">{% if order.fulfillment_status == 'fulfilled' %}✓{% else %}○{% endif %}</span>
+                <div>
+                  <p class="ebels-acc-ord__detail-timeline-label">Delivered</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="ebels-acc-ord__detail-section">
+              <h3 class="ebels-acc-ord__detail-heading">Items</h3>
+              {%- for line_item in order.line_items -%}
+                <div class="ebels-acc-ord__detail-line">
+                  <span>{{ line_item.title }} × {{ line_item.quantity }}</span>
+                  <span>{{ line_item.final_line_price | money }}</span>
+                </div>
+              {%- endfor -%}
+            </div>
+
+            <div class="ebels-acc-ord__detail-section">
+              <div class="ebels-acc-ord__detail-line">
+                <span class="ebels-caption">Subtotal</span>
+                <span>{{ order.subtotal_price | money }}</span>
+              </div>
+              <div class="ebels-acc-ord__detail-line">
+                <span class="ebels-caption">Shipping</span>
+                <span>
+                  {%- assign shipping_line = order.shipping_methods.first -%}
+                  {%- if shipping_line and shipping_line.price > 0 -%}
+                    {{ shipping_line.price | money }}
+                  {%- else -%}
+                    Free
+                  {%- endif -%}
+                </span>
+              </div>
+              {%- if order.total_tax > 0 -%}
+                <div class="ebels-acc-ord__detail-line">
+                  <span class="ebels-caption">Tax</span>
+                  <span>{{ order.total_tax | money }}</span>
+                </div>
+              {%- endif -%}
+              <div class="ebels-acc-ord__detail-line ebels-acc-ord__detail-line--total">
+                <span>Total</span>
+                <span>{{ order.total_price | money }}</span>
+              </div>
+            </div>
+
+            <div class="ebels-acc-ord__detail-section">
+              <h3 class="ebels-acc-ord__detail-heading">Contact</h3>
+              <p class="ebels-body-sm">{{ order.email }}</p>
+            </div>
+
+            {%- if order.billing_address -%}
+              <div class="ebels-acc-ord__detail-section">
+                <h3 class="ebels-acc-ord__detail-heading">Billing address</h3>
+                <p class="ebels-body-sm">
+                  {{ order.billing_address.name }}<br>
+                  {%- if order.billing_address.address1 != blank -%}{{ order.billing_address.address1 }}<br>{%- endif -%}
+                  {%- if order.billing_address.address2 != blank -%}{{ order.billing_address.address2 }}<br>{%- endif -%}
+                  {{ order.billing_address.city }}{% if order.billing_address.province_code != blank %}, {{ order.billing_address.province_code }}{% endif %} {{ order.billing_address.zip }}<br>
+                  {{ order.billing_address.country }}
+                  {%- if order.billing_address.phone != blank -%}<br>{{ order.billing_address.phone }}{%- endif -%}
+                </p>
+              </div>
+            {%- endif -%}
+
+            <div class="ebels-acc-ord__detail-section">
+              <h3 class="ebels-acc-ord__detail-heading">Payment</h3>
+              <p class="ebels-body-sm">{{ order.financial_status | capitalize }} · {{ order.total_price | money }}</p>
             </div>
           </div>
 

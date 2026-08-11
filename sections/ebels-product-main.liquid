@@ -41,17 +41,27 @@
       </div>
 
       {%- if product.images.size > 1 -%}
+        {%- assign ebels_thumb_cap = 5 -%}
+        {%- assign ebels_thumb_remaining = product.images.size | minus: ebels_thumb_cap -%}
         <div class="ebels-product__thumbs" role="list">
           {%- for image in product.images -%}
             <button
               type="button"
-              class="ebels-product__thumb{% if forloop.first %} is-active{% endif %}"
+              class="ebels-product__thumb{% if forloop.first %} is-active{% endif %}{% if forloop.index > ebels_thumb_cap %} ebels-product__thumb--capped{% endif %}"
               data-gallery-thumb
               data-index="{{ forloop.index0 }}"
               aria-label="Show image {{ forloop.index }} of {{ product.images.size }}"
             >
               <img src="{{ image | image_url: width: 200 }}" alt="" width="200" height="200" loading="lazy">
             </button>
+            {%- if forloop.index == ebels_thumb_cap and ebels_thumb_remaining > 0 -%}
+              <button
+                type="button"
+                class="ebels-product__thumb-more"
+                data-ebels-thumb-more
+                aria-label="Show {{ ebels_thumb_remaining }} more photos"
+              >+{{ ebels_thumb_remaining }}</button>
+            {%- endif -%}
           {%- endfor -%}
         </div>
       {%- endif -%}
