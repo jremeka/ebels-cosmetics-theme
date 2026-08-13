@@ -84,13 +84,37 @@
         {{ current_variant.price | money }}
       </p>
 
-      {%- if section.settings.short_description != blank -%}
+      {%- if product.metafields.custom.short_product_description != blank -%}
+        <div class="ebels-body ebels-product__description">
+          {{ product.metafields.custom.short_product_description }}
+        </div>
+      {%- elsif section.settings.short_description != blank -%}
         <div class="ebels-body ebels-product__description">
           {{ section.settings.short_description }}
         </div>
       {%- else -%}
+        {%- liquid
+          assign desc_plain = product.description | strip_html
+          assign sentences = desc_plain | split: '. '
+          assign word_budget = 40
+          assign running_words = 0
+          assign short_desc = ''
+          for sentence in sentences
+            assign sentence_word_count = sentence | split: ' ' | size
+            assign projected = running_words | plus: sentence_word_count
+            if projected > word_budget and short_desc != ''
+              break
+            endif
+            if short_desc == ''
+              assign short_desc = sentence
+            else
+              assign short_desc = short_desc | append: '. ' | append: sentence
+            endif
+            assign running_words = projected
+          endfor
+        -%}
         <div class="ebels-body ebels-product__description">
-          {{ product.description | strip_html | truncatewords: 40 }}
+          {{ short_desc }}.
         </div>
       {%- endif -%}
 
@@ -137,7 +161,7 @@
           data-add-to-bag
           {% unless current_variant.available %}disabled{% endunless %}
         >
-          {%- if current_variant.available -%}Add to Bag{%- elsif current_variant.product.tags contains 'Coming Soon' -%}Coming Soon{%- else -%}Sold Out{%- endif -%}
+          {%- if current_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
         </button>
       </div>
 

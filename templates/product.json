@@ -13,8 +13,8 @@
       "type": "ebels-product-main",
       "settings": {
         "short_description": "",
-        "delivery_line_1": "Free delivery on orders over £50",
-        "delivery_line_2": "Order within 2h for next-day delivery"
+        "delivery_line_1": "",
+        "delivery_line_2": ""
       }
     },
     "ebels_tabs": {

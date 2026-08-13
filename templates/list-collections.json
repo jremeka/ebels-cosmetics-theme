@@ -44,7 +44,7 @@
         "collection_item_MyTbDC": {
           "type": "collection_item",
           "settings": {
-            "collection": "",
+            "collection": "velora",
             "custom_title": ""
           }
         },
