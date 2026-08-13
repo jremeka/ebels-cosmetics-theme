@@ -84,13 +84,20 @@
     return div.innerHTML;
   }
 
+  function isComingSoon(product) {
+    return !!(product.tags && product.tags.indexOf('Coming Soon') !== -1);
+  }
+
   function renderCard(product, moneyFormat) {
     var variant = (product.variants && product.variants[0]) || {};
     var imageSrc = product.featured_image || (product.images && product.images[0]) || '';
     var price = formatMoney(variant.price || 0, moneyFormat);
     var available = !!variant.available;
+    var comingSoon = !available && isComingSoon(product);
     var title = escapeHtml(product.title);
     var url = '/products/' + product.handle;
+
+    var buttonLabel = available ? 'Add to Bag' : (comingSoon ? 'Coming Soon' : 'Sold Out');
 
     return ''
       + '<div class="ebels-rv__card">'
@@ -109,7 +116,7 @@
       +     '</div>'
 
       +     '<button type="button" class="ebels-btn ebels-btn--outline ebels-rv__add-to-bag" data-add-to-bag-rv data-variant-id="' + variant.id + '"' + (available ? '' : ' disabled') + '>'
-      +       (available ? 'Add to Bag' : 'Sold Out')
+      +       buttonLabel
       +     '</button>'
       +   '</div>'
       + '</div>';

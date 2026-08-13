@@ -303,7 +303,15 @@
           >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
         </small>
         <small class="copyright__content">{{ powered_by_link }}</small>
-        {%- if section.settings.show_policy -%}
+        {%- if section.settings.use_single_policy_link and section.settings.single_policy_page != blank -%}
+          <ul class="policies list-unstyled">
+            <li>
+              <small class="copyright__content"
+                ><a href="{{ section.settings.single_policy_page.url }}">{{ section.settings.single_policy_label }}</a></small
+              >
+            </li>
+          </ul>
+        {%- elsif section.settings.show_policy -%}
           <ul class="policies list-unstyled">
             {%- for policy in shop.policies -%}
               {%- if policy != blank -%}
@@ -491,6 +499,28 @@
       "default": true,
       "label": "t:sections.footer.settings.show_policy.label",
       "info": "t:sections.footer.settings.show_policy.info"
+    },
+    {
+      "type": "header",
+      "content": "Ebels: single policies page"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_single_policy_link",
+      "default": false,
+      "label": "Replace policy links with one page instead",
+      "info": "When on, this replaces the native Privacy/Refund/Terms/Shipping list above with a single link to the page chosen below. \"Policy links\" (show_policy) is ignored while this is on."
+    },
+    {
+      "type": "page",
+      "id": "single_policy_page",
+      "label": "Policies page"
+    },
+    {
+      "type": "text",
+      "id": "single_policy_label",
+      "label": "Link label",
+      "default": "Policies"
     },
     {
       "type": "header",

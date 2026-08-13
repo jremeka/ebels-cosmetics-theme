@@ -8,9 +8,13 @@
     review app populates a per-product rating, feed that value into the
     data-rating attribute below instead of the hardcoded placeholder and
     rating sort becomes fully functional with no other changes needed.
-  - Badges are driven by exact product tags: "New Shades", "Bestseller",
-    "Luxury", "Limited". Add the matching tag to a product in Shopify admin
-    to make its badge appear automatically.
+  - Badges are driven by exact product tags: "Coming Soon", "New Shades",
+    "Bestseller", "Luxury", "Limited". Add the matching tag to a product in
+    Shopify admin to make its badge appear automatically.
+  - Empty-collection state below is fully automatic — no admin action
+    needed. The moment a collection has 0 products it shows the "Coming
+    Soon" notify-me state instead of a blank grid; the moment real
+    products are added, it reverts to the normal grid on its own.
 {%- endcomment -%}
 
 <div class="ebels-cg page-width" data-collection-grid data-current-path="{{ collection.url }}">
@@ -57,7 +61,9 @@
       >
         {%- for product in collection.products -%}
           {%- assign badge_text = '' -%}
-          {%- if product.tags contains 'New Shades' -%}
+          {%- if product.tags contains 'Coming Soon' -%}
+            {%- assign badge_text = 'Coming Soon' -%}
+          {%- elsif product.tags contains 'New Shades' -%}
             {%- assign badge_text = 'New Shades' -%}
           {%- elsif product.tags contains 'Bestseller' -%}
             {%- assign badge_text = 'Bestseller' -%}
@@ -161,7 +167,7 @@
                 data-variant-id="{{ primary_variant.id }}"
                 {% unless primary_variant.available %}disabled{% endunless %}
               >
-                {%- if primary_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+                {%- if primary_variant.available -%}Add to Bag{%- elsif product.tags contains 'Coming Soon' -%}Coming Soon{%- else -%}Sold Out{%- endif -%}
               </button>
             </div>
           </div>
@@ -188,8 +194,46 @@
         </nav>
       {%- endif -%}
     {%- else -%}
-      <div class="ebels-cg__empty">
-        <p class="ebels-body">No products found in this collection yet.</p>
+      {%- comment -%}
+        Fully automatic — triggers purely on the collection having 0
+        products right now. No tag, toggle, or admin setup needed. The
+        moment real products are added, this reverts to the normal grid
+        on its own on the next page load.
+      {%- endcomment -%}
+      <div class="ebels-cg__coming-soon" data-reveal>
+        <span class="ebels-cg__coming-soon-eyebrow">Coming Soon</span>
+        <h2 class="ebels-cg__coming-soon-title">{{ collection.title }} is on its way</h2>
+        <p class="ebels-cg__coming-soon-text">
+          We're putting the finishing touches on this collection. Leave your email and we'll let you know the moment it's ready to shop.
+        </p>
+
+        {%- if collection.description != blank -%}
+          <div class="ebels-cg__coming-soon-desc ebels-body-sm">{{ collection.description }}</div>
+        {%- endif -%}
+
+        {%- form 'customer', id: 'ComingSoonForm', class: 'ebels-cg__coming-soon-form' -%}
+          <input type="hidden" name="contact[tags]" value="coming-soon-interest, coming-soon-{{ collection.handle }}">
+          {%- if form.posted_successfully? -%}
+            <p class="ebels-cg__coming-soon-success">Thanks — we'll email you the moment it's live.</p>
+          {%- else -%}
+            <div class="ebels-cg__coming-soon-field">
+              <input
+                type="email"
+                name="contact[email]"
+                class="ebels-cg__coming-soon-input"
+                placeholder="Enter your email"
+                aria-label="Email address"
+                required
+              >
+              <button type="submit" class="ebels-btn ebels-btn--primary ebels-cg__coming-soon-submit">Notify Me</button>
+            </div>
+            {%- if form.errors -%}
+              <p class="ebels-cg__coming-soon-error">
+                {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+              </p>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endform -%}
       </div>
     {%- endif -%}
   {%- endpaginate -%}

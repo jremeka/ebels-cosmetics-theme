@@ -51,7 +51,7 @@
                 data-variant-id="{{ rec_variant.id }}"
                 {% unless rec_variant.available %}disabled{% endunless %}
               >
-                {%- if rec_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+                {%- if rec_variant.available -%}Add to Bag{%- elsif rec_variant.product.tags contains 'Coming Soon' -%}Coming Soon{%- else -%}Sold Out{%- endif -%}
               </button>
             </div>
           </div>

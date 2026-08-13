@@ -1,0 +1,102 @@
+/* ==========================================================================
+   ADD to the bottom of assets/ebels-collection-grid.css
+   ========================================================================== */
+
+/* Coming Soon badge — berry, matching your account-page accent color */
+.ebels-cg__badge--coming-soon {
+  background: #7D1F3D;
+}
+
+/* ----- Empty-collection "Coming Soon" state ----- */
+.ebels-cg__coming-soon {
+  max-width: 560px;
+  margin: var(--space-16, 64px) auto;
+  text-align: center;
+  padding: var(--space-10, 40px) var(--space-6, 28px);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-2xl, 24px);
+}
+
+.ebels-cg__coming-soon-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #7D1F3D;
+  background: rgba(125, 31, 61, 0.07);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4, 16px);
+}
+
+.ebels-cg__coming-soon-title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: var(--text-h3-size);
+  line-height: var(--text-h3-line);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3, 12px);
+}
+
+.ebels-cg__coming-soon-text {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-5, 20px);
+}
+
+.ebels-cg__coming-soon-desc {
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-5, 20px);
+}
+
+.ebels-cg__coming-soon-field {
+  display: flex;
+  gap: var(--space-2, 8px);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.ebels-cg__coming-soon-input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full, 999px);
+  padding: var(--space-3, 12px) var(--space-5, 20px);
+  background: var(--bg-primary, #fff);
+}
+
+.ebels-cg__coming-soon-input:focus {
+  outline: none;
+  border-color: var(--border-brand);
+  box-shadow: 0 0 0 3px rgba(234, 91, 29, 0.1);
+}
+
+.ebels-cg__coming-soon-submit {
+  flex-shrink: 0;
+  padding-left: var(--space-6, 24px);
+  padding-right: var(--space-6, 24px);
+}
+
+.ebels-cg__coming-soon-success {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--status-success, #16a34a);
+  margin: 0;
+}
+
+.ebels-cg__coming-soon-error {
+  font-family: var(--font-body);
+  font-size: var(--text-caption-size);
+  color: var(--status-error, #DC2626);
+  margin: var(--space-3, 12px) 0 0;
+}
+
+@media screen and (max-width: 599px) {
+  .ebels-cg__coming-soon-field {
+    flex-direction: column;
+  }
+}

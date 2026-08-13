@@ -47,6 +47,9 @@
             {% for product in block.settings.collection.products limit: section.settings.products_limit %}
               <div class="ebels-catgrid__card">
                 <div class="ebels-catgrid__media">
+                  {% if product.tags contains 'Coming Soon' %}
+                    <span class="ebels-catgrid__badge">Coming Soon</span>
+                  {% endif %}
                   <a href="{{ product.url }}" class="ebels-catgrid__media-link" aria-label="{{ product.title | escape }}">
                     {% if product.featured_image %}
                       {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'ebels-catgrid__img', widths: '300, 450, 600' }}
@@ -79,6 +82,8 @@
                     >
                       Add to bag
                     </button>
+                  {% elsif product.tags contains 'Coming Soon' %}
+                    <button class="ebels-catgrid__atb is-soldout" disabled>Coming soon</button>
                   {% else %}
                     <button class="ebels-catgrid__atb is-soldout" disabled>Sold out</button>
                   {% endif %}
@@ -204,10 +209,27 @@
   }
 
   .ebels-catgrid__media {
+    position: relative;
     aspect-ratio: 1 / 1;
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--bg-secondary);
+  }
+
+  .ebels-catgrid__badge {
+    position: absolute;
+    top: var(--space-2);
+    left: var(--space-2);
+    z-index: 2;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: #7D1F3D;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm, 6px);
   }
 
   .ebels-catgrid__img {

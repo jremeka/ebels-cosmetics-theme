@@ -50,7 +50,7 @@
               data-variant-id="{{ newin_variant.id }}"
               {% unless newin_variant.available %}disabled{% endunless %}
             >
-              {%- if newin_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+              {%- if newin_variant.available -%}Add to Bag{%- elsif newin_variant.product.tags contains 'Coming Soon' -%}Coming Soon{%- else -%}Sold Out{%- endif -%}
             </button>
           </div>
         </div>

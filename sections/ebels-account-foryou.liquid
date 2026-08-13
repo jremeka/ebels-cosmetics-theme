@@ -22,6 +22,9 @@
             <div class="ebels-acc-fy__card" {{ block.shopify_attributes }}>
               <a href="{{ fy_product.url }}" class="ebels-acc-fy__media-link">
                 <div class="ebels-acc-fy__media">
+                  {%- if fy_product.tags contains 'Coming Soon' -%}
+                    <span class="ebels-acc-fy__badge">Coming Soon</span>
+                  {%- endif -%}
                   {%- if fy_product.featured_image != blank -%}
                     {{ fy_product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'ebels-acc-fy__img', widths: '250, 375, 500' }}
                   {%- else -%}
@@ -41,7 +44,7 @@
                   data-variant-id="{{ fy_variant.id }}"
                   {% unless fy_variant.available %}disabled{% endunless %}
                 >
-                  {%- if fy_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+                  {%- if fy_variant.available -%}Add to Bag{%- elsif fy_product.tags contains 'Coming Soon' -%}Coming Soon{%- else -%}Sold Out{%- endif -%}
                 </button>
               </div>
             </div>

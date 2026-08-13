@@ -46,11 +46,28 @@
 }
 
 .ebels-acc-fy__media {
+  position: relative;
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-lg, 12px);
   overflow: hidden;
   background: var(--bg-secondary);
   margin-bottom: var(--space-3, 12px);
+}
+
+.ebels-acc-fy__badge {
+  position: absolute;
+  top: var(--space-2, 8px);
+  left: var(--space-2, 8px);
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #7D1F3D;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm, 6px);
 }
 
 .ebels-acc-fy__img {

@@ -54,7 +54,9 @@
             {% else %}
               {{ 'product-4' | placeholder_svg_tag: 'ebels-bundles__img' }}
             {% endif %}
-            {% if bundle.compare_at_price > bundle.price %}
+            {% if bundle.tags contains 'Coming Soon' %}
+              <span class="ebels-bundles__save ebels-bundles__save--coming-soon">Coming Soon</span>
+            {% elsif bundle.compare_at_price > bundle.price %}
               {% assign savings = bundle.compare_at_price | minus: bundle.price | times: 100 | divided_by: bundle.compare_at_price %}
               <span class="ebels-bundles__save">Save {{ savings }}%</span>
             {% endif %}
@@ -77,6 +79,8 @@
             <button class="ebels-bundles__atb" data-variant-id="{{ bundle.first_available_variant.id }}">
               Add bundle
             </button>
+          {% elsif bundle.tags contains 'Coming Soon' %}
+            <button class="ebels-bundles__atb is-soldout" disabled>Coming soon</button>
           {% else %}
             <button class="ebels-bundles__atb is-soldout" disabled>Sold out</button>
           {% endif %}
@@ -208,6 +212,10 @@
     background: var(--brand-secondary);
     padding: 3px 10px;
     border-radius: var(--radius-full);
+  }
+
+  .ebels-bundles__save--coming-soon {
+    background: #7D1F3D;
   }
 
   .ebels-bundles__info {
