@@ -381,11 +381,11 @@
           "settings": {
             "image": "shopify://shop_images/model-in-neutral-colors-by-window.jpg",
             "fallback_color": "#f1b8b0",
-            "badge": "",
+            "badge": "Coming soon",
             "heading": "Authentic Hair",
             "text": "",
             "button_label": "Shop Hair",
-            "link": "shopify://collections/all",
+            "link": "shopify://collections/velora",
             "text_theme": "dark",
             "overlay": 55,
             "button_style": "ink"

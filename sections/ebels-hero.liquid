@@ -5,10 +5,11 @@
   image right with espresso gradient overlay, dot navigation.
 
   Each slide can be an Image or a Video (set per-block via "Slide type").
-  Video slides get small mute (left) / pause (right) controls, autoplay
-  muted, and the carousel waits for the video to finish before advancing
-  to the next slide. If a hero has only one block and it's a video, that
-  video loops forever instead of trying to advance.
+  Video slides get Play/Pause (top) and Mute/Unmute (below) controls
+  stacked on the right, autoplay muted, and the carousel waits for the
+  video to finish before advancing to the next slide. If a hero has only
+  one block and it's a video, that video loops forever instead of trying
+  to advance.
 {% endcomment %}
 
 <div class="ebels-hero" id="EbelsHero-{{ section.id }}" data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed | times: 1000 }}">
@@ -28,16 +29,6 @@
             </video>
           </div>
           <div class="ebels-hero__video-controls">
-            <button type="button" class="ebels-hero__video-btn ebels-hero__video-btn--mute" data-hero-mute aria-label="Unmute video">
-              <svg class="ebels-hero__icon ebels-hero__icon-mute-off" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11 5 6 9H3v6h3l5 4V5Z" fill="currentColor"/>
-                <path d="m16 9 5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              <svg class="ebels-hero__icon ebels-hero__icon-mute-on" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11 5 6 9H3v6h3l5 4V5Z" fill="currentColor"/>
-                <path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a9 9 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </button>
             <button type="button" class="ebels-hero__video-btn ebels-hero__video-btn--play" data-hero-play aria-label="Pause video">
               <svg class="ebels-hero__icon ebels-hero__icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/>
@@ -45,6 +36,16 @@
               </svg>
               <svg class="ebels-hero__icon ebels-hero__icon-play" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 5v14l12-7-12-7Z" fill="currentColor"/>
+              </svg>
+            </button>
+            <button type="button" class="ebels-hero__video-btn ebels-hero__video-btn--mute" data-hero-mute aria-label="Unmute video">
+              <svg class="ebels-hero__icon ebels-hero__icon-mute-on" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 5 6 9H3v6h3l5 4V5Z" fill="currentColor"/>
+                <path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a9 9 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <svg class="ebels-hero__icon ebels-hero__icon-mute-off" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 5 6 9H3v6h3l5 4V5Z" fill="currentColor"/>
+                <path d="m16 9 5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
             </button>
           </div>
@@ -253,20 +254,24 @@
     width: 20px;
   }
 
-  /* ----- Video mute / pause controls ----- */
+  /* ----- Video Play/Pause + Mute/Unmute controls -----
+     Both stacked vertically on the right: Play/Pause on top,
+     Mute/Unmute below. Icons are action-based — they show what
+     clicking will DO, not the current state (Pause icon shown while
+     playing, Play icon shown once paused; same idea for mute: plain
+     speaker shown while muted since that's the "turn sound on"
+     action, muted-speaker icon shown once unmuted). */
   .ebels-hero__video-controls {
     position: absolute;
     bottom: var(--space-6);
-    left: var(--space-6);
     right: var(--space-6);
     z-index: 2;
     display: flex;
-    justify-content: space-between;
-    pointer-events: none;
+    flex-direction: column;
+    gap: var(--space-2);
   }
 
   .ebels-hero__video-btn {
-    pointer-events: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -285,23 +290,20 @@
     transform: scale(1.06);
   }
 
-  .ebels-hero__video-btn svg {
-    display: block;
-  }
-
-  .ebels-hero__icon-mute-on {
+  /* Every icon hidden by default — only the matching state rule below
+     re-shows the correct one. Deliberately no generic
+     ".ebels-hero__video-btn svg { display: block }" rule anywhere —
+     that's what caused both icons to show at once before (it had
+     higher CSS specificity than the hide rules, so it always won). */
+  .ebels-hero__video-btn .ebels-hero__icon {
     display: none;
   }
 
-  .ebels-hero__video-btn--mute.is-unmuted .ebels-hero__icon-mute-on {
+  .ebels-hero__video-btn--play .ebels-hero__icon-pause {
     display: block;
   }
 
-  .ebels-hero__video-btn--mute.is-unmuted .ebels-hero__icon-mute-off {
-    display: none;
-  }
-
-  .ebels-hero__icon-play {
+  .ebels-hero__video-btn--play.is-paused .ebels-hero__icon-pause {
     display: none;
   }
 
@@ -309,8 +311,16 @@
     display: block;
   }
 
-  .ebels-hero__video-btn--play.is-paused .ebels-hero__icon-pause {
+  .ebels-hero__video-btn--mute .ebels-hero__icon-mute-on {
+    display: block;
+  }
+
+  .ebels-hero__video-btn--mute.is-unmuted .ebels-hero__icon-mute-on {
     display: none;
+  }
+
+  .ebels-hero__video-btn--mute.is-unmuted .ebels-hero__icon-mute-off {
+    display: block;
   }
 
   @media screen and (max-width: 749px) {
@@ -331,7 +341,6 @@
     .ebels-hero__video-controls {
       top: 84px;
       bottom: auto;
-      left: var(--space-4);
       right: var(--space-4);
     }
   }
